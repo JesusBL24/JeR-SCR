@@ -82,7 +82,7 @@ Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, simil
  <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp">
 </p>
 <p style="text-align: center;>
- [Figura 1: ejemplo Street Fighter](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp)
+ <a href="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp">Figura 1: ejemplo Street Fighter</a>
 </p>
 
 ## Items
