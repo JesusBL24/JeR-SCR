@@ -1,18 +1,21 @@
 # S.C.P. (SPACE COMBAT RUSH)
+---
 
 
 "Space Combat Rush" es un juego multijugador con vista cenital en el que dos o más jugadores se enfrentarán en batallas de naves espaciales en un campo de asteroides. Cada jugador controlará una nave y su misión será acabar con el resto de jugadores; mientras navega evitando los asteroides y destruyéndolos para conseguir mejoras para su nave.
 
 
 # Integrantes del equipo
+---
 
  -  Jesús Bastante López - Correo URJC: j.bastante.2021@alumnos.urjc.es - GitHub: [JesusBL24](https://github.com/JesusBL24)
- - José Antonio González Mesado - Correo URJC: ja.gonzalezme.2021@alumnos.urjc.es - GitHub: [jagonmes](https://github.com/jagonmes)
+ -  José Antonio González Mesado - Correo URJC: ja.gonzalezme.2021@alumnos.urjc.es - GitHub: [jagonmes](https://github.com/jagonmes)
  -  Anastasia Ihnatsenka Shakhova - Correo URJC: a.ihnatsenka.2021@alumnos.urjc.es - GitHub: [TasiaTas](https://github.com/TasiaTas)
  -  Lorena Martínez González - Correo URJC: l.martinezg.2021@alumnos.urjc.es - GitHub: [LorenaMartinez2704](https://github.com/LorenaMartinez2704)
  -  Jorge Juan Xuclá Esparza - Correo URJC: jj.xucla.2021@alumnos.urjc.es - GitHub: [LordOrco](https://github.com/LordOrco)
 
 # GDD
+---
 
 
 ## Concepto del juego
@@ -67,7 +70,7 @@ Comenzamos ahora a hablar sobre la interfaz, tanto la que encontramos durante la
 
 En cuanto a la interfaz externa a la partida, en primer lugar tenemos un menú inicial compuesto de 3 opciones: “start”, donde se dará comienzo al juego, “about the game”, donde se explicará brevemente la historia del juego, y “settings“, donde se pondrán algunos ajustes tales como el sonido.
 
-Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, similar a la de juegos de lucha como [Street Fighter](https://es.wikipedia.org/wiki/Street_Fighter) compuesta únicamente de:
+Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, similar a la de juegos de lucha como [Street Fighter](https://es.wikipedia.org/wiki/Street_Fighter) (fFigura 1: ejemplo Street Fighter) compuesta únicamente de:
 
 -   **Barra de vida**: se indicará de esta forma la vida de cada jugador presente en la arena de combate.
 
@@ -75,7 +78,8 @@ Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, simil
 
 -   **Círculos de boosters**: se representará mediante círculos pequeños en la parte inferior de la pantalla los distintos boosters (refuerzos tales como + velocidad) que consiga cada jugador.
 
-![Street Fighter II](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp)
+<img src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp" width=600 heigth=300>
+![Figura 1: ejemplo Street Fighter](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp)
 
 ## Items
 
