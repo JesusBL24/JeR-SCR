@@ -78,10 +78,9 @@ Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, simil
 
 -   **Círculos de boosters**: se representará mediante círculos pequeños en la parte inferior de la pantalla los distintos boosters (refuerzos tales como + velocidad) que consiga cada jugador.
 
+
 <p align="center">
- <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp">
-</p>
-<p style="text-align: center;>
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp"> <br>
  <a href="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp">Figura 1: ejemplo Street Fighter</a>
 </p>
 
@@ -126,9 +125,12 @@ Además, tendrá una serie de efectos de sonido para las diversas acciones:
 
 ## Estética y concepts
 
-Tal como se ha ido mencionando durante el documento, este juego seguirá la estética pixel art similar a otros juegos como Gradius o Asteoids. Con una paleta de color más oscura y algunos pocos colores más llamativos para crear contraste. Generalmente buscaremos transmitir una sensación de mayor seriedad. La paleta a seguir de guía será la siguiente:
+Tal como se ha ido mencionando durante el documento, este juego seguirá la estética pixel art similar a otros juegos como Gradius o Asteoids. Con una paleta de color más oscura y algunos pocos colores más llamativos para crear contraste (Figura 2: paleta de colores). Generalmente buscaremos transmitir una sensación de mayor seriedad. La paleta a seguir de guía será la siguiente:
 
-![Paleta de colores](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Paleta.PNG)
+<p align="center">
+ <img width=600 heigth=1000 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Paleta.PNG"> <br>
+ <a href="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Paleta.PNG">Figura 2: paleta de colores</a>
+</p>
 
 A continuación se presentarán algunos concepts de los aviones y entornos. Estos serán tanto diseñados por nuestro equipo, como cogidos de referencia de otras fuentes.
 
@@ -136,42 +138,58 @@ Aunque, según avance el desarrollo del juego, se generarán todos los sprites d
 
 ### Concept de aviones:
 
-![Boceto Naves](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Naves%20Boceto.jpg)
-
-![Naves](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Naves.jpg)
-
-![McDaniels Shipwrights Condor-class gunship](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/NaveReferencia1.jpg)
-
-[McDaniels Shipwrights Condor-class gunship](https://www.deviantart.com/adamkop/art/McDaniels-Shipwrights-Condor-class-gunship-517563452)
-
-![Turian Shuttles](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/NaveReferencia2.jpg)
-
-[Turian Shuttles](https://www.deviantart.com/euderion/art/Turian-Shuttles-768172079)
+<p align="center">
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Naves%20Boceto.jpg"> <br>
+ <a href="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Naves%20Boceto.jpg">Figura 3: concepts generales</a> <br> <br>
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Naves.jpg"> <br>
+ <a href="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Naves.jpg">Figura 4: diseño naves final</a> <br><br>
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/NaveReferencia1.jpg"> <br>
+ <a href="https://www.deviantart.com/shoguneagle/art/McDaniels-Shipwrights-Condor-class-gunship-510541336">Figura 5: Shoguneagle's McDaniels Shipwrights Condor-class gunship</a> <br><br>
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/NaveReferencia2.jpg"> <br>
+ <a href="https://www.deviantart.com/euderion/art/Turian-Shuttles-768172079">Figura 6: Euderian's Turian Shuttles</a> <br><br>
+</p>
 
 
 ### Referencias para entornos:
 
-![Neon Sunset on an alien planet?](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/neonSunset.jpg)
-
-[Neon Sunset on an alien planet?](https://www.deviantart.com/goatmutation/art/Neon-Sunset-on-an-alien-planet-829231654)
-
-![# Space Travel](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/spaceTravel.jpg)
-
-[Space Travel](https://www.deviantart.com/qauz/art/Space-Travel-575566386)
-
-![# Gradius II](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Gradius-II-1-Fire-Dragons-1.jpg)
-
-[Gradius II](https://es.wikipedia.org/wiki/Gradius_II)
+<p align="center">
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/neonSunset.jpg"> <br>
+ <a href="https://www.deviantart.com/goatmutation/art/Neon-Sunset-on-an-alien-planet-829231654">Figura 7: GoatMutation's Neon Sunset</a> <br> <br>
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/spaceTravel.jpg"> <br>
+ <a href="https://www.deviantart.com/qauz/art/Space-Travel-575566386">Figura 8: QAuZ's Space Travel</a> <br> <br>
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Gradius-II-1-Fire-Dragons-1.jpg"> <br>
+ <a href="https://es.wikipedia.org/wiki/Gradius_II">Figura 9: fondo Gradius II</a> <br> <br>
+</p>
 
 
-## Referencias
+## Basado en
 
 Para crear este juego hemos partido principalmente de dos fuentes de inspiración.
 
-El juego [Asteroids](https://en.wikipedia.org/wiki/Asteroids_%28video_game%29) de Atari de 1979, del que tomamos prestado tanto la localización y la perspectiva como el control general de las naves.
+El juego [Asteroids](https://en.wikipedia.org/wiki/Asteroids_%28video_game%29) (Figura 10: referencia Asteroids) de Atari de 1979, del que tomamos prestado tanto la localización y la perspectiva como el control general de las naves.
 
-![# Asteroids](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Asteroids.PNG)
+<p align="center">
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Asteroids.PNG"> <br>
+ <a href="https://en.wikipedia.org/wiki/Asteroids_%28video_game%29">Figura 10: referencia Asteroids</a>
+</p>
 
 Y la saga de juegos de Konami [Gradius](https://es.wikipedia.org/wiki/Gradius). En los que nos hemos fijado para diseñar las distintas mejoras que podemos conseguir para nuestra nave (vida/escudos, velocidad o distintas armas) al destruir algunos de los asteroides.
 
-![# Asteroids](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Gradius.jpg)
+<p align="center">
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/Gradius.jpg"> <br>
+ <a href="https://es.wikipedia.org/wiki/Gradius">Figura 11: referencia Gradiuss</a>
+</p>
+
+## Referencias y anexos
+
+A modo de resumen de todo el material utilizado durante este documento, se han utilizado los siguientes enlaces:
+- Wikipedia, (07:09 15 nov 2023‎). _Street Fighter_. Nombre del sitio web: [https://es.wikipedia.org/wiki/Street_Fighter](https://es.wikipedia.org/wiki/Street_Fighter)
+- Capcom, (1987). _Imagen Street Fighter_. Nombre del sitio web: [https://computerhoy.com/noticias/gaming/street-fighter-ii-aniversario-30-anos-806635](https://computerhoy.com/noticias/gaming/street-fighter-ii-aniversario-30-anos-806635)
+- Nuestra paleta, (12 oct 2023). _Generador de paleta de color Coolor_. Nombre del sitio web: [https://coolors.co/](https://coolors.co/)
+- Shoguneagle, (30 enero 2015). _McDaniels Shipwrights Condor-class gunship_. Nombre del sitio web: [https://www.deviantart.com/shoguneagle/art/McDaniels-Shipwrights-Condor-class-gunship-510541336](https://www.deviantart.com/shoguneagle/art/McDaniels-Shipwrights-Condor-class-gunship-510541336)
+- Euderion, (13 oct 2018). _Turian Shuttles_. Nombre del sitio web: [https://www.deviantart.com/euderion/art/Turian-Shuttles-768172079](https://www.deviantart.com/euderion/art/Turian-Shuttles-768172079)
+- GoatMutation, (4 feb 2020). _Neon Sunset on an alien planet?_. Nombre del sitio web: [https://www.deviantart.com/goatmutation/art/Neon-Sunset-on-an-alien-planet-829231654](https://www.deviantart.com/goatmutation/art/Neon-Sunset-on-an-alien-planet-829231654)
+- QAuZ, (1 diciembre 2015). _Space Travel_. Nombre del sitio web: [https://www.deviantart.com/qauz/art/Space-Travel-575566386](https://www.deviantart.com/qauz/art/Space-Travel-575566386)
+- Konami, (1985). _Gradius_. Nombre del sitio web: [https://es.wikipedia.org/wiki/Gradius](https://es.wikipedia.org/wiki/Gradius)
+- Konami, (1988). _Gradius II_. Nombre del sitio web: [https://es.wikipedia.org/wiki/Gradius_II](https://es.wikipedia.org/wiki/Gradius_II)
+- Atari Inc, (Noviembre 1979). _Asteroids_. Nombre del sitio web: [https://en.wikipedia.org/wiki/Asteroids_%28video_game%29](https://en.wikipedia.org/wiki/Asteroids_%28video_game%29)
