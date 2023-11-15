@@ -70,7 +70,7 @@ Comenzamos ahora a hablar sobre la interfaz, tanto la que encontramos durante la
 
 En cuanto a la interfaz externa a la partida, en primer lugar tenemos un menú inicial compuesto de 3 opciones: “start”, donde se dará comienzo al juego, “about the game”, donde se explicará brevemente la historia del juego, y “settings“, donde se pondrán algunos ajustes tales como el sonido.
 
-Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, similar a la de juegos de lucha como [Street Fighter](https://es.wikipedia.org/wiki/Street_Fighter) [Figura 1: ejemplo Street Fighter](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp) compuesta únicamente de:
+Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, similar a la de juegos de lucha como [Street Fighter](https://es.wikipedia.org/wiki/Street_Fighter) (Figura 1: ejemplo Street Fighter) compuesta únicamente de:
 
 -   **Barra de vida**: se indicará de esta forma la vida de cada jugador presente en la arena de combate.
 
@@ -79,7 +79,6 @@ Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, simil
 -   **Círculos de boosters**: se representará mediante círculos pequeños en la parte inferior de la pantalla los distintos boosters (refuerzos tales como + velocidad) que consiga cada jugador.
 
 <img src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp" width=600 heigth=300>
-
 [Figura 1: ejemplo Street Fighter](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp)
 
 ## Items
