@@ -78,7 +78,9 @@ Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, simil
 
 -   **Círculos de boosters**: se representará mediante círculos pequeños en la parte inferior de la pantalla los distintos boosters (refuerzos tales como + velocidad) que consiga cada jugador.
 
-<img src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp" width=600 heigth=300>
+<p align="center">
+ <img width=600 heigth=300 src="https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp">
+</p>
 
 [Figura 1: ejemplo Street Fighter](https://raw.githubusercontent.com/jagonmes/Imagenes-JeR/main/SFII.webp)
 
