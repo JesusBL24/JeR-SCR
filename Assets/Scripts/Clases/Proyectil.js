@@ -1,20 +1,24 @@
 //Esta clase es más para usarla como base, se puede crear una para cada proyectil
 class Proyectil{
     constructor() {
-        //GameObject
+        //SPRITE DEL PROYECTIL (GAMEOBJECT)
         this.cuerpo;
-        //Velocidad del proyectil
+
+        //VELOCIDAD DEL PROYECTIL
         this.velocidad;
-        //Ángulo del proyectil
+        //ÁNGULO DEL PROYECTIL
         this.angulo;
-        //si el proyectil pertenece al jugador 1 o no
-        this.jugador1;
+
+        //SI EL PROYECTIL PERTENECE AL JUGADOR 1
+        this.jugador1 = true;
     }
-    Update(){
+
+    //FUNCIÓN DE ACTUALIZACIÓN DEL PROYECTIL
+    Update(escena){
 
     }
 
-    //Función de movimiento del proyectil
+    //FUNCIÓN DE MOVMIENTO DEL PROYECTIL
     Movimiento(){
 
     }

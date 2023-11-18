@@ -1,14 +1,15 @@
 class Mapa{
     constructor() {
-        //Número de meteoritos a crear en el mapa
+        //NÚMERO DE METEORITOS A CREAR EN EL MAPA
         this.numeroDeMeteoritos;
-        //Tamaño del mapa
+
+        //TAMAÑO DEL MAPA
         this.tamañoX;
         this.tamañoY;
     }
 
-    //Genera el mapa
-    GenerarMapa(){
+    //FUNCIÓN PARA GENERAR EL MAPA
+    GenerarMapa(escena){
 
     }
 }

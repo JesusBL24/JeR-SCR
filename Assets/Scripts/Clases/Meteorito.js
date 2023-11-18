@@ -1,37 +1,46 @@
 class Meteorito{
     constructor() {
-        //GameObject
+        //SPRITE DEL METEORITO (GAMEOBJECT)
         this.cuerpo;
-        //Vida del meteorito
+
+        //VIDA DEL METEORITO
         this.vida;
-        //Aceleracion (o velocidad, a decidir)
-        this.aceleracion;
-        //Velocidad y dirección de rotación
+
+        //VELOCIDAD MÁXIMA DEL METEORITO
+        this.velocidadMaxima;
+        //VELOCIDAD Y DIRECCIÓN DE ROTACIÓN DEL METEORITO
         this.velocidadDeRotacion;
         this.direccionDeRotacion;
-        //Si el meteorito tiene un booster
-        this.tieneBooster;
-        //Tamaño
+
+        //TAMAÑO DEL METEORITO
         this.size;
-        //Meteorito o chatarra
+        //TIPO (METEORITO O CHATARRA)
         this.tipo;
-    }
-    Update(){
+
+        //SI EL METEORITO TIENE UN BOOSTER
+        this.tieneBooster = false;
+        //BOOSTER QUE TIENE EL METEORITO (SI ES ALEATORIO, ESTO SE PUEDE ELIMINAR)
+        this.booster = null;
 
     }
 
-    //Función de movimiento del meteorito
+    //FUNCIÓN DE ACTUALIZACIÓN DEL METEORITO
+    Update(escena){
+
+    }
+
+    //FUNCIÓN DE MOVIMIENTO DEL METEORITO
     Movimiento(){
 
     }
 
-    //Función que hace aparecer un booster
+    //FUNCIÓN QUE HACE APARECER UN BOOSTER
     SpawnBooster(){
 
     }
 
-    //Función que hace aparecer meteoritos más pequeños
-    SpawnMeteorito(){
+    //FUNCIÓN QUE HACE APARECER METEORITOS MÁS PEQUEÑOS
+    SpawnMeteorito(escena){
 
     }
 

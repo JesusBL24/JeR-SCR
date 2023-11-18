@@ -1,8 +1,9 @@
 class Booster{
     constructor() {
-        //GameObject
+        //SPRITE DEL BOOSTER (GAMEOBJECT)
         this.cuerpo;
-        //Tipo de Booster
+
+        //TIPO DE BOOSTER
         this.tipo;
     }
 }

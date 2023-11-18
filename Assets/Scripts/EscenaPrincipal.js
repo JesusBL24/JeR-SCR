@@ -1,3 +1,7 @@
+/////OTRAS VARIABLES/////
+var nave1 = new Nave();
+
+/////CONFIGURACIÓN DE LA ESCENA/////
 var config = {
     type: Phaser.AUTO,
     width: 800,
@@ -5,7 +9,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { z: 300 },
+            gravity: { y: 0 },
             debug: false
         }
     },
@@ -16,16 +20,22 @@ var config = {
     }
 };
 
-var game = new Phaser.Game(config);
+/////ESCENA/////
+var escena = new Phaser.Game(config);
 
+/////FUNCIONES DE LA ESCENA/////
 function preload ()
 {
+    this.load.spritesheet('dude', 'Assets/Sprites/Ejemplo/dude.png', { frameWidth: 32, frameHeight: 48 });
 }
 
 function create ()
 {
+    nave1.GenerarNave(this);
 }
 
 function update ()
 {
+    nave1.Update(this);
 }
+/////FIN FUNCIONES DE LA ESCENA/////
