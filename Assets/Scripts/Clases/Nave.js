@@ -82,16 +82,23 @@ class Nave{
     //FUNCIÓN PARA GENERAR LA NAVE DENTRO DE LA ESCENA
     GenerarNave(escena){
         //Cambiar esto al sprite de la nave correspondiente cuando esten
-        this.cuerpo = escena.physics.add.sprite(100, 450, 'dude');
+        this.cuerpo = escena.physics.add.sprite(400, 300, 'dude');
 
         //SE ASIGNAN LAS VARIABLES PARA EL MOVIMIENTO
         this.cuerpo.setDamping(true);
         this.cuerpo.setDrag(0.99);
         this.cuerpo.setMaxVelocity(this.velocidadMaxima);
 
+        //SE ASIGNA CUANTO A DE REBOTAR LA NAVE AL CHOCARSE CON OTRO OBJETO
+        this.cuerpo.setBounce(.5,.5);
+
+        //ASIGNAR COLLIDER A LA NAVE
+        this.cuerpo.setCircle(16, 0, 12)
+
         //SE ASIGNAN LAS TECLAS AL JUGADOR
         this.AsignarTeclas(escena);
 
+        //SE ASIGNA EL EVENTO DE DISPARO
         this.TeclaDisparo.on('down', event =>
         {
             this.Disparar(escena);
