@@ -1,4 +1,4 @@
-# S.C.P. (SPACE COMBAT RUSH)
+# S.C.R. (SPACE COMBAT RUSH)
 ---
 
 
