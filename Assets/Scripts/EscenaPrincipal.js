@@ -29,7 +29,8 @@ var escena = new Phaser.Game(config);
 function preload ()
 {
     this.load.image('bomb', 'Assets/Sprites/Ejemplo/bomb.png');
-    this.load.spritesheet('dude', 'Assets/Sprites/Ejemplo/dude.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.image('pandora', 'Assets/Sprites/Naves/Pandora.png');
+    //this.load.spritesheet('ravager', 'Assets/Sprites/Naves/Ravager.png');
 }
 
 function create ()
@@ -40,7 +41,8 @@ function create ()
 
 function update ()
 {
-    nave1.Update(this);
+    //nave1.Update(this);
     mapa.Update(this, nave1);
+    nave1.Update(this);
 }
 /////FIN FUNCIONES DE LA ESCENA/////

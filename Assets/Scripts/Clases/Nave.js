@@ -9,15 +9,13 @@ class Nave{
         this.vida = 100;
         //CANTIDAD DE ESCUDO DE LA NAVE
         this.escudo = 0;
-
         //VELOCIDAD MÁXIMA DE LA NAVE
         this.velocidadMaxima = 200;
         //VELOCIDAD DE ROTACIÓN DE LA NAVE
         this.velocidadDeRotacion = 100;
 
         //TIPO DE DISPARO
-        this.tipoDisparo = null;
-
+        this.tipoDisparo = 0;
 
         //TECLAS DE LAS QUE DISPONE EL JUGADOR
         this.Arriba = null;
@@ -52,14 +50,39 @@ class Nave{
         }else {
             this.cuerpo.setAngularVelocity(0);
         }
-
         //ESTO ES DE MOMENTO PARA QUE EL JUGADOR NO SE VAYA A MORDOR
         escena.physics.world.wrap(this.cuerpo, 32);
     }
 
     //FUNCIÓN DE DISPARO DE LA NAVE
     Disparar(escena){
-        console.log("Disparando");
+        switch(this.tipoDisparo){
+            case 0:
+                // Crea un nuevo círculo en la posición de la nave
+                const nuevoCirculo = new Phaser.Geom.Circle(this.cuerpo.x, this.cuerpo.y, 10);
+
+                // Crea un sprite asociado al nuevo círculo
+                const nuevoSprite = escena.add.sprite(nuevoCirculo.x, nuevoCirculo.y, 'pandora awww');
+
+                // Establece propiedades adicionales si es necesario
+                nuevoSprite.setOrigin(0.5, 0.5);
+                nuevoSprite.setScale(0.5);
+
+                // Agrega el nuevo sprite a la escena o a un grupo de sprites
+                escena.physics.add.existing(nuevoSprite);
+
+                break;
+            case 1:
+                console.log("1");
+                break;
+            case 2:
+                console.log("0");
+                this.tipoDisparo = 1;
+                break;
+            case 3:
+                console.log("1");
+                break;
+        }
     }
 
     //FUNCIÓN PARA ASIGNAR LOS CONTROLES DE LA NAVE
@@ -82,7 +105,8 @@ class Nave{
     //FUNCIÓN PARA GENERAR LA NAVE DENTRO DE LA ESCENA
     GenerarNave(escena){
         //Cambiar esto al sprite de la nave correspondiente cuando esten
-        this.cuerpo = escena.physics.add.sprite(400, 300, 'dude');
+        this.cuerpo = escena.physics.add.sprite(400, 300, 'pandora');
+        //this.cuerpo.setScale(2);
 
         //SE ASIGNAN LAS VARIABLES PARA EL MOVIMIENTO
         this.cuerpo.setDamping(true);
@@ -93,7 +117,11 @@ class Nave{
         this.cuerpo.setBounce(.5,.5);
 
         //ASIGNAR COLLIDER A LA NAVE
-        this.cuerpo.setCircle(16, 0, 12)
+        //this.cuerpo.setCircle(16, 0, 12);
+        this.cuerpo.setSize(20, 60);
+        this.cuerpo.setOffset(22, 0); // Puedes ajustar estos valores según tus necesidades
+        
+
 
         //SE ASIGNAN LAS TECLAS AL JUGADOR
         this.AsignarTeclas(escena);
