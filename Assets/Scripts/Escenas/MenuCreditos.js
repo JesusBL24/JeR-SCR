@@ -12,6 +12,9 @@ class MenuCreditos extends Phaser.Scene{
 
     create(){
 
+        //FADE IN
+        this.cameras.main.fadeIn(2000);
+
         /////////
         //FONDO//
         /////////

@@ -10,6 +10,9 @@ class InterfazJuego extends Phaser.Scene{
 
     create(){
 
+        //FADE IN
+        this.cameras.main.fadeIn(2000);
+
         /////////////////////////////////////////////////////////
         //CAJAS FIJAS QUE CONTIENE LOS BOOSTERS DE CADA JUGADOR//
         /////////////////////////////////////////////////////////
