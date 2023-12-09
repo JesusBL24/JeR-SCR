@@ -16,6 +16,9 @@ class EscenaPrincipal extends Phaser.Scene {
 
     create() {
 
+        //LLAMAMOS A LA INTERFAZ DE JUEGO PARA PINTARLA POR ENCIMA
+        this.scene.launch('InterfazJuego');
+
         //MAPA
         this.mapa = new Mapa();
         this.mapa.GenerarMapa(this);
