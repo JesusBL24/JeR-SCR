@@ -13,6 +13,9 @@ class MenuInicial extends Phaser.Scene{
 
     create(){
 
+        //FADE IN
+        this.cameras.main.fadeIn(2000);
+
         /////////
         //FONDO//
         /////////

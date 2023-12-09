@@ -1,18 +1,15 @@
 class GanarPerder extends Phaser.Scene {
     constructor() {
-        super({key: 'GanarPerder', active: true});
+        super({key: 'GanarPerder', active: false});
         this.hasGanado = null;
         this.hasPerdido = null;
-        this.camaraSecundaria;
-        this.botonVolver = new BotonVolver(this);
+        this.camaraSecundaria = null;
     }
 
     preload() {
         //CARGAMOS LAS IMAGENES DE "HAS PERDIDO" Y "HAS GANADO"
         this.load.image('HasGanado', 'Assets/Sprites/carteles_victoria_derrota/you_win.png');
         this.load.image('HasPerdido', 'Assets/Sprites/carteles_victoria_derrota/you_lose.png');
-        //LLAMAMOS A QUE SE CARGUE EL BOTON DE VOLVER A MENU INICIAL
-        this.botonVolver.preload();
     }
 
     create() {
@@ -40,10 +37,20 @@ class GanarPerder extends Phaser.Scene {
                 this.cameras.main.startFollow(this.hasGanado, true);
                 this.camaraSecundaria.startFollow(this.hasPerdido, true);
             }
-        }, this);
 
-        //LLAMAMOS AL COMPONENTE QUE NOS CREA UN BOTON FUNCIONAL PARA VOLVER AL MENU INICIAL
-        this.botonVolver.create();
+            //DESPUES DE TRES SEGUNDOS SE HACE UN FADE OUT DE AMBAS CAMARAS
+            this.time.delayedCall(3000, function (){
+                this.cameras.main.fadeOut(2000);
+                this.camaraSecundaria.fadeOut(2000);
+                //TRAS EL FADE OUT SE CAMBIA DE ESCENA
+                this.time.delayedCall(2000, function (){
+                    this.scene.stop('EscenaPrincipal');
+                    this.scene.start('MenuInicial');
+                }, [], this);
+
+
+            }, [], this);
+        }, this);
 
     }
 
