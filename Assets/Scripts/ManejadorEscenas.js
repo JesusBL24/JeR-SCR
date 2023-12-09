@@ -6,7 +6,7 @@ var config = {
         parent: 'Juego',
         width: 800,
         height: 600,
-        scene: [EscenaPrincipal, GanarPerder],
+        scene: [MenuInicial, MenuControles, MenuCreditos, EscenaPrincipal, InterfazJuego, GanarPerder],
         physics: {
             default: 'arcade',
             arcade: {
