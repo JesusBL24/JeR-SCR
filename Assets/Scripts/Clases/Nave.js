@@ -18,7 +18,7 @@ class Nave{
         this.tipoDisparo = 0;
 
         //Collider multiple
-        this.c1;
+        this.radioCollider = 24;
         //this.c2 = null;
 
         //TECLAS DE LAS QUE DISPONE EL JUGADOR
@@ -54,10 +54,14 @@ class Nave{
             this.cuerpo.setAngularVelocity(0);
         }
 
-        //const direccionMovimiento = this.velocityFromRotation(this.rotation, 1)
-        //const anguloRotacion = Phaser.Math.RadToDeg(direccionMovimiento.angle());
         //ESTO ES DE MOMENTO PARA QUE EL JUGADOR NO SE VAYA A MORDOR
         escena.physics.world.wrap(this.cuerpo, 32);
+
+        //this.cuerpo.rotation = Math.atan2(this.cuerpo.body.velocity.y, this.cuerpo.body.velocity.x);
+
+
+        // Refrescar el cuerpo del sprite (opcional)
+        //this.cuerpo.refreshBody();
     }
 
     //FUNCIÓN DE DISPARO DE LA NAVE
@@ -112,7 +116,9 @@ class Nave{
     GenerarNave(escena){
         //Cambiar esto al sprite de la nave correspondiente cuando esten
         this.cuerpo = escena.physics.add.sprite(400, 300, 'pandora');
-        //this.cuerpo.setScale(2);
+        //this.cuerpo.angle = 90;
+        this.cuerpo.setOrigin(0.4,0.5);
+        
 
         //SE ASIGNAN LAS VARIABLES PARA EL MOVIMIENTO
         this.cuerpo.setDamping(true);
@@ -123,7 +129,8 @@ class Nave{
         this.cuerpo.setBounce(.5,.5);
 
         //ASIGNAR COLLIDER A LA NAVE
-        this.cuerpo.setCircle(24, 8, 20);
+        this.cuerpo.setCircle(this.radioCollider,3 , 10);
+        //this.cuerpo.setOrigin(0.5,0.9);
         //this.cuerpo.setSize(20, 60);
         //this.cuerpo.setOffset(22, 0); // Puedes ajustar estos valores según tus necesidades
         //this.c1 = escena.physics.add.sprite(400,300);
@@ -143,35 +150,4 @@ class Nave{
             this.Disparar(escena);
         });
     }
-      
-
-
-    /*Ejemplo varios colliders
-    s1 = this.physics.add.image();
-  s1.body.setCircle(20);
-  s1.setBounce(1);
-  s1.setDebugBodyColor(0xffff00);
-
-  s2 = this.physics.add.image();
-  s2.body.setCircle(10);
-  s2.setBounce(1);
-  s2.setDebugBodyColor(0xffff00);
-
-  s3 = this.physics.add.image();
-  s3.body.setCircle(10);
-  s3.body.setBounce(1);
-  s3.setDebugBodyColor(0xffff00);
-
-  asteroid = this.physics.add.image(200, 0, 'asteroid');
-  asteroid.setImmovable(true);
-
-  this.physics.add.collider(asteroid, [s1, s2, s3], function (_asteroid, shipComponent) {
-    var v = shipComponent.body.velocity;
-
-    ship.body.velocity.copy(v);
-    s1.body.velocity.copy(v);
-    s2.body.velocity.copy(v);
-    s3.body.velocity.copy(v);
-  });*/
-
 }
