@@ -26,6 +26,8 @@ class EscenaPrincipal extends Phaser.Scene {
         this.physics.add.collider(this.nave1.cuerpo, this.nave2.cuerpo, null, null, this);
 
         //PANTALLA DIVIDIDA
+        //AJUSTAMOS LA CAMARA PRINCIPAL Y LA SECUNDARIA A LA PANTALLA DE JUEGO
+        //Y HACEMOS QUE CADA UNA DE ELLAS SIGA A UN JUGADOR
         this.cameras.main.setSize(this.sys.game.scale.gameSize.width/2, this.sys.game.scale.gameSize.height);
         this.cameras.main.startFollow(this.nave1.cuerpo, true);
         this.cameras.main.setZoom(2);
@@ -39,6 +41,11 @@ class EscenaPrincipal extends Phaser.Scene {
         this.mapa.Update(this, this.nave1, this.nave2);
         this.nave1.Update(this);
         this.nave2.Update(this);
+
+        //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePArtida"
+        if(this.nave1.vida <= 0 || this.nave2.vida <= 0){
+            this.events.emit('finDePartida');
+        }
     }
 
 }
