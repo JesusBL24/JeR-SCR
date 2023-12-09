@@ -57,11 +57,6 @@ class Nave{
         //ESTO ES DE MOMENTO PARA QUE EL JUGADOR NO SE VAYA A MORDOR
         escena.physics.world.wrap(this.cuerpo, 32);
 
-        //this.cuerpo.rotation = Math.atan2(this.cuerpo.body.velocity.y, this.cuerpo.body.velocity.x);
-
-
-        // Refrescar el cuerpo del sprite (opcional)
-        //this.cuerpo.refreshBody();
     }
 
     //FUNCIÓN DE DISPARO DE LA NAVE
@@ -116,8 +111,6 @@ class Nave{
     GenerarNave(escena){
         //Cambiar esto al sprite de la nave correspondiente cuando esten
         this.cuerpo = escena.physics.add.sprite(400, 300, 'pandora');
-        //this.cuerpo.angle = 90;
-        this.cuerpo.setOrigin(0.4,0.5);
         
 
         //SE ASIGNAN LAS VARIABLES PARA EL MOVIMIENTO
@@ -129,17 +122,7 @@ class Nave{
         this.cuerpo.setBounce(.5,.5);
 
         //ASIGNAR COLLIDER A LA NAVE
-        this.cuerpo.setCircle(this.radioCollider,3 , 10);
-        //this.cuerpo.setOrigin(0.5,0.9);
-        //this.cuerpo.setSize(20, 60);
-        //this.cuerpo.setOffset(22, 0); // Puedes ajustar estos valores según tus necesidades
-        //this.c1 = escena.physics.add.sprite(400,300);
-        //this.c1.body.setCircle(100);
-        //this.s1.setBounce(1);
-        //this.c1.setDebugBodyColor(0xffff00);
-        
-        
-
+        this.cuerpo.setCircle(this.radioCollider,8 , 8);
 
         //SE ASIGNAN LAS TECLAS AL JUGADOR
         this.AsignarTeclas(escena);
