@@ -4,12 +4,15 @@ class GanarPerder extends Phaser.Scene {
         this.hasGanado = null;
         this.hasPerdido = null;
         this.camaraSecundaria;
+        this.botonVolver = new BotonVolver(this);
     }
 
     preload() {
         //CARGAMOS LAS IMAGENES DE "HAS PERDIDO" Y "HAS GANADO"
         this.load.image('HasGanado', 'Assets/Sprites/carteles_victoria_derrota/you_win.png');
         this.load.image('HasPerdido', 'Assets/Sprites/carteles_victoria_derrota/you_lose.png');
+        //LLAMAMOS A QUE SE CARGUE EL BOTON DE VOLVER A MENU INICIAL
+        this.botonVolver.preload();
     }
 
     create() {
@@ -38,6 +41,9 @@ class GanarPerder extends Phaser.Scene {
                 this.camaraSecundaria.startFollow(this.hasPerdido, true);
             }
         }, this);
+
+        //LLAMAMOS AL COMPONENTE QUE NOS CREA UN BOTON FUNCIONAL PARA VOLVER AL MENU INICIAL
+        this.botonVolver.create();
 
     }
 
