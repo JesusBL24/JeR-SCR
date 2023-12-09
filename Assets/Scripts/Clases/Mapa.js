@@ -56,13 +56,15 @@ class Mapa{
     }
 
     //FUNCIÓN DE ACTUALIZACIÓN DEL MAPA
-    Update(escena, nave){
+    Update(escena, jugador1, jugador2){
 
         //PINTA EL LIMITE
         this.graficos.clear();
         this.graficos.strokeCircleShape(this.limite);
 
         //COMPRUEBA LAS COLISIONES CON EL LIMITE DEL MAPA (AQUI HHABRA QUE AÑADIR LOS METEORITOS)
-        escena.physics.world.collide(nave.cuerpo, this.CollidersLimite);
+        escena.physics.world.collide(jugador1.cuerpo, this.CollidersLimite);
+        escena.physics.world.collide(jugador2.cuerpo, this.CollidersLimite);
+
     }
 }
