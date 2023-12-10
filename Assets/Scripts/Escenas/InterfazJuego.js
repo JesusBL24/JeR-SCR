@@ -1,6 +1,6 @@
 class InterfazJuego extends Phaser.Scene{
     constructor(props) {
-        super({key:'InterfazJuego'});
+        super({key:'InterfazJuego', active: false});
     }
 
     preload(){

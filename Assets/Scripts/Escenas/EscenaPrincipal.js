@@ -52,6 +52,8 @@ class EscenaPrincipal extends Phaser.Scene {
 
         //INICIA LA ESCENA GANARPERDER
         this.scene.run('GanarPerder');
+        //INICIA LA ESCENA DE LA INTERFAZ DEL JUEGO
+        this.scene.run('InterfazJuego');
 
     }
 
@@ -68,6 +70,8 @@ class EscenaPrincipal extends Phaser.Scene {
                 //HACEMOS UN FADE OUT DE AMBAS CAMARAS
                 this.cameras.main.fadeOut(3000);
                 this.camaraSecundaria.fadeOut(3000);
+                //HACEMOS UN FADE OUT DE LA INTERFAZ DEL JUEGO
+                this.scene.get('InterfazJuego').cameras.main.fadeOut(3000);
             }
         }
     }

@@ -45,6 +45,7 @@ class GanarPerder extends Phaser.Scene {
                 //TRAS EL FADE OUT SE CAMBIA DE ESCENA
                 this.time.delayedCall(2000, function (){
                     this.scene.stop('EscenaPrincipal');
+                    this.scene.stop('InterfazJuego');
                     this.scene.start('MenuInicial');
                 }, [], this);
 
