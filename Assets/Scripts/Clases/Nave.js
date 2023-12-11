@@ -65,14 +65,26 @@ class Nave {
   Disparar(escena) {
     switch (this.tipoDisparo) {
       case 0:
-        const nuevoProyectil = new Misil(
-        this.cuerpo.x,
-        this.cuerpo.y,
-        this.cuerpo.rotation,
-        this.jugador1,
+        // Crea un nuevo círculo en la posición de la nave
+        const nuevoCirculo = new Phaser.Geom.Circle(
+          this.cuerpo.x,
+          this.cuerpo.y,
+          10
         );
 
-        nuevoProyectil.Fire(escena);
+        // Crea un sprite asociado al nuevo círculo
+        const nuevoSprite = escena.add.sprite(
+          nuevoCirculo.x,
+          nuevoCirculo.y,
+          "pandora awww"
+        );
+
+        // Establece propiedades adicionales si es necesario
+        nuevoSprite.setOrigin(0.5, 0.5);
+        nuevoSprite.setScale(0.5);
+
+        // Agrega el nuevo sprite a la escena o a un grupo de sprites
+        escena.physics.add.existing(nuevoSprite);
 
         break;
       case 1:
@@ -141,6 +153,12 @@ class Nave {
 
     //ASIGNAR COLLIDER A LA NAVE
     this.cuerpo.setCircle(24, 8, 20);
+    //this.cuerpo.setSize(20, 60);
+    //this.cuerpo.setOffset(22, 0); // Puedes ajustar estos valores según tus necesidades
+    //this.c1 = escena.physics.add.sprite(400,300);
+    //this.c1.body.setCircle(100);
+    //this.s1.setBounce(1);
+    //this.c1.setDebugBodyColor(0xffff00);
 
     //ASIGNAR COLLIDER A LA NAVE
     this.cuerpo.setCircle(this.radioCollider, 8, 8);
