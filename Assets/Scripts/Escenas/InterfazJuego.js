@@ -23,9 +23,9 @@ class InterfazJuego extends Phaser.Scene{
         this.add.image(170,550,'cajaBoosters').setScale(0.05,0.05);
 
         //Jugador 2 (derecha/numpad)
-        this.add.image(630,550,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(690,550,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(750,550,'cajaBoosters').setScale(0.05,0.05);
+        this.add.image(650,550,'cajaBoosters').setScale(0.05,0.05);
+        this.add.image(710,550,'cajaBoosters').setScale(0.05,0.05);
+        this.add.image(770,550,'cajaBoosters').setScale(0.05,0.05);
 
 
         /////////////////////////

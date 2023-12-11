@@ -14,7 +14,7 @@ class BotonVolver{
         //BOTON//
         /////////
 
-        this.botonVolver = this.relatedScene.add.sprite(700, 550, 'botonVolver').setScale(0.1,0.1).setInteractive();
+        this.botonVolver = this.relatedScene.add.sprite(1100, 650, 'botonVolver').setScale(0.1,0.1).setInteractive();
 
         ///////////////////////
         //FUNCIONALIDAD BOTON//

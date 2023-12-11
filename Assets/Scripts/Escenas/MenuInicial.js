@@ -20,16 +20,16 @@ class MenuInicial extends Phaser.Scene{
         //FONDO//
         /////////
 
-        this.add.image(0,0,'fondoMI').setScale(0.4,0.445).setOrigin(0,0);
+        this.add.image(0,0,'fondoMI').setScale(0.6, 0.55).setOrigin(0,0);
 
 
         ///////////
         //BOTONES//
         ///////////
 
-        var botStart = this.add.sprite(525,250,'botonStart').setScale(0.2,0.2).setInteractive();
-        var botControles = this.add.sprite(525,350,'botonControles').setScale(0.2,0.2).setInteractive();
-        var botCreditos = this.add.sprite(525,450,'botonCreditos').setScale(0.2,0.2).setInteractive();
+        var botStart = this.add.sprite(850,350,'botonStart').setScale(0.2,0.2).setInteractive();
+        var botControles = this.add.sprite(850,450,'botonControles').setScale(0.2,0.2).setInteractive();
+        var botCreditos = this.add.sprite(850,550,'botonCreditos').setScale(0.2,0.2).setInteractive();
 
 
         ///////////////////////////
