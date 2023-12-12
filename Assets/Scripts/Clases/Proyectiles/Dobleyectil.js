@@ -33,6 +33,11 @@ class Dobleyectil extends Proyectil {
             this.jugador1,
             );
 
-            nuevoProyectil.Disparar(escena);
+        nuevoProyectil.Disparar(escena);
+        escena.time.delayedCall(5000, () => {
+        this.DestruirProyectil();
+        });
     }
+    
+    
 }

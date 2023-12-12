@@ -13,6 +13,8 @@ class EscenaPrincipal extends Phaser.Scene {
     this.load.image("pandora", "Assets/Sprites/Naves/Pandora.png");
     this.load.image("ravager", "Assets/Sprites/Naves/Ravager.png");
     this.load.image("proyectilBasico", "Assets/Sprites/Proyectiles/Proyectil.png");
+    this.load.image("explosionMisil", "Assets/Sprites/Proyectiles/Explosion.png");
+    this.load.image("proyectilMisil", "Assets/Sprites/Proyectiles/Misil.png");
     this.load.spritesheet("booster", "Assets/Sprites/Boosters/ShieldSCR.png", {
       frameWidth: 32,
       frameHeight: 32,

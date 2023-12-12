@@ -17,7 +17,7 @@ class Nave {
     this.velocidadActual = 200;
 
     //TIPO DE DISPARO
-    this.tipoDisparo = 2;
+    this.tipoDisparo = 3;
 
     //CADENCIA DE DISPARO
     this.cadenciaDisparo = 1000; 
@@ -46,7 +46,7 @@ class Nave {
 
   //FUNCION DE FEEDBACK DE DAÑO LA NAVE
   Hit(){
-    Phaser.Actions.SetTint([this.cuerpo], this.colorTint1);
+    Phaser.Actions.SetTint([this.cuerpo], this.filter);
     setTimeout(() =>{
         this.cuerpo.clearTint();
     }, 150);
@@ -142,7 +142,14 @@ class Nave {
                 nuevoProyectil.Disparar(escena);
               break;
             case 3:
-              console.log("1");
+              var nuevoProyectil = new Misil(
+                this.cuerpo.x,
+                this.cuerpo.y,
+                this.cuerpo.rotation,
+                this.jugador1,
+                );
+                
+                nuevoProyectil.Disparar(escena);
               break;
           }
           //SE IGUALA LA CADENCIA A LA DEL TIPO DE PROYECTIL

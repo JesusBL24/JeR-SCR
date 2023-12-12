@@ -93,5 +93,8 @@ class Proyectil{
         this.cuerpo.rotation = this.angulo;
         escena.physics.velocityFromRotation(this.angulo, this.velocidad, this.cuerpo.body.velocity);
         this.AddColliders(escena);
+        escena.time.delayedCall(5000, () => {
+            this.DestruirProyectil();
+        });
     }
 }
