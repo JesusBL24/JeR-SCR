@@ -6,6 +6,9 @@ class Mapa {
     //METEORITOS EN EL MAPA
     this.meteoritos = null;
 
+    //CUERPO DE LOS METEORITOS EN EL MAPA
+    this.cuerposMeteoritos = [];
+
     //TAMAÑO DEL MAPA
     this.diametro = 1000;
 
@@ -54,14 +57,24 @@ class Mapa {
 
   //FUNCIÓN PARA GENERAR EL MAPA (TODO)
   GenerarMapa(escena) {
+
+    //GENERAMOS EL LIMITE DE LA ESCENA
     this.GenerarLimite(escena);
+
+    //GENERAMOS LOS METEORITOS
     this.meteoritos = new Array(this.numeroDeMeteoritos);
+
+    //GENERAMOS CADA METEORITO
     for(var i = 0; i < this.numeroDeMeteoritos; i++){
       this.meteoritos[i] = new Meteorito();
       this.meteoritos[i].SpawnMeteorito(escena);
-      this.meteoritos[i] = this.meteoritos[i].cuerpo;
+
+      //AÑADIMOS EL CUERPO DE LOS METEORITOS AL ARRAY AUXILIAR
+      this.cuerposMeteoritos[i] = this.meteoritos[i].cuerpo;
     }
-    Phaser.Actions.RandomCircle(this.meteoritos, this.limite);
+
+    //COLOCAMOS LOS METEORITOS EN EL MAPA
+    Phaser.Actions.RandomCircle(this.cuerposMeteoritos, this.limite);
   }
 
   //FUNCIÓN DE ACTUALIZACIÓN DEL MAPA
@@ -70,9 +83,10 @@ class Mapa {
     this.graficos.clear();
     this.graficos.strokeCircleShape(this.limite);
 
-    //COMPRUEBA LAS COLISIONES CON EL LIMITE DEL MAPA (AQUI HHABRA QUE AÑADIR LOS METEORITOS)
+    //COMPRUEBA LAS COLISIONES CON EL LIMITE DEL MAPA
     escena.physics.world.collide(jugador1.cuerpo, this.CollidersLimite);
     escena.physics.world.collide(jugador2.cuerpo, this.CollidersLimite);
+    escena.physics.world.collide(this.cuerposMeteoritos, this.CollidersLimite);
   }
 
 }
