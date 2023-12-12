@@ -26,6 +26,9 @@ class Nave {
     this.cadenciaDisparo = 1000; 
     this.ultimoDisparo = 0; 
 
+    this.filter = null;
+    this.filter2 = null;
+    this.intervalId = null;
     //RADIO DEL COLLIDER
     this.radioCollider = 24;
 
@@ -42,6 +45,34 @@ class Nave {
     if (this.TeclaDisparo.isDown) {
       this.Disparar(escena);
     }
+  }
+
+  //FUNCION DE FEEDBACK DE DAÑO LA NAVE
+  Hit(){
+    Phaser.Actions.SetTint([this.cuerpo], this.colorTint1);
+    setTimeout(() =>{
+        this.cuerpo.clearTint();
+    }, 150);
+
+    if(this.vida <= 20 && this.vida > 10){ this.intervalId = this.LowHeal(800, false)}
+    else if(this.vida <= 10){this.intervalId = this.LowHeal(600, true)}
+  }
+
+  LowHeal(frecuencia,tipo){
+    if (this.intervalId != null) {
+      clearInterval(this.intervalId);
+  }
+    var duracion = 150;
+    const color = tipo ? this.filter : this.filter2;
+    const intervalId = setInterval(() => {
+        Phaser.Actions.SetTint([this.cuerpo], color);
+        setTimeout(() => {
+            this.cuerpo.clearTint();
+        }, duracion);
+    }, frecuencia);
+  
+      // Devuelve el identificador del intervalo para que pueda detenerse más tarde si es necesario
+      return intervalId;
   }
 
   //FUNCIÓN DE MOVIMIENTO DE LA NAVE
@@ -162,8 +193,13 @@ class Nave {
   //FUNCIÓN PARA GENERAR LA NAVE DENTRO DE LA ESCENA
   GenerarNave(escena) {
     //Cambiar esto al sprite de la nave correspondiente cuando esten
-    this.cuerpo = escena.physics.add.sprite(400, 300, "pandora");
-    //this.cuerpo.setScale(2);
+    if(this.jugador1)
+    {this.cuerpo = escena.physics.add.sprite(400, 300, "pandora");}
+    else{this.cuerpo = escena.physics.add.sprite(400, 300, "ravager");}
+    
+    //FILTROS DE COLOR
+    this.filter = 0x00ff0000;
+    this.filter2 = 0x00cf8d00; 
 
     //SE ASIGNAN LAS VARIABLES PARA EL MOVIMIENTO
     this.cuerpo.setDamping(true);

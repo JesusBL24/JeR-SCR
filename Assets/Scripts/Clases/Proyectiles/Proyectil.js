@@ -75,6 +75,7 @@ class Proyectil{
         //DAÑO A LA NAVE ENEMIGA
         if (objetoImpacto && objetoImpacto instanceof Nave) {
             objetoImpacto.vida = objetoImpacto.vida - this.daño;
+            objetoImpacto.Hit();
             //console.log(objetoImpacto.vida);
         }
         else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito){
@@ -88,7 +89,7 @@ class Proyectil{
 
     //DISPARO DEL PROYECTIL
     Disparar(escena){
-        this.cuerpo = escena.physics.add.sprite(this.x, this.y, "ProyectilBasico");
+        this.cuerpo = escena.physics.add.sprite(this.x, this.y, "proyectilBasico");
         this.cuerpo.rotation = this.angulo;
         escena.physics.velocityFromRotation(this.angulo, this.velocidad, this.cuerpo.body.velocity);
         this.AddColliders(escena);

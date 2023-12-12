@@ -19,7 +19,7 @@ class Dobleyectil extends Proyectil {
         this.x = this.x - offsetXFromShip;
         this.y = this.y - offsetYFromShip;
 
-        this.cuerpo = escena.physics.add.sprite(this.x, this.y, "ProyectilBasico");
+        this.cuerpo = escena.physics.add.sprite(this.x, this.y, "proyectilBasico");
 
         this.cuerpo.rotation = this.angulo;
         escena.physics.velocityFromRotation(this.angulo, this.velocidad, this.cuerpo.body.velocity);
