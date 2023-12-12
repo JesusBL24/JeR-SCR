@@ -6,7 +6,8 @@ class MenuCreditos extends Phaser.Scene{
 
     preload(){
         //cargamos imagenes
-        this.load.image('fondoCreditos','Assets/Sprites/Menus/MenuCreditos.png')
+        this.load.image('fondoCreditos','Assets/Sprites/Menus/MenuCreditos.png');
+        this.load.image('decorLienzo','Assets/Sprites/Menus/DecorLienzo.png');
         this.botonVolver.preload();
     }
 
@@ -19,7 +20,8 @@ class MenuCreditos extends Phaser.Scene{
         //FONDO//
         /////////
 
-        this.add.image(0,0,'fondoCreditos').setScale(0.6, 0.55).setOrigin(0,0);
+        this.add.image(0,0,'fondoCreditos').setScale(0.6, 0.58).setOrigin(0,0);
+        this.add.image(0,0,'decorLienzo').setOrigin(0,0);
 
         /////////
         //BOTON//

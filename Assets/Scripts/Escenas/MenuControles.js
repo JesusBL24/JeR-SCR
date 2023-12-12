@@ -6,7 +6,8 @@ class MenuControles extends Phaser.Scene{
 
     preload(){
         //cargamos imagenes
-        this.load.image('fondoControles','Assets/Sprites/Menus/MenuControles.png')
+        this.load.image('fondoControles','Assets/Sprites/Menus/MenuControles.png');
+        this.load.image('decorLienzo','Assets/Sprites/Menus/DecorLienzo.png');
         this.botonVolver.preload();
     }
 
@@ -19,7 +20,8 @@ class MenuControles extends Phaser.Scene{
         //FONDO//
         /////////
 
-        this.add.image(0,0,'fondoControles').setScale(0.6, 0.55).setOrigin(0,0);
+        this.add.image(0,0,'fondoControles').setScale(0.6, 0.58).setOrigin(0,0);
+        this.add.image(0,0,'decorLienzo').setOrigin(0,0);
 
         /////////
         //BOTON//

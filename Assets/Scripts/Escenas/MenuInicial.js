@@ -6,6 +6,7 @@ class MenuInicial extends Phaser.Scene{
     preload(){
         //se cargan las imagenes
         this.load.image('fondoMI','Assets/Sprites/Menus/MenuInicial.png');
+        this.load.image('decorLienzo','Assets/Sprites/Menus/DecorLienzo.png');
         this.load.spritesheet('botonStart','Assets/Sprites/Menus/StartSpriteSheet.png',{frameWidth: 946,frameHeight: 385});
         this.load.spritesheet('botonControles','Assets/Sprites/Menus/ControlesSpriteSheet.png',{frameWidth: 946,frameHeight: 385});
         this.load.spritesheet('botonCreditos','Assets/Sprites/Menus/CreditosSpriteSheet.png',{frameWidth: 946,frameHeight: 385});
@@ -20,7 +21,8 @@ class MenuInicial extends Phaser.Scene{
         //FONDO//
         /////////
 
-        this.add.image(0,0,'fondoMI').setScale(0.6, 0.55).setOrigin(0,0);
+        this.add.image(0,0,'fondoMI').setScale(0.6, 0.58).setOrigin(0,0);
+        this.add.image(0,0,'decorLienzo').setOrigin(0,0);
 
 
         ///////////

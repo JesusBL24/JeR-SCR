@@ -6,6 +6,8 @@ class InterfazJuego extends Phaser.Scene{
     preload(){
         //cargamos los sprites
         this.load.image('cajaBoosters','Assets/Sprites/Interfaces/ingame/BoosterBaseIconJER.png');
+        this.load.image('decorLienzo','Assets/Sprites/Menus/DecorLienzo.png');
+        this.load.image('lineaDiv','Assets/Sprites/Menus/LineaDivisoriaJugadores.png');
     }
 
     create(){
@@ -17,15 +19,19 @@ class InterfazJuego extends Phaser.Scene{
         //CAJAS FIJAS QUE CONTIENE LOS BOOSTERS DE CADA JUGADOR//
         /////////////////////////////////////////////////////////
 
+        //caja lienzo
+        this.add.image(0,0,'decorLienzo').setOrigin(0,0);
+        this.add.image(0,0,'lineaDiv').setOrigin(0,0);
+
         //Jugador 1 (izquierda/wasd)
-        this.add.image(50,550,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(110,550,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(170,550,'cajaBoosters').setScale(0.05,0.05);
+        this.add.image(50,650,'cajaBoosters').setScale(0.05,0.05);
+        this.add.image(110,650,'cajaBoosters').setScale(0.05,0.05);
+        this.add.image(170,650,'cajaBoosters').setScale(0.05,0.05);
 
         //Jugador 2 (derecha/numpad)
-        this.add.image(650,550,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(710,550,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(770,550,'cajaBoosters').setScale(0.05,0.05);
+        this.add.image(650,650,'cajaBoosters').setScale(0.05,0.05);
+        this.add.image(710,650,'cajaBoosters').setScale(0.05,0.05);
+        this.add.image(770,650,'cajaBoosters').setScale(0.05,0.05);
 
 
         /////////////////////////
