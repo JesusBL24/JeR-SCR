@@ -8,8 +8,8 @@ class GanarPerder extends Phaser.Scene {
 
     preload() {
         //CARGAMOS LAS IMAGENES DE "HAS PERDIDO" Y "HAS GANADO"
-        this.load.image('HasGanado', 'Assets/Sprites/carteles_victoria_derrota/you_win.png');
-        this.load.image('HasPerdido', 'Assets/Sprites/carteles_victoria_derrota/you_lose.png');
+        this.load.image('HasGanado', 'Assets/Sprites/carteles_victoria_derrota/has_ganado.png');
+        this.load.image('HasPerdido', 'Assets/Sprites/carteles_victoria_derrota/has_perdido.png');
     }
 
     create() {
@@ -20,9 +20,9 @@ class GanarPerder extends Phaser.Scene {
 
         //AJUSTAMOS LA CAMARA PRINCIPAL Y LA SECUNDARIA A LA PANTALLA DE JUEGO
         this.cameras.main.setSize(this.sys.game.scale.gameSize.width/2, this.sys.game.scale.gameSize.height);
-        this.cameras.main.setZoom(0.2);
+        this.cameras.main.setZoom(0.5);
         this.camaraSecundaria = this.cameras.add(this.sys.game.scale.gameSize.width/2, 0, this.sys.game.scale.gameSize.width/2, this.sys.game.scale.gameSize.height);
-        this.camaraSecundaria.setZoom(0.2);
+        this.camaraSecundaria.setZoom(0.5);
 
         //SI DESDE LA ESCENA PRINCIPAL SE LANZA EL EVENTO "finDePArtida", MOSTRAMOS A CADA LADO DE LA PANTALLA LA IMAGEN CORRESPONDIENTE
         this.scene.get('EscenaPrincipal').events.on('finDePartida', function ()

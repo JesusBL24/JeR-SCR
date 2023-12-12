@@ -68,7 +68,7 @@ El tamaño de la arena se adecua al ritmo del juego, haciendo así que las parti
 
 Comenzamos ahora a hablar sobre la interfaz, tanto la que encontramos durante la partida como la de fuera de ella.
 
-En cuanto a la interfaz externa a la partida, en primer lugar tenemos un menú inicial compuesto de 3 opciones: “start”, donde se dará comienzo al juego, “about the game”, donde se explicará brevemente la historia del juego, y “settings“, donde se pondrán algunos ajustes tales como el sonido.
+En cuanto a la interfaz externa a la partida, en primer lugar tenemos un menú inicial compuesto de 3 opciones: “comenzar”, donde se dará comienzo al juego, “créditos”, donde se mencionará a los creadores del juego, y “controles“, donde se explicará mediante gráficos los distintos controles de cada jugador.
 
 Y, respecto a la de dentro de la partida, tendremos una interfaz sencilla, similar a la de juegos de lucha como [Street Fighter](https://es.wikipedia.org/wiki/Street_Fighter) (Figura 1: ejemplo Street Fighter) compuesta únicamente de:
 

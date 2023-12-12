@@ -11,12 +11,24 @@ class EscenaPrincipal extends Phaser.Scene {
   preload() {
     this.load.image("bomb", "Assets/Sprites/Ejemplo/bomb.png");
     this.load.image("pandora", "Assets/Sprites/Naves/Pandora.png");
+    this.load.image("ProyectilBasico", "Assets/Sprites/Proyectiles/Proyectil.png");
     this.load.spritesheet("booster", "Assets/Sprites/Boosters/ShieldSCR.png", {
       frameWidth: 32,
       frameHeight: 32,
       startFrame: 0,
       endFrame: 5,
     });
+    this.load.spritesheet("meteorite", "Assets/Sprites/Asteroides/AsteroidsSCR.png", {
+      frameWidth: 1024,
+      frameHeight: 1024,
+      startFrame: 0,
+      endFrame: 3,
+    });
+    this.load.image("trash1", "Assets/Sprites/Restos/Restos1.png");
+    this.load.image("trash2", "Assets/Sprites/Restos/Restos2.png");
+    this.load.image("trash3", "Assets/Sprites/Restos/Restos3.png");
+    this.load.image("trash4", "Assets/Sprites/Restos/Restos4.png");
+    this.load.image("trash5", "Assets/Sprites/Restos/RestoGrande.png");
     //this.load.spritesheet('ravager', 'Assets/Sprites/Naves/Ravager.png');
   }
 
@@ -35,7 +47,7 @@ class EscenaPrincipal extends Phaser.Scene {
     this.nave2.jugador1 = false;
     this.nave2.GenerarNave(this);
 
-    // BOOSTER EJEMPLo
+    // BOOSTER EJEMPLO
     this.booster = new Booster(BoosterType.Speed, { x: 500, y: 100 });
     this.booster.GenerarBooster(this);
     this.booster.addColliders(this.nave1, (_, __) =>
@@ -44,6 +56,12 @@ class EscenaPrincipal extends Phaser.Scene {
     this.booster.addColliders(this.nave2, (_, __) =>
       this.nave2.CogerBooster(this.booster)
     );
+
+    //METEORITO EJEMPLO;
+    this.meteorite = new Meteorito();
+    this.meteorite.SpawnMeteorito(this);
+    this.physics.add.collider(this.meteorite.cuerpo, this.nave1.cuerpo);
+    this.physics.add.collider(this.meteorite.cuerpo, this.nave2.cuerpo);
 
     //COLISIÓN ENTRE JUGADOR 1 Y 2
     this.physics.add.collider(
@@ -90,6 +108,7 @@ class EscenaPrincipal extends Phaser.Scene {
       this.mapa.Update(this, this.nave1, this.nave2);
       this.nave1.Update(this);
       this.nave2.Update(this);
+      this.meteorite.Update(this);
 
       //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePArtida"
       if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {

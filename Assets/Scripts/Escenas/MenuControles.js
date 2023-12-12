@@ -19,7 +19,7 @@ class MenuControles extends Phaser.Scene{
         //FONDO//
         /////////
 
-        this.add.image(0,0,'fondoControles').setScale(0.4,0.445).setOrigin(0,0);
+        this.add.image(0,0,'fondoControles').setScale(0.6, 0.55).setOrigin(0,0);
 
         /////////
         //BOTON//
