@@ -1,29 +1,28 @@
 class Mapa {
   constructor() {
     //NÚMERO DE METEORITOS A CREAR EN EL MAPA
-    this.numeroDeMeteoritos;
+    this.numeroDeMeteoritos = 100;
 
     //METEORITOS EN EL MAPA
-    this.meteoritos;
+    this.meteoritos = null;
 
     //TAMAÑO DEL MAPA
-    this.tamañoX;
-    this.tamañoY;
+    this.diametro = 1000;
 
     //LIMITE DEL MAPA
-    this.limite;
+    this.limite = null;
 
     //OBJETOS EN EL LIMITE DEL MAPA PARA QUE EL JUGADOR NO PUEDA SALIR
-    this.CollidersLimite;
+    this.CollidersLimite = null;
 
     //ESTILO DE GRÁFICOS (DE MOMENTO PARA PINTAR EL LIMITE)
-    this.graficos;
+    this.graficos = null;
   }
 
   //FUNCION QUE GENERA EL LIMITE DEL MAPA
   GenerarLimite(escena) {
     //GENERA EL CISCULO QUE HACE DE LIMITE DEL MAPA
-    this.limite = new Phaser.Geom.Circle(400, 300, 250);
+    this.limite = new Phaser.Geom.Circle(0, 0, this.diametro);
 
     //DEFINE COMO SE PINTARA EL CIRCULO QUE LIMITA EL MAPA
     this.graficos = escena.add.graphics({
@@ -35,7 +34,7 @@ class Mapa {
     //(EL NUMERO DE ELEMENTOS Y SU TAMAÑO TENDRA QUE IR EN FUNCIÓN DEL TAMAÑO DEL CIRCULO)
     this.CollidersLimite = escena.physics.add.staticGroup({
       key: "bomb",
-      frameQuantity: 60,
+      frameQuantity: 180,
     });
 
     //ASIGNA UN COLLIDER CIRCULAR A CADA OBJETO DENTRO DE COLLIDERS LIMITE
@@ -56,32 +55,13 @@ class Mapa {
   //FUNCIÓN PARA GENERAR EL MAPA (TODO)
   GenerarMapa(escena) {
     this.GenerarLimite(escena);
-  }
-
-  //FUNCIÓN DE ACTUALIZACIÓN DEL MAPA
-  Update(escena, nave) {
-    //PINTA EL LIMITE
-    this.graficos.clear();
-    this.graficos.strokeCircleShape(this.limite);
-
-    //ASIGNA UN COLLIDER CIRCULAR A CADA OBJETO DENTRO DE COLLIDERS LIMITE
-    for (const collider of this.CollidersLimite.getChildren()) {
-      collider.setCircle(8);
+    this.meteoritos = new Array(this.numeroDeMeteoritos);
+    for(var i = 0; i < this.numeroDeMeteoritos; i++){
+      this.meteoritos[i] = new Meteorito();
+      this.meteoritos[i].SpawnMeteorito(escena);
+      this.meteoritos[i] = this.meteoritos[i].cuerpo;
     }
-
-    //COLOCA LOS COLLIDERS EN EL LIMITE
-    Phaser.Actions.PlaceOnCircle(
-      this.CollidersLimite.getChildren(),
-      this.limite
-    );
-
-    //REFRESCA COLLIDERS LIMITE DESPUÉS DE ALTERAR SU POSICIÓN
-    this.CollidersLimite.refresh();
-  }
-
-  //FUNCIÓN PARA GENERAR EL MAPA (TODO)
-  GenerarMapa(escena) {
-    this.GenerarLimite(escena);
+    Phaser.Actions.RandomCircle(this.meteoritos, this.limite);
   }
 
   //FUNCIÓN DE ACTUALIZACIÓN DEL MAPA
@@ -94,4 +74,5 @@ class Mapa {
     escena.physics.world.collide(jugador1.cuerpo, this.CollidersLimite);
     escena.physics.world.collide(jugador2.cuerpo, this.CollidersLimite);
   }
+
 }
