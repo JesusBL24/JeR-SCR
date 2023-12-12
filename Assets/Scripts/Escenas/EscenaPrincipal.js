@@ -51,10 +51,10 @@ class EscenaPrincipal extends Phaser.Scene {
     this.booster = new Booster(BoosterType.Speed, { x: 500, y: 100 });
     this.booster.GenerarBooster(this);
     this.booster.addColliders(this.nave1, (_, __) =>
-      this.nave1.cogerBooster(this.booster)
+      this.nave1.CogerBooster(this.booster)
     );
     this.booster.addColliders(this.nave2, (_, __) =>
-      this.nave2.cogerBooster(this.booster)
+      this.nave2.CogerBooster(this.booster)
     );
 
     //METEORITO EJEMPLO;

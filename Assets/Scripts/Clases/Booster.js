@@ -37,8 +37,8 @@ class Booster {
     );
   }
 
-  addColliders(nave, cogerBooster) {
-    this.escena.physics.add.overlap(nave.cuerpo, this.cuerpo, cogerBooster);
+  addColliders(nave, CogerBooster) {
+    this.escena.physics.add.overlap(nave.cuerpo, this.cuerpo, CogerBooster);
   }
 
   Update() {
