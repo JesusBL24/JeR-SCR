@@ -8,6 +8,9 @@ class Proyectil{
         //CUERPO
         this.cuerpo = null;
 
+        //RADIO DEL COLLIDER
+        this.radioCollider = 3;
+
         //ÁNGULO DEL PROYECTIL
         this.angulo = angulo;
 
@@ -52,6 +55,7 @@ class Proyectil{
                 escena
             );
         }
+        this.cuerpo.setCircle(this.radioCollider, 5, 3);
     }
 
     //FUNCIÓN QUE SE EJECUTA AL IMPACTAR

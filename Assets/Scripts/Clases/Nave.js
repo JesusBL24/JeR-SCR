@@ -20,12 +20,13 @@ class Nave {
     this.velocidadActual = 200;
 
     //TIPO DE DISPARO
-    this.tipoDisparo = 0;
+    this.tipoDisparo = 2;
 
+    //CADENCIA DE DISPARO
     this.cadenciaDisparo = 1000; 
     this.ultimoDisparo = 0; 
 
-    //Collider multiple
+    //RADIO DEL COLLIDER
     this.radioCollider = 24;
 
     //TECLAS DE LAS QUE DISPONE EL JUGADOR
@@ -90,12 +91,27 @@ class Nave {
               nuevoProyectil.Disparar(escena);
               
               break;
+
             case 1:
-              console.log("1");
+              var nuevoProyectil = new Ametralladora(
+                this.cuerpo.x,
+                this.cuerpo.y,
+                this.cuerpo.rotation,
+                this.jugador1,
+                );
+                
+                nuevoProyectil.Disparar(escena);
               break;
+
             case 2:
-              console.log("0");
-              this.tipoDisparo = 1;
+              var nuevoProyectil = new Dobleyectil(
+                this.cuerpo.x,
+                this.cuerpo.y,
+                this.cuerpo.rotation,
+                this.jugador1,
+                );
+                
+                nuevoProyectil.Disparar(escena);
               break;
             case 3:
               console.log("1");

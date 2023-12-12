@@ -1,5 +1,5 @@
 class Misil extends Proyectil {
-    constructor(x, y, velocidad, angulo, jugador1) {
+    constructor(x, y, angulo, jugador1) {
         // Llama al constructor de la clase padre (Proyectil)
         super(x, y, velocidad, angulo, jugador1);
 
