@@ -18,21 +18,54 @@ class InterfazJuego extends Phaser.Scene{
         /////////////////////////////////////////////////////////
         //CAJAS FIJAS QUE CONTIENE LOS BOOSTERS DE CADA JUGADOR//
         /////////////////////////////////////////////////////////
-
+        
         //caja lienzo
         this.add.image(0,0,'decorLienzo').setOrigin(0,0);
         this.add.image(0,0,'lineaDiv').setOrigin(0,0);
+        // Jugador 1 (izquierda/wasd)
+        const booster1 = this.add.image(50, 650, 'cajaBoosters').setScale(0.05, 0.05);
+        const booster2 = this.add.image(110, 650, 'cajaBoosters').setScale(0.05, 0.05);
+        const booster3 = this.add.image(170, 650, 'cajaBoosters').setScale(0.05, 0.05);
 
-        //Jugador 1 (izquierda/wasd)
-        this.add.image(50,650,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(110,650,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(170,650,'cajaBoosters').setScale(0.05,0.05);
+        // Add text 'A' inside each booster for Player 1
+        const textStyle = {
+            fontFamily: 'Arial',
+            fontSize: '24px',
+            color: '#ffffff',
+        };
 
-        //Jugador 2 (derecha/numpad)
-        this.add.image(650,650,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(710,650,'cajaBoosters').setScale(0.05,0.05);
-        this.add.image(770,650,'cajaBoosters').setScale(0.05,0.05);
+        // Jugador 2 (derecha/arrow keys)
+        const booster4 = this.add.image(650, 650, 'cajaBoosters').setScale(0.05, 0.05);
+        const booster5 = this.add.image(710, 650, 'cajaBoosters').setScale(0.05, 0.05);
+        const booster6 = this.add.image(770, 650, 'cajaBoosters').setScale(0.05, 0.05);
 
+        // Con ello conseguimos comunicacion entre escenas
+        this.scene.get('EscenaPrincipal').events.on('booster_obtenido', (data) => {
+            switch(data.tipo){
+                case BoosterType.Speed:
+                    if(!data.esJugador1){
+                        this.add.text(booster1.x - 10, booster1.y - 10, 'V', textStyle).setColor('#00FF00');
+                    } else{
+                        this.add.text(booster4.x - 10, booster4.y - 10, 'V', textStyle).setColor('#00FF00');
+                    }
+                break;
+                case BoosterType.Damage:
+                    if(!data.esJugador1){
+                        this.add.text(booster2.x - 10, booster2.y - 10, 'D', textStyle).setColor('#FF0000');
+                    } else{
+                        this.add.text(booster5.x - 10, booster5.y - 10, 'D', textStyle).setColor('#FF0000');
+                    }
+                break;
+                case BoosterType.Shield:
+                    if(!data.esJugador1){
+                        this.add.text(booster3.x - 10, booster3.y - 10, 'S', textStyle).setColor('#0000FF');
+                    } else{
+                        this.add.text(booster6.x - 10, booster6.y - 10, 'S', textStyle).setColor('#0000FF');
+                    }
+                break;
+            }
+
+        });
 
         /////////////////////////
         //VIDA DE LOS JUGADORES//

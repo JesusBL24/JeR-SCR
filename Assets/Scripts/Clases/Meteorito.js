@@ -46,8 +46,22 @@ class Meteorito{
 
     //FUNCIÓN QUE HACE APARECER UN BOOSTER
     SpawnBooster(){
-        console.log("Booster pa ti")
+        // Asignacion de las funciones del booster a las naves
+        this.booster = new Booster(this.GetRandomBoosterType(), { x: this.cuerpo.x, y: this.cuerpo.y });
+        this.booster.GenerarBooster(this.escena);
+        this.booster.addColliders(this.escena.nave1, (_, __) =>
+            this.escena.nave1.CogerBooster(this.booster)
+        );
+        this.booster.addColliders(this.escena.nave2, (_, __) =>
+            this.escena.nave2.CogerBooster(this.booster)
+        );
     }
+    // Funcion para devolver cualquier tipo de booster (aleatoriamente)
+    GetRandomBoosterType() {
+        const types = Object.values(BoosterType);
+        const randomIndex = Math.floor(Math.random() * types.length);
+        return types[randomIndex];
+      }
 
     //FUNCIÓN LLAMADA CUANDO ES GOLPEADO;
     Hit(){
@@ -61,6 +75,7 @@ class Meteorito{
     SpawnMeteorito(escena){
         //console.log(game.loop.actualFps);
         //SELECCIÓN ENTRE METEORITO O CHATARRA
+        this.escena = escena;
         this.tipo = Math.floor(Math.random() * 2);
         this.direccionDeRotacion = Math.random() - 0.5;
 

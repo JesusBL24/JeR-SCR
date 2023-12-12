@@ -48,16 +48,6 @@ class EscenaPrincipal extends Phaser.Scene {
     this.nave2.jugador1 = false;
     this.nave2.GenerarNave(this);
 
-    // BOOSTER EJEMPLO
-    this.booster = new Booster(BoosterType.Speed, { x: 500, y: 100 });
-    this.booster.GenerarBooster(this);
-    this.booster.addColliders(this.nave1, (_, __) =>
-      this.nave1.cogerBooster(this.booster)
-    );
-    this.booster.addColliders(this.nave2, (_, __) =>
-      this.nave2.cogerBooster(this.booster)
-    );
-
     //METEORITOS;
     this.meteorites = this.physics.add.group();
 

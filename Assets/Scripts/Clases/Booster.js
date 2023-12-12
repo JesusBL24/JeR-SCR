@@ -6,16 +6,16 @@ const BoosterType = {
 
 class Booster {
   constructor(tipo, { x, y }) {
-    //SPRITE DEL BOOSTER (GAMEOBJECT)
+    // Sprite del booster (gameobject)
     this.cuerpo;
 
-    //TIPO DE BOOSTER
+    // Tipo de booster
     this.tipo = tipo;
 
-    // POSICION
+    // Posicion
     this.posicion = { x, y };
   }
-
+  // Funcion para que aparezca el booster en la escena
   GenerarBooster(escena) {
     this.escena = escena;
     const config = {
@@ -36,7 +36,7 @@ class Booster {
       "booster"
     );
   }
-
+  // Funcion con la que, en el momento en el que una nave toque un booster, se ejecute la funcion 'CogerBooster'
   addColliders(nave, CogerBooster) {
     this.escena.physics.add.overlap(nave.cuerpo, this.cuerpo, CogerBooster);
   }

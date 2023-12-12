@@ -9,9 +9,6 @@ class Nave {
     //VIDA DE LA NAVE
     this.vida = 100;
 
-    //CANTIDAD DE ESCUDO DE LA NAVE
-    this.escudo = 0;
-
     //VELOCIDAD MÁXIMA DE LA NAVE
     this.velocidadMaxima = 2000;
 
@@ -193,6 +190,7 @@ class Nave {
   //FUNCIÓN PARA GENERAR LA NAVE DENTRO DE LA ESCENA
   GenerarNave(escena) {
     //Cambiar esto al sprite de la nave correspondiente cuando esten
+    this.escena = escena;
     if(this.jugador1)
     {this.cuerpo = escena.physics.add.sprite(400, 300, "pandora");}
     else{this.cuerpo = escena.physics.add.sprite(400, 300, "ravager");}
@@ -224,36 +222,42 @@ class Nave {
     });
   }
 
+  // Funcion con la que distinguimos cada tipo de booster
   CogerBooster(booster) {
     console.log(booster);
     booster.cuerpo.disableBody(true, true);
 
     switch (booster.tipo) {
+      // Para el booster de velocidad: aumentamos la velocidad del personaje x1.2 hasta el final de la ronda
       case BoosterType.Speed:
         let velocidadInicial = this.velocidadActual;
-        this.velocidadActual = velocidadInicial * 4;
-        console.log(
-          `Cambiada velocidad de ${this.jugador1 ? "Jugador1" : "Jugador2"} a ${
-            this.velocidadActual
-          }`
-        );
+        this.velocidadActual = velocidadInicial * 1.2; // Aumentamos la velocidad actual
+        this.escena.events.emit('booster_obtenido', {
+          tipo: BoosterType.Speed,
+          esjugador1: this.jugador1
+        });
 
-        setTimeout(() => {
-          this.velocidadActual = velocidadInicial;
-          console.log(
-            `Cambiada velocidad de ${
-              this.jugador1 ? "Jugador1" : "Jugador2"
-            } a ${velocidadInicial}`
-          );
-        }, 2000);
         break;
-
+      // Para el booster de daño
       case BoosterType.Damage:
-        // ...
-        break;
+        // Esto escogeria, aleatoriamente, cualquiera de los tipos de armas
+        let max = 2;
+        let min = 0;
+        this.tipoDisparo = Math.floor(Math.random() * (max - min + 1) + min);
+        this.escena.events.emit('booster_obtenido', {
+          tipo: BoosterType.Damage,
+          esjugador1: this.jugador1
+        });
 
+        break;
+      // Para el booster de escudo: proporciona vida extra durante x cantidad de tiempo
       case BoosterType.Shield:
-        // ...
+        this.vida += 25;
+        this.escena.events.emit('booster_obtenido', {
+          tipo: BoosterType.Shield,
+          esjugador1: this.jugador1
+        });
+
         break;
 
       default:
