@@ -5,6 +5,7 @@ class Meteorito{
 
         //VIDA DEL METEORITO
         this.vida;
+        this.vidaTotal;
 
         //VELOCIDAD MÁXIMA DEL METEORITO
         this.velocidadMaxima = 100;
@@ -26,16 +27,19 @@ class Meteorito{
     //FUNCIÓN DE ACTUALIZACIÓN DEL METEORITO
     Update(escena){
         this.Movimiento(escena);
-        if(this.vida <= 0 && this.tieneBooster){
-            this.SpawnBooster();
+        if(this.vida <= 0){
+            if(this.tieneBooster){
+                this.SpawnBooster();
+                this.tieneBooster = false;
+            }
+            this.cuerpo.destroy();
         }
     }
 
     //FUNCIÓN DE MOVIMIENTO DEL METEORITO
     Movimiento(escena){
-        //this.cuerpo.x += Math.cos(this.cuerpo.rotation) * this.velocidadMaxima * 0.02;
-        //this.cuerpo.y += Math.sin(this.cuerpo.rotation) * this.velocidadMaxima * 0.02;
         this.cuerpo.setAngle(this.cuerpo.angle + this.velocidadDeRotacion * this.direccionDeRotacion);
+        //console.log(this.cuerpo.angle, this.velocidadDeRotacion)
     }
 
     //FUNCIÓN QUE HACE APARECER UN BOOSTER
@@ -45,7 +49,7 @@ class Meteorito{
 
     //FUNCIÓN QUE HACE APARECER METEORITOS
     SpawnMeteorito(escena){
-
+        //console.log(game.loop.actualFps);
         //SELECCIÓN ENTRE METEORITO O CHATARRA
         this.tipo = Math.floor(Math.random() * 2);
         this.direccionDeRotacion = Math.random() - 0.5;
@@ -56,7 +60,9 @@ class Meteorito{
             this.tieneBooster = Math.random() >= 0.33 ;
             this.cuerpo = escena.physics.add.sprite(400, 400, 'meteorite', this.size);
             this.cuerpo.setScale(1/16);
-            this.vida = (1+this.size) * 20;
+
+            this.vidaTotal = (3-this.size) * 20;
+            this.vida = this.vidaTotal;
 
             switch(this.size){
                 case 0:
@@ -79,7 +85,9 @@ class Meteorito{
             this.tieneBooster = false;
             this.cuerpo = escena.physics.add.sprite(400, 400, 'trash' + tipoChatarra);
             this.cuerpo.setScale(1/16);
-            this.vida = (1 + Math.floor(Math.random() * 3)) * 20;
+
+            this.vidaTotal = (1 + Math.floor(Math.random() * 3)) * 200;
+            this.vida = this.vidaTotal;
 
             switch(tipoChatarra){
                 case 1:
@@ -100,9 +108,8 @@ class Meteorito{
                 default:
                     break;
             }
-            console.log(this.tipo, this.size, tipoChatarra);
+            //console.log(this.tipo, this.size, tipoChatarra);
         }
-
     }
 }
 

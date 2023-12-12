@@ -46,7 +46,7 @@ class Proyectil{
                 escena
             );
         }
-        if (this.jugador1 == false) {
+        else if (this.jugador1 == false) {
             escena.physics.add.overlap(
                 this.cuerpo,
                 escena.nave1.cuerpo,
@@ -55,6 +55,17 @@ class Proyectil{
                 escena
             );
         }
+        
+        escena.physics.add.overlap(
+            this.cuerpo,
+            escena.meteorites.getChildren(),
+            (proyectil, meteorito) => {
+                this.Impacto(proyectil, meteorito);
+            },
+            null,
+            escena
+        );
+        
         this.cuerpo.setCircle(this.radioCollider, 5, 3);
     }
 
@@ -64,7 +75,11 @@ class Proyectil{
         //DAÑO A LA NAVE ENEMIGA
         if (objetoImpacto && objetoImpacto instanceof Nave) {
             objetoImpacto.vida = objetoImpacto.vida - this.daño;
-            console.log(objetoImpacto.vida);
+            //console.log(objetoImpacto.vida);
+        }
+        else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito){
+            objetoImpacto.datos.vida -= this.daño;
+            //console.log(objetoImpacto.datos.vida);
         }
 
         this.DestruirProyectil();

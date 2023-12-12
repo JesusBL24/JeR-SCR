@@ -51,17 +51,28 @@ class EscenaPrincipal extends Phaser.Scene {
     this.booster = new Booster(BoosterType.Speed, { x: 500, y: 100 });
     this.booster.GenerarBooster(this);
     this.booster.addColliders(this.nave1, (_, __) =>
-      this.nave1.CogerBooster(this.booster)
+      this.nave1.cogerBooster(this.booster)
     );
     this.booster.addColliders(this.nave2, (_, __) =>
-      this.nave2.CogerBooster(this.booster)
+      this.nave2.cogerBooster(this.booster)
     );
 
-    //METEORITO EJEMPLO;
-    this.meteorite = new Meteorito();
-    this.meteorite.SpawnMeteorito(this);
-    this.physics.add.collider(this.meteorite.cuerpo, this.nave1.cuerpo);
-    this.physics.add.collider(this.meteorite.cuerpo, this.nave2.cuerpo);
+    //METEORITOS;
+    this.meteorites = this.physics.add.group();
+
+    this.mapa.cuerposMeteoritos.forEach(element => {
+      this.meteorites.add(element);
+    });
+
+    this.meteorites.children.iterate((meteorito, index) => {
+      meteorito.datos = this.mapa.meteoritos[index];
+      //console.log(meteorito);
+  });
+
+    //COLISIONES ENTRE METEORITOS Y NAVES
+    this.physics.add.collider(this.meteorites);
+    this.physics.add.collider(this.meteorites, this.nave1.cuerpo);
+    this.physics.add.collider(this.meteorites, this.nave2.cuerpo);
 
     //COLISIÓN ENTRE JUGADOR 1 Y 2
     this.physics.add.collider(
@@ -108,7 +119,10 @@ class EscenaPrincipal extends Phaser.Scene {
       this.mapa.Update(this, this.nave1, this.nave2);
       this.nave1.Update(this);
       this.nave2.Update(this);
-      this.meteorite.Update(this);
+
+      this.mapa.meteoritos.forEach(element => {
+        element.Update();
+      });
 
       //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePArtida"
       if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
