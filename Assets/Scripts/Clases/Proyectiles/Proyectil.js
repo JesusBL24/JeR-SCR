@@ -79,6 +79,7 @@ class Proyectil{
         }
         else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito){
             objetoImpacto.datos.vida -= this.daño;
+            objetoImpacto.datos.Hit();
             //console.log(objetoImpacto.datos.vida);
         }
 

@@ -17,6 +17,8 @@ class Meteorito{
         this.size;
         //TIPO (0 - METEORITO | 1 - CHATARRA)
         this.tipo;
+        //FILTRO DE COLOR
+        this.filter;
 
         //SI EL METEORITO TIENE UN BOOSTER
         this.tieneBooster = false;
@@ -47,6 +49,14 @@ class Meteorito{
         console.log("Booster pa ti")
     }
 
+    //FUNCIÓN LLAMADA CUANDO ES GOLPEADO;
+    Hit(){
+        Phaser.Actions.SetTint([this.cuerpo], this.filter);
+        setTimeout(() =>{
+            this.cuerpo.clearTint();
+        }, 150);
+    }
+
     //FUNCIÓN QUE HACE APARECER METEORITOS
     SpawnMeteorito(escena){
         //console.log(game.loop.actualFps);
@@ -56,6 +66,7 @@ class Meteorito{
 
         //SI ES METEORITO
         if(this.tipo == 0){
+            this.filter = 0x00ff0000;
             this.size = Math.floor(Math.random() * 3)
             this.tieneBooster = Math.random() >= 0.33 ;
             this.cuerpo = escena.physics.add.sprite(400, 400, 'meteorite', this.size);
@@ -66,13 +77,13 @@ class Meteorito{
 
             switch(this.size){
                 case 0:
-                    this.cuerpo.setCircle(512);
+                    this.cuerpo.setSize(950, 950);
                     break;
                 case 1:
-                    this.cuerpo.setCircle(400, 110, 100);
+                    this.cuerpo.setSize(700, 700, 110, 100);
                     break;
                 case 2:
-                    this.cuerpo.setCircle(256, 250, 250);
+                    this.cuerpo.setSize(450, 450, 250, 250);
                     break;
                 default:
                     break;
@@ -82,6 +93,8 @@ class Meteorito{
         //SI ES CHATARRA
         else{
             var tipoChatarra = 1 + Math.floor(Math.random() * 5);
+            
+            this.filter = 0x00666666;
             this.tieneBooster = false;
             this.cuerpo = escena.physics.add.sprite(400, 400, 'trash' + tipoChatarra);
             this.cuerpo.setScale(1/16);
@@ -97,10 +110,10 @@ class Meteorito{
                     this.cuerpo.setSize(500, 500);
                     break;
                 case 3:
-                    this.cuerpo.setCircle(400, 250, 250);
+                    this.cuerpo.setSize(370, 370);
                     break;
                 case 4:
-                    this.cuerpo.setCircle(500, 20, 20);
+                    this.cuerpo.setSize(700, 700, 20);
                     break;
                 case 5:
                     this.cuerpo.setSize(1500, 1500);
