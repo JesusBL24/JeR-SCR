@@ -9,6 +9,7 @@ var config = {
   scene: [
     MenuInicial,
     MenuControles,
+    MenuBoosters,
     MenuCreditos,
     EscenaPrincipal,
     InterfazJuego,
