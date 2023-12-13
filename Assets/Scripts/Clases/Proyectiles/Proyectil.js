@@ -28,6 +28,8 @@ class Proyectil{
 
         //ESCENA
         this.escena;
+
+        this.sprite = "proyectilBasico";
     }
 
     //LIMPIEZA DEL PRPYECTIL
@@ -70,7 +72,7 @@ class Proyectil{
             escena
         );
         
-        this.cuerpo.setCircle(this.radioCollider, 5, 3);
+        //this.cuerpo.setCircle(this.radioCollider,1,1);
     }
 
     //FUNCIÓN QUE SE EJECUTA AL IMPACTAR
@@ -103,7 +105,9 @@ class Proyectil{
 
     //DISPARO DEL PROYECTIL
     Disparar(escena){
-        this.cuerpo = escena.physics.add.sprite(this.x, this.y, "proyectilBasico");
+        this.cuerpo = escena.physics.add.sprite(this.x, this.y, this.sprite);
+        //this.cuerpo.setOrigin(0.5);
+        this.cuerpo.setScale(0.3);
         this.cuerpo.rotation = this.angulo;
         escena.physics.velocityFromRotation(this.angulo, this.velocidad, this.cuerpo.body.velocity);
         this.AddColliders(escena);

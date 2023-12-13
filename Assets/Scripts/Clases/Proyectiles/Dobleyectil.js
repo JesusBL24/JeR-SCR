@@ -1,7 +1,7 @@
 class Dobleyectil extends Proyectil {
     constructor(x, y, velocidad, angulo, jugador1) {
         
-        // LLAMA AL CONSTRUCTOR DEL PADRE
+        //CONSTRUCTOR DEL PADRE
         super(x, y, velocidad, angulo, jugador1);
         
         //OFFSET
@@ -9,6 +9,9 @@ class Dobleyectil extends Proyectil {
 
         //CADENCIA DE DISPARO
         this.cadenciaDisparo  = 1000;
+
+        //SPRITE
+        this.sprite = "dobleyectil";
     }
 
     //DISPARO DEL PROYECTIL
@@ -19,7 +22,9 @@ class Dobleyectil extends Proyectil {
         this.x = this.x - offsetXFromShip;
         this.y = this.y - offsetYFromShip;
 
-        this.cuerpo = escena.physics.add.sprite(this.x, this.y, "proyectilBasico");
+        //CREACION DE PROYECTIL
+        this.cuerpo = escena.physics.add.sprite(this.x, this.y, this.sprite);
+        this.cuerpo.setScale(0.3);
 
         this.cuerpo.rotation = this.angulo;
         escena.physics.velocityFromRotation(this.angulo, this.velocidad, this.cuerpo.body.velocity);
@@ -32,7 +37,7 @@ class Dobleyectil extends Proyectil {
             this.cuerpo.rotation,
             this.jugador1,
             );
-
+        nuevoProyectil.sprite = this.sprite;
         nuevoProyectil.Disparar(escena);
         escena.time.delayedCall(5000, () => {
         this.DestruirProyectil();

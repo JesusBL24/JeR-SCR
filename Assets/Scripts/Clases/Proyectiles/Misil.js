@@ -1,19 +1,23 @@
 class Misil extends Proyectil {
     constructor(x, y, angulo, jugador1) {
-        // Llama al constructor de la clase padre (Proyectil)
+        //CONSTRUCTOR DE LA CLASE PADRE
         super(x, y, angulo, jugador1);
 
         // Puedes añadir propiedades específicas para Misil aquí
         this.explosivo = true;
         this.radioExplosion = 30;
-        
+
+        //SPRITE
+        this.sprite = 8;
     }
     
     Disparar(escena){
-            this.cuerpo = escena.physics.add.sprite(this.x, this.y, "proyectilMisil");
-            this.cuerpo.rotation = this.angulo;
+            this.cuerpo = escena.physics.add.sprite(this.x, this.y, "boosterIcons", 7);
+            this.cuerpo.setScale(1/35);
+            this.cuerpo.rotation = this.angulo + (90 * 3.14/180);
             escena.physics.velocityFromRotation(this.angulo, this.velocidad, this.cuerpo.body.velocity);
             this.AddColliders(escena);
+            //this.cuerpo.setScale(0.2);
 
             escena.time.delayedCall(5000, () => {
                 this.DestruirProyectil();
@@ -50,7 +54,7 @@ class Misil extends Proyectil {
             escena
         );
         
-        this.cuerpo.setCircle(this.radioCollider, 5, 3);
+        //this.cuerpo.setCircle(this.radioCollider, 5, 3);
     }
 
     Explotar(escena){

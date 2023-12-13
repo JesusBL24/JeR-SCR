@@ -12,36 +12,53 @@ class EscenaPrincipal extends Phaser.Scene {
     //FONDO
     this.load.image('fondoEP','Assets/Sprites/Fondos/Fondo2.jpg');
 
+    //BOMBAS LIMITE ARENA
     this.load.image("bomb", "Assets/Sprites/Ejemplo/bomb.png");
+
+    //NAVES
     this.load.image("pandora", "Assets/Sprites/Naves/Pandora.png");
     this.load.image("ravager", "Assets/Sprites/Naves/Ravager.png");
-    this.load.image("proyectilBasico", "Assets/Sprites/Proyectiles/Proyectil.png");
+
+    //PROYECTILES
+    this.load.image("proyectilBasico", "Assets/Sprites/Proyectiles/ProyectilBasico.png");
+    this.load.image("proyectilAmetralladora", "Assets/Sprites/Proyectiles/Ametralladora.png");
+    this.load.image("dobleyectil", "Assets/Sprites/Proyectiles/Dobleyectil.png");
     this.load.image("explosionMisil", "Assets/Sprites/Proyectiles/Explosion.png");
-    this.load.image("proyectilMisil", "Assets/Sprites/Proyectiles/Misil.png");
+    //this.load.image("proyectilMisil", "Assets/Sprites/Proyectiles/Misil.png");
+
+    //ANIMACION EXPLOSION
     this.load.spritesheet("explosionAnim", "Assets/Sprites/Proyectiles/ExplosionSheet.png", {
       frameWidth: 65,
       frameHeight: 65,
       startFrame: 0,
       endFrame: 5,
     });
+
+    //ANIMACION ESCUDO
     this.load.spritesheet("shieldAnim", "Assets/Sprites/Boosters/ShieldSCR_2k.png", {
       frameWidth: 1024,
       frameHeight: 1024,
       startFrame: 0,
       endFrame: 4,
     });
-    this.load.spritesheet("booster", "Assets/Sprites/Boosters/ShieldSCR.png", {
-      frameWidth: 32,
-      frameHeight: 32,
-      startFrame: 0,
-      endFrame: 5,
-    });
+
+    //SPRITESHEET METEORITOS
     this.load.spritesheet("meteorite", "Assets/Sprites/Asteroides/AsteroidsSCR.png", {
       frameWidth: 1024,
       frameHeight: 1024,
       startFrame: 0,
       endFrame: 3,
     });
+
+    //SPRITESHEET ICONOS DE BOOSTERS
+    this.load.spritesheet("boosterIcons", "Assets/Sprites/Interfaces/ingame/BoosterIcons.png", {
+      frameWidth: 1024,
+      frameHeight: 1024,
+      startFrame: 0,
+      endFrame: 9,
+    });
+
+    //RESTOS
     this.load.image("trash1", "Assets/Sprites/Restos/Restos1.png");
     this.load.image("trash2", "Assets/Sprites/Restos/Restos2.png");
     this.load.image("trash3", "Assets/Sprites/Restos/Restos3.png");
