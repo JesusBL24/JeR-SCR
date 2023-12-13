@@ -43,6 +43,8 @@ class Proyectil{
     //GENERAR OVERLAPS Y COLLIDERS
     AddColliders(escena) {
         this.escena = escena;
+
+        //CON LA NAVE2
         if (this.jugador1 == true) {
             escena.physics.add.overlap(
                 this.cuerpo,
@@ -52,6 +54,7 @@ class Proyectil{
                 escena
             );
         }
+        //CON LA NAVE1
         else if (this.jugador1 == false) {
             escena.physics.add.overlap(
                 this.cuerpo,
@@ -61,7 +64,7 @@ class Proyectil{
                 escena
             );
         }
-        
+        //CON LOS METEORITOS
         escena.physics.add.overlap(
             this.cuerpo,
             escena.meteorites.getChildren(),
