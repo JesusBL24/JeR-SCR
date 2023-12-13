@@ -84,12 +84,20 @@ class Nave {
     else if(this.vida <= 0){this.Destruccion(this.escena);}
   }
 
+  //FUNCIÓN DE PARPADEO AL TENER POCA VIDA
   LowHeal(frecuencia,tipo){
+
+    //SI YA HAY UN PARPADEO LO ELIMINA
     if (this.intervalId != null) {
       clearInterval(this.intervalId);
   }
+    //DURACION DEL RECOLOR
     var duracion = 150;
+
+    //TIPO DE COLOR
     const color = tipo ? this.filter : this.filter2;
+
+    //INTERVALO DE PARPADEO
     const intervalId = setInterval(() => {
         Phaser.Actions.SetTint([this.cuerpo], color);
         setTimeout(() => {
@@ -97,7 +105,6 @@ class Nave {
         }, duracion);
     }, frecuencia);
   
-      // Devuelve el identificador del intervalo para que pueda detenerse más tarde si es necesario
       return intervalId;
   }
 
@@ -109,10 +116,10 @@ class Nave {
         this.cuerpo.rotation,
         this.velocidadActual,
         this.cuerpo.body.acceleration
-
       );
-      if(!this.thrust.isPlaying)
-        this.thrust.play();
+
+    if(!this.thrust.isPlaying)
+      this.thrust.play();
     } else {
       this.cuerpo.setAcceleration(0);
       this.thrust.pause();
@@ -141,7 +148,9 @@ class Nave {
       //CALCULO DE SI SE PUEDE DISPARAR
       if (tiempoActual - this.ultimoDisparo > this.cadenciaDisparo) {
         this.ultimoDisparo = tiempoActual;
+
         switch (this.tipoDisparo) {
+          //PROYECTIL BASICO
           case 0:
             var nuevoProyectil = new Proyectil(
                 this.cuerpo.x,
@@ -151,9 +160,9 @@ class Nave {
             );
 
             nuevoProyectil.Disparar(escena);
-
             break;
 
+          //AMETRALLADORA
           case 1:
             var nuevoProyectil = new Ametralladora(
                 this.cuerpo.x,
@@ -165,6 +174,7 @@ class Nave {
             nuevoProyectil.Disparar(escena);
             break;
 
+          //DOBLEYECTIL
           case 2:
             var nuevoProyectil = new Dobleyectil(
                 this.cuerpo.x,
@@ -175,6 +185,8 @@ class Nave {
 
             nuevoProyectil.Disparar(escena);
             break;
+
+          //MISIL
           case 3:
             var nuevoProyectil = new Misil(
                 this.cuerpo.x,
@@ -316,6 +328,7 @@ class Nave {
           esjugador1: this.jugador1
         });
         break;
+        
       // Para el booster de daño
       case BoosterType.Damage:
         // Esto escogeria, aleatoriamente, cualquiera de los tipos de armas

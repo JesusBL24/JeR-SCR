@@ -11,6 +11,7 @@ class Misil extends Proyectil {
         this.sprite = 8;
     }
     
+    //REESCRIBIR FUNCION DISPARAR
     Disparar(escena){
             this.cuerpo = escena.physics.add.sprite(this.x, this.y, "boosterIcons", 7);
             this.cuerpo.setScale(1/35);
@@ -24,7 +25,10 @@ class Misil extends Proyectil {
             });
     }
 
+    //REESCRIBIR FUNCION ADDCOLLIDERS
     AddColliders(escena) {
+
+        //CON LA NAVE 2
         if (this.jugador1 == true) {
             escena.physics.add.overlap(
                 this.cuerpo,
@@ -34,6 +38,8 @@ class Misil extends Proyectil {
                 escena
             );
         }
+
+        //CON LA NAVE1
         else if (this.jugador1 == false) {
             escena.physics.add.overlap(
                 this.cuerpo,
@@ -44,6 +50,7 @@ class Misil extends Proyectil {
             );
         }
         
+        //CON LA NAVE2
         escena.physics.add.overlap(
             this.cuerpo,
             escena.meteorites.getChildren(),
@@ -57,6 +64,7 @@ class Misil extends Proyectil {
         //this.cuerpo.setCircle(this.radioCollider, 5, 3);
     }
 
+    //FUNCION QUE CREA LA EXPLOSION
     Explotar(escena){
         var explosion = new Explosion(this.cuerpo.x, this.cuerpo.y, this.jugador1);
         explosion.Explotar(escena);
