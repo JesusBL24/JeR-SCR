@@ -80,9 +80,15 @@ class Explosion {
         if (objetoImpacto && objetoImpacto instanceof Nave && objetoImpacto == escena.nave1  && this.nave1Golpeada != true) {
             if(objetoImpacto.shield > 0){
                 objetoImpacto.shield -= this.daño;
+
                 if(objetoImpacto.shield < 0){
                     objetoImpacto.vida += objetoImpacto.shield;
                     objetoImpacto.shield = 0;
+
+                    this.escena.events.emit('booster_perdido', {
+                        tipo: BoosterType.Shield,
+                        esjugador1: this.jugador1
+                      });
                 }
             }
             else{

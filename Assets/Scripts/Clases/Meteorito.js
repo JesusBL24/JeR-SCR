@@ -89,7 +89,7 @@ class Meteorito{
         if(this.tipo == 0){
             this.filter = 0x00ff0000;
             this.size = Math.floor(Math.random() * 3)
-            this.tieneBooster = Math.random() >= 0.33 ;
+            this.tieneBooster = Math.random() >= 0.20 * (this.size+1);
             this.cuerpo = escena.physics.add.sprite(400, 400, 'meteorite', this.size);
             this.cuerpo.setScale(1/16);
 

@@ -23,6 +23,7 @@ class Nave {
 
     //ESCUDO ACTIVO?
     this.shield = 0;
+    this.shieldHealth = 35;
     this.shieldTexture;
 
     //CADENCIA DE DISPARO
@@ -185,9 +186,15 @@ class Nave {
         //SE COMPRUEBA MUNICIÓN Y SI HACE FALTA SE CAMBIA EL ARMA
         if(this.municion != NaN){
           this.municion--;
+
           if(this.municion == 0){
             this.municion = NaN;
             this.tipoDisparo = 0;
+
+            this.escena.events.emit('booster_perdido', {
+              tipo: BoosterType.Damage,
+              esjugador1: this.jugador1
+            });
           }
         }
 
@@ -286,20 +293,20 @@ class Nave {
     }
   }
 
-  // Funcion con la que distinguimos cada tipo de booster
+  //FUNCIÓN CON LA QUE SE ACTIVA UN BOOSTER
   CogerBooster(booster) {
-    console.log(booster);
+    //console.log(booster);
     //booster.cuerpo.disableBody(true, true);
 
     switch (booster.tipo) {
-      // Para el booster de velocidad: aumentamos la velocidad del personaje x1.2 hasta el final de la ronda
+      // Para el booster de velocidad: aumentamos la velocidad del personaje x1.15 hasta el final de la ronda
       case BoosterType.Speed:
-        this.velocidadDeRotacion *= 1.15; // Aumentamos la velocidad actual
+        this.velocidadDeRotacion *= 1.15; // Aumentamos la velocidad de rotación actual
+
         this.escena.events.emit('booster_obtenido', {
           tipo: BoosterType.Speed,
           esjugador1: this.jugador1
         });
-
         break;
       // Para el booster de daño
       case BoosterType.Damage:
@@ -307,6 +314,7 @@ class Nave {
         let max = 3;
         let min = 1;
         this.tipoDisparo = Math.floor(Math.random() * (max - min) + min);
+
         switch(this.tipoDisparo){
           case 0:
             this.municion = NaN;
@@ -323,19 +331,20 @@ class Nave {
         }
 
         this.escena.events.emit('booster_obtenido', {
-          tipo: BoosterType.Damage,
-          esjugador1: this.jugador1
+          tipo: BoosterType.Damage,  
+          esjugador1: this.jugador1,
+          arma: this.tipoDisparo,
         });
-
         break;
+
       // Para el booster de escudo: proporciona un escudo
       case BoosterType.Shield:
-        this.shield = 35;
+        this.shield = this.shieldHealth;
+
         this.escena.events.emit('booster_obtenido', {
           tipo: BoosterType.Shield,
           esjugador1: this.jugador1
         });
-
         break;
 
       default:

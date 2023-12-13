@@ -12,6 +12,12 @@ class InterfazJuego extends Phaser.Scene{
         this.load.image('cajaBoosters','Assets/Sprites/Interfaces/ingame/BoosterBaseIconJER.png');
         this.load.image('decorLienzo','Assets/Sprites/Menus/DecorLienzo.png');
         this.load.image('lineaDiv','Assets/Sprites/Menus/LineaDivisoriaJugadores.png');
+        this.load.spritesheet("boosters", "Assets/Sprites/Interfaces/ingame/BoosterIcons.png", {
+            frameWidth: 1024,
+            frameHeight: 1024,
+            startFrame: 0,
+            endFrame: 8,
+        });
     }
 
     create(){
@@ -26,49 +32,107 @@ class InterfazJuego extends Phaser.Scene{
         //caja lienzo
         this.add.image(0,0,'decorLienzo').setOrigin(0,0);
         this.add.image(0,0,'lineaDiv').setOrigin(0,0);
+
         // Jugador 1 (izquierda/wasd)
         const booster1 = this.add.image(50, 650, 'cajaBoosters').setScale(0.05, 0.05);
         const booster2 = this.add.image(110, 650, 'cajaBoosters').setScale(0.05, 0.05);
         const booster3 = this.add.image(170, 650, 'cajaBoosters').setScale(0.05, 0.05);
-
-        // Add text 'A' inside each booster for Player 1
-        const textStyle = {
-            fontFamily: 'Arial',
-            fontSize: '35px',
-            color: '#ffffff',
-        };
 
         // Jugador 2 (derecha/arrow keys)
         const booster4 = this.add.image(650, 650, 'cajaBoosters').setScale(0.05, 0.05);
         const booster5 = this.add.image(710, 650, 'cajaBoosters').setScale(0.05, 0.05);
         const booster6 = this.add.image(770, 650, 'cajaBoosters').setScale(0.05, 0.05);
 
+        //IMÁGENES PARA MOSTRAR LOS BOOSTERS ACTIVOS
+        var j1b1 = this.add.sprite(0,0, "boosters").setVisible(false);
+        var j1b2 = this.add.sprite(0,0, "boosters").setVisible(false);
+        var j1b3 = this.add.sprite(0,0, "boosters").setVisible(false);
+
+        var j2b1 = this.add.sprite(0,0, "boosters").setVisible(false);
+        var j2b2 = this.add.sprite(0,0, "boosters").setVisible(false);
+        var j2b3 = this.add.sprite(0,0, "boosters").setVisible(false);
+
         // Con ello conseguimos comunicacion entre escenas
         this.scene.get('EscenaPrincipal').events.on('booster_obtenido', (data) => {
+            var scale = 1/25;
             switch(data.tipo){
+
+                //SI ES DE VELOCIDAD
                 case BoosterType.Speed:
                     if(!data.esJugador1){
-                        this.add.text(booster1.x - 10, booster1.y - 10, 'V', textStyle).setColor('#00FF00');
+                        j1b1.destroy();
+                        j1b1 = this.add.sprite(booster1.x, booster1.y, "boosters", 2).setScale(scale);
                     } else{
-                        this.add.text(booster4.x - 10, booster4.y - 10, 'V', textStyle).setColor('#00FF00');
+                        j2b1.destroy();
+                        j2b1 = this.add.sprite(booster4.x, booster4.y, "boosters", 2).setScale(scale);
                     }
                 break;
+
+                //SI ES DE DAÑO
                 case BoosterType.Damage:
                     if(!data.esJugador1){
-                        this.add.text(booster2.x - 10, booster2.y - 10, 'D', textStyle).setColor('#FF0000');
+                        j1b2.destroy();
+                        switch(data.arma){
+                            case 1:
+                                j1b2 = this.add.sprite(booster2.x, booster2.y, "boosters", 8).setScale(scale);
+                                break;
+                            case 2:
+                                j1b2 = this.add.sprite(booster2.x, booster2.y, "boosters", 1).setScale(scale);
+                                break;
+                            case 3:
+                                j1b2 = this.add.sprite(booster2.x, booster2.y, "boosters", 7).setScale(scale);
+                                break;
+                        }
                     } else{
-                        this.add.text(booster5.x - 10, booster5.y - 10, 'D', textStyle).setColor('#FF0000');
+                        j2b2.destroy();
+                        switch(data.arma){
+                            case 1:
+                                j2b2 = this.add.sprite(booster5.x, booster5.y, "boosters", 8).setScale(scale);
+                                break;
+                            case 2:
+                                j2b2 = this.add.sprite(booster5.x, booster5.y, "boosters", 1).setScale(scale);
+                                break;
+                            case 3:
+                                j2b2 = this.add.sprite(booster5.x, booster5.y, "boosters", 7).setScale(scale);
+                                break;
+                        }
                     }
                 break;
+
+                //SI ES DE ESCUDO
                 case BoosterType.Shield:
                     if(!data.esJugador1){
-                        this.add.text(booster3.x - 10, booster3.y - 10, 'S', textStyle).setColor('#0000FF');
+                        j1b3.destroy();
+                        j1b3 = this.add.sprite(booster3.x, booster3.y, "boosters", 4).setScale(scale);
                     } else{
-                        this.add.text(booster6.x - 10, booster6.y - 10, 'S', textStyle).setColor('#0000FF');
+                        j2b3.destroy();
+                        j2b3 = this.add.sprite(booster6.x, booster6.y, "boosters", 4).setScale(scale);
                     }
                 break;
             }
 
+        });
+
+        this.scene.get('EscenaPrincipal').events.on('booster_perdido', (data) => {
+            switch(data.tipo){
+                //SI ES DE DAÑO
+                case BoosterType.Damage:
+                    if(!data.esjugador1){
+                        j1b2.destroy();
+                    } else{
+                        j2b2.destroy();
+                    }
+                break;
+
+                //SI ES DE ESCUDO
+                case BoosterType.Shield:
+                    if(!data.esjugador1){
+                        j1b3.destroy();
+                    } else{
+                        j2b3.destroy();
+                    }
+                break;
+            }
         });
 
         /////////////////////////
@@ -83,6 +147,14 @@ class InterfazJuego extends Phaser.Scene{
         //////////////
         //MUNICIONES//
         //////////////
+        // FUENTE DE TEXTO 
+        const textStyle = {
+            fontFamily: 'Arial',
+            fontSize: '35px',
+            color: '#ffffff',
+        };
+
+        //ELEMENTOS DE TEXTO
         this.municion1 = this.add.text(25, 575, "-", textStyle);
         this.municion2 = this.add.text(625, 575, "-", textStyle);
 
