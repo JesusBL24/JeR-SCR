@@ -15,6 +15,12 @@ class EscenaPrincipal extends Phaser.Scene {
     this.load.image("proyectilBasico", "Assets/Sprites/Proyectiles/Proyectil.png");
     this.load.image("explosionMisil", "Assets/Sprites/Proyectiles/Explosion.png");
     this.load.image("proyectilMisil", "Assets/Sprites/Proyectiles/Misil.png");
+    this.load.spritesheet("explosionAnim", "Assets/Sprites/Proyectiles/ExplosionSheet.png", {
+      frameWidth: 65,
+      frameHeight: 65,
+      startFrame: 0,
+      endFrame: 5,
+    });
     this.load.spritesheet("booster", "Assets/Sprites/Boosters/ShieldSCR.png", {
       frameWidth: 32,
       frameHeight: 32,
@@ -105,6 +111,7 @@ class EscenaPrincipal extends Phaser.Scene {
     this.scene.run("GanarPerder");
     //INICIA LA ESCENA DE LA INTERFAZ DEL JUEGO
     this.scene.run("InterfazJuego");
+
   }
 
   update() {

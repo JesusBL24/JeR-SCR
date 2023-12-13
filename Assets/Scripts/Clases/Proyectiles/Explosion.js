@@ -14,8 +14,19 @@ class Explosion {
      }
 
      Explotar(escena){
+
+        //ANIMACION DE EXPLOSION
+        escena.anims.create({
+        key: 'explosion',
+        frames: escena.anims.generateFrameNumbers('explosionAnim', { start: 0, end: 5 }),
+        frameRate: 5,
+        repeat: -1
+        });
+
         this.cuerpo = escena.physics.add.sprite(this.x, this.y, "explosionMisil");
         this.AddColliders(escena);
+
+        this.cuerpo.anims.play('explosion', true)
 
         // Destruye la explosión después de 3 segundos
         escena.time.delayedCall(1000, () => {
