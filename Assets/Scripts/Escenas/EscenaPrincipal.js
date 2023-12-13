@@ -14,7 +14,7 @@ class EscenaPrincipal extends Phaser.Scene {
     this.load.image('fondoEPALT','Assets/Sprites/Fondos/Fondo1.png');
 
     //BOMBAS LIMITE ARENA
-    this.load.image("bomb", "Assets/Sprites/Ejemplo/bomb.png");
+    this.load.image("bomb", "Assets/Sprites/Externos/bomb.png");
 
     //NAVES
     this.load.image("pandora", "Assets/Sprites/Naves/Pandora.png");

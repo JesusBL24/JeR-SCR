@@ -148,19 +148,3 @@ class Meteorito{
         }
     }
 }
-
-//////////////////////////////////////////////////////////
-//PARA EL PRELOAD DE LA ESCENA PRINCIPAL:
-//////////////////////////////////////////////////////////
-//
-// this.load.spritesheet("meteorite", "Assets/Sprites/Asteroides/AsteroidsSCR.png", {
-//     frameWidth: 1024,
-//     frameHeight: 1024,
-//     startFrame: 0,
-//     endFrame: 3,
-//   });
-//   this.load.image("trash1", "Assets/Sprites/Restos/Restos1.png");
-//   this.load.image("trash2", "Assets/Sprites/Restos/Restos2.png");
-//   this.load.image("trash3", "Assets/Sprites/Restos/Restos3.png");
-//   this.load.image("trash4", "Assets/Sprites/Restos/Restos4.png");
-//   this.load.image("trash5", "Assets/Sprites/Restos/RestoGrande.png");
