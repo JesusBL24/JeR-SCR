@@ -117,7 +117,7 @@ class InterfazJuego extends Phaser.Scene{
             switch(data.tipo){
                 //SI ES DE DAÑO
                 case BoosterType.Damage:
-                    if(!data.esjugador1){
+                    if(data.esjugador1){
                         j1b2.destroy();
                     } else{
                         j2b2.destroy();
@@ -126,7 +126,7 @@ class InterfazJuego extends Phaser.Scene{
 
                 //SI ES DE ESCUDO
                 case BoosterType.Shield:
-                    if(!data.esjugador1){
+                    if(data.esjugador1){
                         j1b3.destroy();
                     } else{
                         j2b3.destroy();
