@@ -65,6 +65,13 @@ class Nave {
     }
   }
 
+  //FUNCION QUE SE LLAMA CUANDO LA NAVE ES DESTRUIDA
+  Destruccion(escena){
+    var explosion = new Explosion(this.cuerpo.x, this.cuerpo.y, this.jugador1);
+    explosion.anim = "explosionNaveAnim";
+    explosion.Explotar(escena);
+    //this.body.disableBody(true, true);
+  }
   //FUNCION DE FEEDBACK DE DAÑO LA NAVE
   Hit(){
     Phaser.Actions.SetTint([this.cuerpo], this.filter);
@@ -72,8 +79,9 @@ class Nave {
         this.cuerpo.clearTint();
     }, 150);
 
-    if(this.vida <= 20 && this.vida > 10){ this.intervalId = this.LowHeal(800, false)}
-    else if(this.vida <= 10){this.intervalId = this.LowHeal(600, true)}
+    if(this.vida <= 20 && this.vida > 10){ this.intervalId = this.LowHeal(800, false);}
+    else if(this.vida > 0 &&this.vida <= 10){this.intervalId = this.LowHeal(600, true);}
+    else if(this.vida <= 0){this.Destruccion(this.escena);}
   }
 
   LowHeal(frecuencia,tipo){

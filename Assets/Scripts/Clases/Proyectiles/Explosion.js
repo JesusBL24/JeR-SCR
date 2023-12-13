@@ -23,11 +23,14 @@ class Explosion {
 
         //ESCENA
         this.escena;
+
+        //SPRITE
+        this.anim = "explosionMisil";
      }
 
      //FUNCION QUE CREA LA EXPLOSION Y LE AÑADE LA ANIMACION
      Explotar(escena){
-        this.cuerpo = escena.physics.add.sprite(this.x, this.y, "explosionMisil");
+        this.cuerpo = escena.physics.add.sprite(this.x, this.y, this.anim );
         this.AddColliders(escena);
 
         this.cuerpo.anims.play('explosion', true)

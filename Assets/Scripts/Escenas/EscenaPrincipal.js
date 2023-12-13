@@ -24,10 +24,17 @@ class EscenaPrincipal extends Phaser.Scene {
     this.load.image("proyectilAmetralladora", "Assets/Sprites/Proyectiles/Ametralladora.png");
     this.load.image("dobleyectil", "Assets/Sprites/Proyectiles/Dobleyectil.png");
     this.load.image("explosionMisil", "Assets/Sprites/Proyectiles/Explosion.png");
-    //this.load.image("proyectilMisil", "Assets/Sprites/Proyectiles/Misil.png");
 
     //ANIMACION EXPLOSION
     this.load.spritesheet("explosionAnim", "Assets/Sprites/Proyectiles/ExplosionSheet.png", {
+      frameWidth: 65,
+      frameHeight: 65,
+      startFrame: 0,
+      endFrame: 5,
+    });
+
+    //ANIMACION EXPLOSION NAVE
+    this.load.spritesheet("explosionNaveAnim", "Assets/Sprites/Proyectiles/ExplosionNave.png", {
       frameWidth: 65,
       frameHeight: 65,
       startFrame: 0,
@@ -91,6 +98,15 @@ class EscenaPrincipal extends Phaser.Scene {
       repeat: -1
     });
 
+    //ANIMACION DE EXPLOSION DE NAVE
+    this.anims.create({
+      key: 'explosionNave',
+      frames: this.anims.generateFrameNumbers('explosionNaveAnim', { start: 0, end: 5 }),
+      frameRate: 5,
+      repeat: -1
+    });
+
+    //ANIMACION DE ESCUDO
     this.anims.create({
       key: 'shield',
       frames: this.anims.generateFrameNumbers('shieldAnim', { start: 0, end: 4 }),
