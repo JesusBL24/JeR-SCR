@@ -242,6 +242,7 @@ class Nave {
     }
     else{
       this.cuerpo = escena.physics.add.sprite(950, 0, "ravager");
+      this.cuerpo.angle = 180;
     }
     
     //FILTROS DE COLOR

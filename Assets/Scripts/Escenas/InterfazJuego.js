@@ -34,7 +34,7 @@ class InterfazJuego extends Phaser.Scene{
         // Add text 'A' inside each booster for Player 1
         const textStyle = {
             fontFamily: 'Arial',
-            fontSize: '24px',
+            fontSize: '35px',
             color: '#ffffff',
         };
 
@@ -83,14 +83,17 @@ class InterfazJuego extends Phaser.Scene{
         //////////////
         //MUNICIONES//
         //////////////
-        this.municion1 = this.add.text(50, 300, this.vidaNave1.GetPlayerAmmo(), textStyle).setColor('#FFFFFF');
-        this.municion2 = this.add.text(850, 700, this.vidaNave1.GetPlayerAmmo(), textStyle).setColor('#0000FF');
+        this.municion1 = this.add.text(25, 575, "-", textStyle);
+        this.municion2 = this.add.text(625, 575, "-", textStyle);
 
     }
 
     update(){
         this.vidaNave1.Update();
         this.vidaNave2.Update();
+
+        this.municion1.text = this.vidaNave1.GetPlayerAmmo();
+        this.municion2.text = this.vidaNave2.GetPlayerAmmo();
     }
 
 }

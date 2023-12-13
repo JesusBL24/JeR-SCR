@@ -1,21 +1,25 @@
 class BarraVida{
     constructor(escena, x, y, type){
+        //ELEMENTOS A DIBUJAR
         this.barraTotal;
         this.barraActual;
         this.borde1;
 
+        //ESCENA
         this.escena = escena;
 
+        //COORDENADAS
         this.x = x;
         this.y = y;
 
+        //DIMENSIONES
         this.width = 300;
         this.height = 30;
 
-        //Tipo de barra: 0 Izq->Dch // 1 Dch->Izq
+        //TIPO DE BARRA: 0 Izq->Dch // 1 Dch->Izq
         this.type = type;
 
-        //A qué pertenece la barra
+        //A QUÉ PERTENECE LA BARRA DE VIDA
         this.object;
         //console.log(this.object)
 
@@ -25,6 +29,7 @@ class BarraVida{
 
     }
 
+    //FUNIÓN DE INICIALIZACIÓN DE LA BARRA DE VIDA
     Init(object){
         this.object = object;
         this.capacity = this.object.vidaTotal;
@@ -47,6 +52,7 @@ class BarraVida{
         }
     }
 
+    //FUNCIÓN DE ACTUALIZACIÓN DE LA BARRA DE VIDA
     Update(){
         this.percentage =  this.object.vida * 100 / this.object.vidaTotal;
 
@@ -60,12 +66,13 @@ class BarraVida{
         //console.log("AAA")
     }
 
+    //FUNCIÓN QUE DEVUELVE LA MUNICIÓN DEL JUGADOR
     GetPlayerAmmo(){
-        if(this.object.municion != NaN){
-            return this.object.municion;
+        if(this.object.tipoDisparo == 0){
+            return "∞";
         }
         else{
-            return "∞"
+            return this.object.municion;
         }
     }
 }
