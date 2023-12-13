@@ -8,6 +8,7 @@ class Nave {
 
     //VIDA DE LA NAVE
     this.vidaTotal = 100;
+    this.isAlife = true;
     this.vida = this.vidaTotal;
     
     //VELOCIDAD MÁXIMA DE LA NAVE
@@ -67,13 +68,16 @@ class Nave {
 
   //FUNCION QUE SE LLAMA CUANDO LA NAVE ES DESTRUIDA
   Destruccion(escena){
+    this.isAlife = false;
     var explosion = new Explosion(this.cuerpo.x, this.cuerpo.y, this.jugador1);
     explosion.anim = "explosionNaveAnim";
+    //explosion.daño = 0;
     explosion.Explotar(escena);
-    //this.body.disableBody(true, true);
+    this.cuerpo.setVisible(false);
   }
   //FUNCION DE FEEDBACK DE DAÑO LA NAVE
   Hit(){
+    if(this.vida < 0){this.vida = 0;}
     Phaser.Actions.SetTint([this.cuerpo], this.filter);
     setTimeout(() =>{
         this.cuerpo.clearTint();
@@ -81,7 +85,8 @@ class Nave {
 
     if(this.vida <= 20 && this.vida > 10){ this.intervalId = this.LowHeal(800, false);}
     else if(this.vida > 0 &&this.vida <= 10){this.intervalId = this.LowHeal(600, true);}
-    else if(this.vida <= 0){this.Destruccion(this.escena);}
+    else if(this.vida <= 0 && this.isAlife)
+    {this.Destruccion(this.escena);}
   }
 
   //FUNCIÓN DE PARPADEO AL TENER POCA VIDA
@@ -330,7 +335,7 @@ class Nave {
           esjugador1: this.jugador1
         });
         break;
-        
+
       // Para el booster de daño
       case BoosterType.Damage:
         // Esto escogeria, aleatoriamente, cualquiera de los tipos de armas
