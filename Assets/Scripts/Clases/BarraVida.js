@@ -59,4 +59,13 @@ class BarraVida{
         }
         //console.log("AAA")
     }
+
+    GetPlayerAmmo(){
+        if(this.object.municion != NaN){
+            return this.object.municion;
+        }
+        else{
+            return "∞"
+        }
+    }
 }

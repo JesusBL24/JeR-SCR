@@ -19,6 +19,7 @@ class Nave {
 
     //TIPO DE DISPARO
     this.tipoDisparo = 0;
+    this.municion = NaN;
 
     //ESCUDO ACTIVO?
     this.shield = 0;
@@ -180,6 +181,16 @@ class Nave {
         this.cadenciaDisparo = nuevoProyectil.cadenciaDisparo;
         //SE REPRODUCE EL SONIDO DE DISPARO
         this.shoot.play();
+
+        //SE COMPRUEBA MUNICIÓN Y SI HACE FALTA SE CAMBIA EL ARMA
+        if(this.municion != NaN){
+          this.municion--;
+          if(this.municion == 0){
+            this.municion = NaN;
+            this.tipoDisparo = 0;
+          }
+        }
+
       }
     }
   }
@@ -295,6 +306,21 @@ class Nave {
         let max = 3;
         let min = 1;
         this.tipoDisparo = Math.floor(Math.random() * (max - min) + min);
+        switch(this.tipoDisparo){
+          case 0:
+            this.municion = NaN;
+            break;
+          case 1:
+            this.municion = 20;
+            break;
+          case 2:
+            this.municion = 10;
+            break;
+          case 3:
+            this.municion = 5;
+            break;
+        }
+
         this.escena.events.emit('booster_obtenido', {
           tipo: BoosterType.Damage,
           esjugador1: this.jugador1

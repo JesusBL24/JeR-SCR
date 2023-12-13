@@ -2,6 +2,9 @@ class InterfazJuego extends Phaser.Scene{
     constructor(props) {
         super({key:'InterfazJuego', active: false});
         this.vidaNave1;
+        this.vidaNave2;
+        this.municion1;
+        this.municion2;
     }
 
     preload(){
@@ -27,13 +30,6 @@ class InterfazJuego extends Phaser.Scene{
         const booster1 = this.add.image(50, 650, 'cajaBoosters').setScale(0.05, 0.05);
         const booster2 = this.add.image(110, 650, 'cajaBoosters').setScale(0.05, 0.05);
         const booster3 = this.add.image(170, 650, 'cajaBoosters').setScale(0.05, 0.05);
-
-        //Barras de vida
-        this.vidaNave1 = new BarraVida(this, 13, 13, 0);
-        this.vidaNave1.Init(this.scene.get("EscenaPrincipal").nave1);
-
-        this.vidaNave2 = new BarraVida(this, 888, 13, 1);;
-        this.vidaNave2.Init(this.scene.get("EscenaPrincipal").nave2);
 
         // Add text 'A' inside each booster for Player 1
         const textStyle = {
@@ -78,6 +74,18 @@ class InterfazJuego extends Phaser.Scene{
         /////////////////////////
         //VIDA DE LOS JUGADORES//
         /////////////////////////
+        this.vidaNave1 = new BarraVida(this, 13, 13, 0);
+        this.vidaNave1.Init(this.scene.get("EscenaPrincipal").nave1);
+
+        this.vidaNave2 = new BarraVida(this, 888, 13, 1);;
+        this.vidaNave2.Init(this.scene.get("EscenaPrincipal").nave2);
+
+        //////////////
+        //MUNICIONES//
+        //////////////
+        this.municion1 = this.add.text(50, 300, this.vidaNave1.GetPlayerAmmo(), textStyle).setColor('#FFFFFF');
+        this.municion2 = this.add.text(850, 700, this.vidaNave1.GetPlayerAmmo(), textStyle).setColor('#0000FF');
+
     }
 
     update(){
