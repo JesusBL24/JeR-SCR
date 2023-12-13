@@ -9,8 +9,9 @@ class EscenaPrincipal extends Phaser.Scene {
   }
 
   preload() {
-    //FONDO
+    //FONDOS
     this.load.image('fondoEP','Assets/Sprites/Fondos/Fondo2.jpg');
+    this.load.image('fondoEPALT','Assets/Sprites/Fondos/Fondo1.png');
 
     //BOMBAS LIMITE ARENA
     this.load.image("bomb", "Assets/Sprites/Ejemplo/bomb.png");
@@ -85,10 +86,18 @@ class EscenaPrincipal extends Phaser.Scene {
     this.scene.launch("InterfazJuego");
 
     //PINTAMOS EL FONDO
-    this.add.image(0,0,'fondoEP').setOrigin(0,0);
-    this.add.image(-2000,0,'fondoEP').setOrigin(0,0);
-    this.add.image(0,-1350,'fondoEP').setOrigin(0,0);
-    this.add.image(-2000,-1350,'fondoEP').setOrigin(0,0);
+    if(Math.random() < 0.5){
+      this.add.image(0,0,'fondoEP').setOrigin(0,0);
+      this.add.image(-2000,0,'fondoEP').setOrigin(0,0);
+      this.add.image(0,-1350,'fondoEP').setOrigin(0,0);
+      this.add.image(-2000,-1350,'fondoEP').setOrigin(0,0);
+    }else{
+      this.add.image(0,0,'fondoEPALT').setOrigin(0,0);
+      this.add.image(-2000,0,'fondoEPALT').setOrigin(0,0);
+      this.add.image(0,-1350,'fondoEPALT').setOrigin(0,0);
+      this.add.image(-2000,-1350,'fondoEPALT').setOrigin(0,0);
+    }
+
 
     //ANIMACION DE EXPLOSION
     this.anims.create({
@@ -125,15 +134,6 @@ class EscenaPrincipal extends Phaser.Scene {
     this.nave2.jugador1 = false;
     this.nave2.GenerarNave(this);
 
-    // // BOOSTER EJEMPLO
-    // this.booster = new Booster(BoosterType.Speed, { x: 500, y: 100 });
-    // this.booster.GenerarBooster(this);
-    // this.booster.addColliders(this.nave1, (_, __) =>
-    //   this.nave1.CogerBooster(this.booster)
-    // );
-    // this.booster.addColliders(this.nave2, (_, __) =>
-    //   this.nave2.CogerBooster(this.booster)
-    // );
 
     //METEORITOS;
     this.meteorites = this.physics.add.group();
