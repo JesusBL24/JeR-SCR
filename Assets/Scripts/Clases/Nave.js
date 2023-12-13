@@ -341,7 +341,7 @@ class Nave {
         // Esto escogeria, aleatoriamente, cualquiera de los tipos de armas
         let max = 3;
         let min = 1;
-        this.tipoDisparo = Math.floor(Math.random() * (max - min) + min);
+        this.tipoDisparo = Math.floor(Math.random() * (max) + min);
 
         switch(this.tipoDisparo){
           case 0:
