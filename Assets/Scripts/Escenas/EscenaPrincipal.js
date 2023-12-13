@@ -70,7 +70,7 @@ class EscenaPrincipal extends Phaser.Scene {
     this.load.image("trash2", "Assets/Sprites/Restos/Restos2.png");
     this.load.image("trash3", "Assets/Sprites/Restos/Restos3.png");
     this.load.image("trash4", "Assets/Sprites/Restos/Restos4.png");
-    this.load.image("trash5", "Assets/Sprites/Restos/RestoGrande.png");
+    this.load.image("trash5", "Assets/Sprites/Restos/Restos5.png");
     //this.load.spritesheet('ravager', 'Assets/Sprites/Naves/Ravager.png');
 
     //AUDIOS DE LA NAVE

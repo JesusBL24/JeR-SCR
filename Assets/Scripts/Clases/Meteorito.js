@@ -9,7 +9,7 @@ class Meteorito{
 
         //VELOCIDAD MÁXIMA DEL METEORITO
         this.velocidadMaxima = 100;
-        
+
         //VELOCIDAD Y DIRECCIÓN DE ROTACIÓN DEL METEORITO
         this.velocidadDeRotacion = 0.1;
         this.direccionDeRotacion;
@@ -139,7 +139,7 @@ class Meteorito{
                     this.cuerpo.setSize(700, 700, 20);
                     break;
                 case 5:
-                    this.cuerpo.setSize(1500, 1500);
+                    this.cuerpo.setSize(1250, 1250, 600, 500);
                     break;
                 default:
                     break;
