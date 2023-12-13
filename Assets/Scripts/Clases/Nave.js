@@ -137,11 +137,6 @@ class Nave {
     } else {
       this.cuerpo.setAngularVelocity(0);
     }
-
-    //const direccionMovimiento = this.velocityFromRotation(this.rotation, 1)
-    //const anguloRotacion = Phaser.Math.RadToDeg(direccionMovimiento.angle());
-    //ESTO ES DE MOMENTO PARA QUE EL JUGADOR NO SE VAYA A MORDOR
-    //escena.physics.world.wrap(this.cuerpo, 32);
   }
 
   //FUNCIÓN DE DISPARO DE LA NAVE, POSEE CADENCIA DE DISPARO
