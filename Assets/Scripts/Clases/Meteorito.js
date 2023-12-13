@@ -9,6 +9,7 @@ class Meteorito{
 
         //VELOCIDAD MÁXIMA DEL METEORITO
         this.velocidadMaxima = 100;
+        
         //VELOCIDAD Y DIRECCIÓN DE ROTACIÓN DEL METEORITO
         this.velocidadDeRotacion = 0.1;
         this.direccionDeRotacion;
@@ -22,54 +23,53 @@ class Meteorito{
 
         //SI EL METEORITO TIENE UN BOOSTER
         this.tieneBooster = false;
-        //BOOSTER QUE TIENE EL METEORITO (SI ES ALEATORIO, ESTO SE PUEDE ELIMINAR) -> Lo es
-        //this.booster = null;
     }
 
     //FUNCIÓN DE ACTUALIZACIÓN DEL METEORITO
     Update(escena){
-        this.Movimiento(escena);
+        this.Movimiento();
     }
 
     //FUNCIÓN DE MOVIMIENTO DEL METEORITO
-    Movimiento(escena){
+    Movimiento(){
         this.cuerpo.setAngle(this.cuerpo.angle + this.velocidadDeRotacion * this.direccionDeRotacion);
         //console.log(this.cuerpo.angle, this.velocidadDeRotacion)
     }
 
-    //FUNCIÓN QUE HACE APARECER UN BOOSTER
+    //FUNCIÓN QUE DA AL JUGADOR UN BOOSTER
     SpawnBooster(jugador1, escena){
-        console.log("Booster pa ti");
+        //console.log("Booster pa ti");
         console.log(jugador1);
         var booster = new Booster(this.GetRandomBoosterType(), {x:-1000, y:-1000});
 
         if(jugador1){
             escena.nave1.CogerBooster(booster);
-            //console.log(escena);
         }
         else{
             escena.nave2.CogerBooster(booster);
         }
     }
 
-    // Funcion para devolver cualquier tipo de booster (aleatoriamente)
+    //FUNCIÓN PARA DEVOLVER UN TIPO DE BOOSTER ALEATORIO
     GetRandomBoosterType() {
         const types = Object.values(BoosterType);
         const randomIndex = Math.floor(Math.random() * types.length);
         return types[randomIndex];
     }
       
-    //FUNCIÓN LLAMADA CUANDO ES GOLPEADO;
+    //FUNCIÓN LLAMADA CUANDO SE GOLPEA EL METEORITO
     Hit(jugador1, escena){
 
+        //HACE UN DESTELLO DE COLOR
         Phaser.Actions.SetTint([this.cuerpo], this.filter);
         setTimeout(() =>{
             this.cuerpo.clearTint();
         }, 150);
 
+        //SI SE DESTRUYE Y TIENE BOOSTER LO DA
         if(this.vida <= 0){
             if(this.tieneBooster){
-                console.log(jugador1);
+                //console.log(jugador1);
                 this.SpawnBooster(jugador1, escena);
                 this.tieneBooster = false;
             }
@@ -79,7 +79,7 @@ class Meteorito{
 
     //FUNCIÓN QUE HACE APARECER METEORITOS
     SpawnMeteorito(escena){
-        //console.log(game.loop.actualFps);
+
         //SELECCIÓN ENTRE METEORITO O CHATARRA
         this.escena = escena;
         this.tipo = Math.floor(Math.random() * 2);
@@ -96,6 +96,7 @@ class Meteorito{
             this.vidaTotal = (3-this.size) * 20;
             this.vida = this.vidaTotal;
 
+            //HITBOXES
             switch(this.size){
                 case 0:
                     this.cuerpo.setSize(950, 950);
@@ -123,6 +124,7 @@ class Meteorito{
             this.vidaTotal = (1 + Math.floor(Math.random() * 3)) * 200;
             this.vida = this.vidaTotal;
 
+            //HITBOXES
             switch(tipoChatarra){
                 case 1:
                     this.cuerpo.setSize(500, 500);

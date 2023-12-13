@@ -52,7 +52,7 @@ class InterfazJuego extends Phaser.Scene{
         var j2b2 = this.add.sprite(0,0, "boosters").setVisible(false);
         var j2b3 = this.add.sprite(0,0, "boosters").setVisible(false);
 
-        // Con ello conseguimos comunicacion entre escenas
+        //COMUNICACIÓN CON LA ESCENA PRINCIPAL PARA CUANDO CONSIGUES BOOSTERS
         this.scene.get('EscenaPrincipal').events.on('booster_obtenido', (data) => {
             var scale = 1/25;
             switch(data.tipo){
@@ -113,6 +113,7 @@ class InterfazJuego extends Phaser.Scene{
 
         });
 
+        //COMUNICACIÓN CON LA ESCENA 
         this.scene.get('EscenaPrincipal').events.on('booster_perdido', (data) => {
             switch(data.tipo){
                 //SI ES DE DAÑO
@@ -161,11 +162,12 @@ class InterfazJuego extends Phaser.Scene{
     }
 
     update(){
+        //ACTUALIZACIÓN DE BARRAS DE VIDA
         this.vidaNave1.Update();
         this.vidaNave2.Update();
 
+        //ACTUALIZACIÓN DE MUNICIONES
         this.municion1.text = this.vidaNave1.GetPlayerAmmo();
         this.municion2.text = this.vidaNave2.GetPlayerAmmo();
     }
-
 }

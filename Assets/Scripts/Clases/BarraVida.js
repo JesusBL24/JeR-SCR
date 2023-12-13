@@ -26,22 +26,24 @@ class BarraVida{
         //TOTAL DE LA BARRA Y PORCENTAJE ACTUAL
         this.capacity;
         this.percentage;
-
     }
 
-    //FUNIÓN DE INICIALIZACIÓN DE LA BARRA DE VIDA
+    //FUNCIÓN DE INICIALIZACIÓN DE LA BARRA DE VIDA
     Init(object){
+        
+        //SE ESTABLECE A QUIEN PERTENECE LA BARRA DE VIDA Y SU TAMAÑO
         this.object = object;
         this.capacity = this.object.vidaTotal;
         this.percentage = this.object.vida * 100 / this.object.vidaTotal;
 
+        //SE PINTA EL TOTAL Y EL BORDE EXTERIOR
         this.borde1 = this.escena.add.rectangle(this.x-5, this.y-5, this.width+10, this.height+10, 0x222222);
         this.borde1.setOrigin(0);
 
         this.barraTotal = this.escena.add.rectangle(this.x, this.y, this.width, this.height, 0xaaaaaa);
         this.barraTotal.setOrigin(0);
 
-
+        //SE PINTA LA VIDA RESTANTE SEGÚN EL TIPO DE BARRA DE VIDA
         if(this.type == 0){    
             this.barraActual = this.escena.add.rectangle(this.x, this.y, this.width * this.percentage/100, this.height, 0xff0000);
             this.barraActual.setOrigin(0);
@@ -56,6 +58,7 @@ class BarraVida{
     Update(){
         this.percentage =  this.object.vida * 100 / this.object.vidaTotal;
 
+        //SE ACTUALIZA EL EL TAMAÑO DE LA BARRA DE VIDA RESTANTE
         if(this.type == 0){    
             this.barraActual.setSize(this.width * this.percentage/100, this.height);
         }
