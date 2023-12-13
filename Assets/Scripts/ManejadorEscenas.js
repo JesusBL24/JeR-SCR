@@ -15,6 +15,9 @@ var config = {
     InterfazJuego,
     GanarPerder,
   ],
+  audio: {
+    disableWebAudio: true
+  },
   physics: {
     default: "arcade",
     arcade: {

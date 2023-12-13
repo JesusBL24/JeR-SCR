@@ -11,10 +11,10 @@ class Nave {
     this.vida = this.vidaTotal;
     
     //VELOCIDAD MÁXIMA DE LA NAVE
-    this.velocidadMaxima = 2000;
+    this.velocidadMaxima = 200;
 
     //VELOCIDAD DE ROTACIÓN DE LA NAVE
-    this.velocidadDeRotacion = 100;
+    this.velocidadDeRotacion = 200;
     this.velocidadActual = 200;
 
     //TIPO DE DISPARO
@@ -41,6 +41,10 @@ class Nave {
     this.Izquierda = null;
     this.Derecha = null;
     this.TeclaDisparo = null;
+
+    //SONIDOS
+    this.thrust = null;
+    this.shoot = null;
   }
   //FUNCIÓN DE ACTUALIZACIÓN DE LA NAVE
   Update(escena) {
@@ -95,9 +99,13 @@ class Nave {
         this.cuerpo.rotation,
         this.velocidadActual,
         this.cuerpo.body.acceleration
+
       );
+      if(!this.thrust.isPlaying)
+        this.thrust.play();
     } else {
       this.cuerpo.setAcceleration(0);
+      this.thrust.pause();
     }
     //PARA GIRAR LATERALMENTE
     if (this.Izquierda.isDown) {
@@ -116,60 +124,64 @@ class Nave {
 
   //FUNCIÓN DE DISPARO DE LA NAVE, POSEE CADENCIA DE DISPARO
   Disparar(escena) {
-    //VARIABLE PARA CALCULO DE CADENCIA
-    const tiempoActual = escena.time.now;
+    if(!escena.finDePartida) {
+      //VARIABLE PARA CALCULO DE CADENCIA
+      const tiempoActual = escena.time.now;
 
-    //CALCULO DE SI SE PUEDE DISPARAR
-    if (tiempoActual - this.ultimoDisparo > this.cadenciaDisparo) {
-      this.ultimoDisparo = tiempoActual;
-          switch (this.tipoDisparo) {
-            case 0:
-              var nuevoProyectil = new Proyectil(
-              this.cuerpo.x,
-              this.cuerpo.y,
-              this.cuerpo.rotation,
-              this.jugador1,
-              );
-              
-              nuevoProyectil.Disparar(escena);
-              
-              break;
-
-            case 1:
-              var nuevoProyectil = new Ametralladora(
+      //CALCULO DE SI SE PUEDE DISPARAR
+      if (tiempoActual - this.ultimoDisparo > this.cadenciaDisparo) {
+        this.ultimoDisparo = tiempoActual;
+        switch (this.tipoDisparo) {
+          case 0:
+            var nuevoProyectil = new Proyectil(
                 this.cuerpo.x,
                 this.cuerpo.y,
                 this.cuerpo.rotation,
                 this.jugador1,
-                );
-                
-                nuevoProyectil.Disparar(escena);
-              break;
+            );
 
-            case 2:
-              var nuevoProyectil = new Dobleyectil(
+            nuevoProyectil.Disparar(escena);
+
+            break;
+
+          case 1:
+            var nuevoProyectil = new Ametralladora(
                 this.cuerpo.x,
                 this.cuerpo.y,
                 this.cuerpo.rotation,
                 this.jugador1,
-                );
-                
-                nuevoProyectil.Disparar(escena);
-              break;
-            case 3:
-              var nuevoProyectil = new Misil(
+            );
+
+            nuevoProyectil.Disparar(escena);
+            break;
+
+          case 2:
+            var nuevoProyectil = new Dobleyectil(
                 this.cuerpo.x,
                 this.cuerpo.y,
                 this.cuerpo.rotation,
                 this.jugador1,
-                );
-                
-                nuevoProyectil.Disparar(escena);
-              break;
-          }
-          //SE IGUALA LA CADENCIA A LA DEL TIPO DE PROYECTIL
-          this.cadenciaDisparo = nuevoProyectil.cadenciaDisparo;
-      } 
+            );
+
+            nuevoProyectil.Disparar(escena);
+            break;
+          case 3:
+            var nuevoProyectil = new Misil(
+                this.cuerpo.x,
+                this.cuerpo.y,
+                this.cuerpo.rotation,
+                this.jugador1,
+            );
+
+            nuevoProyectil.Disparar(escena);
+            break;
+        }
+        //SE IGUALA LA CADENCIA A LA DEL TIPO DE PROYECTIL
+        this.cadenciaDisparo = nuevoProyectil.cadenciaDisparo;
+        //SE REPRODUCE EL SONIDO DE DISPARO
+        this.shoot.play();
+      }
+    }
   }
 
   //FUNCIÓN PARA ASIGNAR LOS CONTROLES DE LA NAVE
@@ -214,8 +226,12 @@ class Nave {
     //Cambiar esto al sprite de la nave correspondiente cuando esten
     this.escena = escena;
     if(this.jugador1)
-    {this.cuerpo = escena.physics.add.sprite(400, 300, "pandora");}
-    else{this.cuerpo = escena.physics.add.sprite(400, 300, "ravager");}
+    {
+      this.cuerpo = escena.physics.add.sprite(-950, 0, "pandora");
+    }
+    else{
+      this.cuerpo = escena.physics.add.sprite(950, 0, "ravager");
+    }
     
     //FILTROS DE COLOR
     this.filter = 0x00ff0000;
@@ -246,6 +262,16 @@ class Nave {
     //SE ASIGNA LA TEXTURA DEL ESCUDO
     this.shieldTexture = escena.physics.add.sprite(this.cuerpo.x, this.cuerpo.y, "shield");
     this.shieldTexture.setScale(1/14);
+
+    //ASIGNAMOS EL SONIDO AL ACELERAR Y EL DE DISPARAR
+    if(this.jugador1) {
+      this.thrust = escena.sound.add('thrust');
+      this.shoot = escena.sound.add('disparo');
+    }
+    else {
+      this.thrust = escena.sound.add('thrust2');
+      this.shoot = escena.sound.add('disparo2');
+    }
   }
 
   // Funcion con la que distinguimos cada tipo de booster
