@@ -9,6 +9,9 @@ class EscenaPrincipal extends Phaser.Scene {
   }
 
   preload() {
+    //FONDO
+    this.load.image('fondoEP','Assets/Sprites/Fondos/Fondo2.jpg');
+
     this.load.image("bomb", "Assets/Sprites/Ejemplo/bomb.png");
     this.load.image("pandora", "Assets/Sprites/Naves/Pandora.png");
     this.load.image("ravager", "Assets/Sprites/Naves/Ravager.png");
@@ -56,6 +59,12 @@ class EscenaPrincipal extends Phaser.Scene {
   create() {
     //LLAMAMOS A LA INTERFAZ DE JUEGO PARA PINTARLA POR ENCIMA
     this.scene.launch("InterfazJuego");
+
+    //PINTAMOS EL FONDO
+    this.add.image(0,0,'fondoEP').setOrigin(0,0);
+    this.add.image(-2000,0,'fondoEP').setOrigin(0,0);
+    this.add.image(0,-1350,'fondoEP').setOrigin(0,0);
+    this.add.image(-2000,-1350,'fondoEP').setOrigin(0,0);
 
     //ANIMACION DE EXPLOSION
     this.anims.create({
