@@ -56,10 +56,10 @@ class InterfazJuego extends Phaser.Scene{
         this.scene.get('EscenaPrincipal').events.on('booster_obtenido', (data) => {
             var scale = 1/25;
             switch(data.tipo){
-
                 //SI ES DE VELOCIDAD
                 case BoosterType.Speed:
-                    if(!data.esJugador1){
+                    if(data.esjugador1){
+                        console.log("entra aqui")
                         j1b1.destroy();
                         j1b1 = this.add.sprite(booster1.x, booster1.y, "boosters", 2).setScale(scale);
                     } else{
@@ -70,7 +70,7 @@ class InterfazJuego extends Phaser.Scene{
 
                 //SI ES DE DAÑO
                 case BoosterType.Damage:
-                    if(!data.esJugador1){
+                    if(data.esjugador1){
                         j1b2.destroy();
                         switch(data.arma){
                             case 1:
@@ -101,7 +101,7 @@ class InterfazJuego extends Phaser.Scene{
 
                 //SI ES DE ESCUDO
                 case BoosterType.Shield:
-                    if(!data.esJugador1){
+                    if(data.esjugador1){
                         j1b3.destroy();
                         j1b3 = this.add.sprite(booster3.x, booster3.y, "boosters", 4).setScale(scale);
                     } else{
