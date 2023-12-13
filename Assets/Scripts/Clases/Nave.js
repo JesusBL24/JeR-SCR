@@ -7,8 +7,9 @@ class Nave {
     this.jugador1 = true;
 
     //VIDA DE LA NAVE
-    this.vida = 100;
-
+    this.vidaTotal = 100;
+    this.vida = this.vidaTotal;
+    
     //VELOCIDAD MÁXIMA DE LA NAVE
     this.velocidadMaxima = 2000;
 
@@ -17,7 +18,11 @@ class Nave {
     this.velocidadActual = 200;
 
     //TIPO DE DISPARO
-    this.tipoDisparo = 3;
+    this.tipoDisparo = 0;
+
+    //ESCUDO ACTIVO?
+    this.shield = 0;
+    this.shieldTexture;
 
     //CADENCIA DE DISPARO
     this.cadenciaDisparo = 1000; 
@@ -26,6 +31,7 @@ class Nave {
     this.filter = null;
     this.filter2 = null;
     this.intervalId = null;
+
     //RADIO DEL COLLIDER
     this.radioCollider = 24;
 
@@ -41,6 +47,15 @@ class Nave {
     this.Movimiento(escena);
     if (this.TeclaDisparo.isDown) {
       this.Disparar(escena);
+    }
+    if(this.shield > 0){
+      this.shieldTexture.setVisible(true);
+      this.shieldTexture.x = this.cuerpo.x;
+      this.shieldTexture.y = this.cuerpo.y;
+      this.shieldTexture.anims.play('shield', true)
+    }
+    else{
+      this.shieldTexture.setVisible(false);
     }
   }
 
@@ -205,40 +220,43 @@ class Nave {
     //FILTROS DE COLOR
     this.filter = 0x00ff0000;
     this.filter2 = 0x00cf8d00; 
-
+    
     //SE ASIGNAN LAS VARIABLES PARA EL MOVIMIENTO
     this.cuerpo.setDamping(true);
     this.cuerpo.setDrag(0.99);
     this.cuerpo.setMaxVelocity(this.velocidadMaxima);
-
+    
     //SE ASIGNA CUANTO A DE REBOTAR LA NAVE AL CHOCARSE CON OTRO OBJETO
     this.cuerpo.setBounce(0.5, 0.5);
-
+    
     //ASIGNAR COLLIDER A LA NAVE
     this.cuerpo.setCircle(24, 8, 20);
-
+    
     //ASIGNAR COLLIDER A LA NAVE
     this.cuerpo.setCircle(this.radioCollider, 8, 8);
-
+    
     //SE ASIGNAN LAS TECLAS AL JUGADOR
     this.AsignarTeclas(escena);
-
+    
     //SE ASIGNA EL EVENTO DE DISPARO
     this.TeclaDisparo.on("down", (event) => {
       this.Disparar(escena);
     });
+
+    //SE ASIGNA LA TEXTURA DEL ESCUDO
+    this.shieldTexture = escena.physics.add.sprite(this.cuerpo.x, this.cuerpo.y, "shield");
+    this.shieldTexture.setScale(1/14);
   }
 
   // Funcion con la que distinguimos cada tipo de booster
   CogerBooster(booster) {
     console.log(booster);
-    booster.cuerpo.disableBody(true, true);
+    //booster.cuerpo.disableBody(true, true);
 
     switch (booster.tipo) {
       // Para el booster de velocidad: aumentamos la velocidad del personaje x1.2 hasta el final de la ronda
       case BoosterType.Speed:
-        let velocidadInicial = this.velocidadActual;
-        this.velocidadActual = velocidadInicial * 1.2; // Aumentamos la velocidad actual
+        this.velocidadDeRotacion *= 1.15; // Aumentamos la velocidad actual
         this.escena.events.emit('booster_obtenido', {
           tipo: BoosterType.Speed,
           esjugador1: this.jugador1
@@ -248,18 +266,18 @@ class Nave {
       // Para el booster de daño
       case BoosterType.Damage:
         // Esto escogeria, aleatoriamente, cualquiera de los tipos de armas
-        let max = 2;
-        let min = 0;
-        this.tipoDisparo = Math.floor(Math.random() * (max - min + 1) + min);
+        let max = 3;
+        let min = 1;
+        this.tipoDisparo = Math.floor(Math.random() * (max - min) + min);
         this.escena.events.emit('booster_obtenido', {
           tipo: BoosterType.Damage,
           esjugador1: this.jugador1
         });
 
         break;
-      // Para el booster de escudo: proporciona vida extra durante x cantidad de tiempo
+      // Para el booster de escudo: proporciona un escudo
       case BoosterType.Shield:
-        this.vida += 25;
+        this.shield = 35;
         this.escena.events.emit('booster_obtenido', {
           tipo: BoosterType.Shield,
           esjugador1: this.jugador1

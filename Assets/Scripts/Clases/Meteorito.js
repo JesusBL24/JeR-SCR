@@ -29,13 +29,6 @@ class Meteorito{
     //FUNCIÓN DE ACTUALIZACIÓN DEL METEORITO
     Update(escena){
         this.Movimiento(escena);
-        if(this.vida <= 0){
-            if(this.tieneBooster){
-                this.SpawnBooster();
-                this.tieneBooster = false;
-            }
-            this.cuerpo.destroy();
-        }
     }
 
     //FUNCIÓN DE MOVIMIENTO DEL METEORITO
@@ -45,30 +38,43 @@ class Meteorito{
     }
 
     //FUNCIÓN QUE HACE APARECER UN BOOSTER
-    SpawnBooster(){
-        // Asignacion de las funciones del booster a las naves
-        this.booster = new Booster(this.GetRandomBoosterType(), { x: this.cuerpo.x, y: this.cuerpo.y });
-        this.booster.GenerarBooster(this.escena);
-        this.booster.addColliders(this.escena.nave1, (_, __) =>
-            this.escena.nave1.CogerBooster(this.booster)
-        );
-        this.booster.addColliders(this.escena.nave2, (_, __) =>
-            this.escena.nave2.CogerBooster(this.booster)
-        );
+    SpawnBooster(jugador1, escena){
+        console.log("Booster pa ti");
+        console.log(jugador1);
+        var booster = new Booster(this.GetRandomBoosterType(), {x:-1000, y:-1000});
+
+        if(jugador1){
+            escena.nave1.CogerBooster(booster);
+            //console.log(escena);
+        }
+        else{
+            escena.nave2.CogerBooster(booster);
+        }
     }
+
     // Funcion para devolver cualquier tipo de booster (aleatoriamente)
     GetRandomBoosterType() {
         const types = Object.values(BoosterType);
         const randomIndex = Math.floor(Math.random() * types.length);
         return types[randomIndex];
-      }
-
+    }
+      
     //FUNCIÓN LLAMADA CUANDO ES GOLPEADO;
-    Hit(){
+    Hit(jugador1, escena){
+
         Phaser.Actions.SetTint([this.cuerpo], this.filter);
         setTimeout(() =>{
             this.cuerpo.clearTint();
         }, 150);
+
+        if(this.vida <= 0){
+            if(this.tieneBooster){
+                console.log(jugador1);
+                this.SpawnBooster(jugador1, escena);
+                this.tieneBooster = false;
+            }
+            this.cuerpo.destroy();
+        }
     }
 
     //FUNCIÓN QUE HACE APARECER METEORITOS

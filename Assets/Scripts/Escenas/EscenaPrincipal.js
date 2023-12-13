@@ -21,6 +21,12 @@ class EscenaPrincipal extends Phaser.Scene {
       startFrame: 0,
       endFrame: 5,
     });
+    this.load.spritesheet("shieldAnim", "Assets/Sprites/Boosters/ShieldSCR_2k.png", {
+      frameWidth: 1024,
+      frameHeight: 1024,
+      startFrame: 0,
+      endFrame: 4,
+    });
     this.load.spritesheet("booster", "Assets/Sprites/Boosters/ShieldSCR.png", {
       frameWidth: 32,
       frameHeight: 32,
@@ -45,6 +51,21 @@ class EscenaPrincipal extends Phaser.Scene {
     //LLAMAMOS A LA INTERFAZ DE JUEGO PARA PINTARLA POR ENCIMA
     this.scene.launch("InterfazJuego");
 
+    //ANIMACION DE EXPLOSION
+    this.anims.create({
+      key: 'explosion',
+      frames: this.anims.generateFrameNumbers('explosionAnim', { start: 0, end: 5 }),
+      frameRate: 5,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'shield',
+      frames: this.anims.generateFrameNumbers('shieldAnim', { start: 0, end: 4 }),
+      frameRate: 10,
+      repeat: -1
+    });
+
     //MAPA
     this.mapa = new Mapa();
     this.mapa.GenerarMapa(this);
@@ -55,6 +76,16 @@ class EscenaPrincipal extends Phaser.Scene {
     this.nave2 = new Nave();
     this.nave2.jugador1 = false;
     this.nave2.GenerarNave(this);
+
+    // BOOSTER EJEMPLO
+    this.booster = new Booster(BoosterType.Speed, { x: 500, y: 100 });
+    this.booster.GenerarBooster(this);
+    this.booster.addColliders(this.nave1, (_, __) =>
+      this.nave1.CogerBooster(this.booster)
+    );
+    this.booster.addColliders(this.nave2, (_, __) =>
+      this.nave2.CogerBooster(this.booster)
+    );
 
     //METEORITOS;
     this.meteorites = this.physics.add.group();

@@ -10,19 +10,12 @@ class Explosion {
 
         this.nave1Golpeada = false;
         this.nave2Golpeada = false;
+        this.meteoritosGolpeados = [];
         this.daño = 20;
+        this.escena;
      }
 
      Explotar(escena){
-
-        //ANIMACION DE EXPLOSION
-        escena.anims.create({
-        key: 'explosion',
-        frames: escena.anims.generateFrameNumbers('explosionAnim', { start: 0, end: 5 }),
-        frameRate: 5,
-        repeat: -1
-        });
-
         this.cuerpo = escena.physics.add.sprite(this.x, this.y, "explosionMisil");
         this.AddColliders(escena);
 
@@ -35,6 +28,7 @@ class Explosion {
     }
 
      AddColliders(escena) {
+        this.escena = escena;
             escena.physics.add.overlap(
                 this.cuerpo,
                 escena.nave2.cuerpo,
@@ -68,22 +62,43 @@ class Explosion {
 
         //DAÑO A LA NAVE ENEMIGA
         if (objetoImpacto && objetoImpacto instanceof Nave && objetoImpacto == escena.nave1  && this.nave1Golpeada != true) {
-            objetoImpacto.vida = objetoImpacto.vida - this.daño;
+            if(objetoImpacto.shield > 0){
+                objetoImpacto.shield -= this.daño;
+                if(objetoImpacto.shield < 0){
+                    objetoImpacto.vida += objetoImpacto.shield;
+                    objetoImpacto.shield = 0;
+                }
+            }
+            else{
+                objetoImpacto.vida = objetoImpacto.vida - this.daño;
+            }
             objetoImpacto.Hit();
             console.log(objetoImpacto.vida);
             //console.log(objetoImpacto);
             this.nave1Golpeada = true
         }
         else if(objetoImpacto && objetoImpacto instanceof Nave && objetoImpacto == escena.nave2 && this.nave2Golpeada != true){
-            objetoImpacto.vida = objetoImpacto.vida - this.daño;
+            if(objetoImpacto.shield > 0){
+                objetoImpacto.shield -= this.daño;
+                if(objetoImpacto.shield < 0){
+                    objetoImpacto.vida += objetoImpacto.shield;
+                    objetoImpacto.shield = 0;
+                }
+            }
+            else{
+                objetoImpacto.vida = objetoImpacto.vida - this.daño;
+            }
             objetoImpacto.Hit();
             console.log(objetoImpacto.vida);
-            console.log("A");
+            //console.log("A");
             this.nave2Golpeada = true;
         }
-        else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito){
-            //console.log(objetoImpacto.datos.vida);
-            console.log("B");
+        else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito && !this.meteoritosGolpeados.includes(objetoImpacto.datos)){
+            console.log(objetoImpacto.datos);
+            objetoImpacto.datos.Hit(this.jugador1, this.escena);
+            objetoImpacto.datos.vida -= this.daño;
+            //console.log("B");
+            this.meteoritosGolpeados.push(objetoImpacto.datos);
         }
         //console.log("C");
     }

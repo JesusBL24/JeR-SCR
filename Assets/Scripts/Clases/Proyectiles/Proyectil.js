@@ -25,18 +25,22 @@ class Proyectil{
         
         //CADENCIA DEL PROYECTIL
         this.cadenciaDisparo  = 1000;
+
+        //ESCENA
+        this.escena;
     }
 
     //LIMPIEZA DEL PRPYECTIL
     DestruirProyectil() {
         if (this.cuerpo) {
             this.cuerpo.destroy();
-            console.log("Proyectil destruido");
+            //console.log("Proyectil destruido");
         }
     }
 
     //GENERAR OVERLAPS Y COLLIDERS
     AddColliders(escena) {
+        this.escena = escena;
         if (this.jugador1 == true) {
             escena.physics.add.overlap(
                 this.cuerpo,
@@ -70,19 +74,29 @@ class Proyectil{
     }
 
     //FUNCIÓN QUE SE EJECUTA AL IMPACTAR
-    Impacto(proyectil, objetoImpacto) {
+    Impacto(proyectil, objetoImpacto,) {
 
         //DAÑO A LA NAVE ENEMIGA
         if (objetoImpacto && objetoImpacto instanceof Nave) {
-            objetoImpacto.vida = objetoImpacto.vida - this.daño;
+            if(objetoImpacto.shield > 0){
+                objetoImpacto.shield -= this.daño;
+                if(objetoImpacto.shield < 0){
+                    objetoImpacto.vida += objetoImpacto.shield;
+                    objetoImpacto.shield = 0;
+                }
+            }
+            else{
+                objetoImpacto.vida = objetoImpacto.vida - this.daño;
+            }
             objetoImpacto.Hit();
             //console.log(objetoImpacto.vida);
         }
         else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito){
             objetoImpacto.datos.vida -= this.daño;
-            objetoImpacto.datos.Hit();
+            objetoImpacto.datos.Hit(this.jugador1, this.escena);
             //console.log(objetoImpacto.datos.vida);
         }
+ 
 
         this.DestruirProyectil();
     }
