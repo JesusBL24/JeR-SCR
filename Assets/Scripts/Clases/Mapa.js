@@ -1,7 +1,7 @@
 class Mapa {
   constructor() {
     //NÚMERO DE METEORITOS A CREAR EN EL MAPA
-    this.numeroDeMeteoritos = 100;
+    this.numeroDeMeteoritos = 50;
 
     //METEORITOS EN EL MAPA
     this.meteoritos = null;
@@ -74,7 +74,8 @@ class Mapa {
     }
 
     //COLOCAMOS LOS METEORITOS EN EL MAPA
-    Phaser.Actions.RandomCircle(this.cuerposMeteoritos, this.limite);
+    var limiteMeteoritos = new Phaser.Geom.Circle(0, 0, this.diametro * 0.8);
+    Phaser.Actions.RandomCircle(this.cuerposMeteoritos, limiteMeteoritos);
   }
 
   //FUNCIÓN DE ACTUALIZACIÓN DEL MAPA
