@@ -311,6 +311,8 @@ class Nave {
       this.thrust = escena.sound.add('thrust2');
       this.shoot = escena.sound.add('disparo2');
     }
+    this.thrust.volume = 0.1;
+    this.shoot.volume = 0.1;
   }
 
   //FUNCIÓN CON LA QUE SE ACTIVA UN BOOSTER
