@@ -74,7 +74,7 @@ class InterfazJuego extends Phaser.Scene{
                         j1b2.destroy();
                         switch(data.arma){
                             case 1:
-                                j1b2 = this.add.sprite(booster2.x, booster2.y, "boosters", 8).setScale(scale);
+                                j1b2 = this.add.sprite(booster2.x, booster2.y, "boosters", 0).setScale(scale);
                                 break;
                             case 2:
                                 j1b2 = this.add.sprite(booster2.x, booster2.y, "boosters", 1).setScale(scale);
@@ -87,7 +87,7 @@ class InterfazJuego extends Phaser.Scene{
                         j2b2.destroy();
                         switch(data.arma){
                             case 1:
-                                j2b2 = this.add.sprite(booster5.x, booster5.y, "boosters", 8).setScale(scale);
+                                j2b2 = this.add.sprite(booster5.x, booster5.y, "boosters", 0).setScale(scale);
                                 break;
                             case 2:
                                 j2b2 = this.add.sprite(booster5.x, booster5.y, "boosters", 1).setScale(scale);
