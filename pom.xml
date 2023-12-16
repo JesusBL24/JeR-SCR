@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>es.urjc.code.juegosenred.ejer2</groupId>
-	<artifactId>ws-ejer2</artifactId>
+	<artifactId>SpaceCombatRush</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>ws-ejer2</name>
-	<description>Websockets - Ejer2</description>
+	<name>SpaceCombatRush</name>
+	<description>Implementacion de las funcionalidades de la fase 3 de la practica</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
