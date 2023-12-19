@@ -4,10 +4,34 @@
     <meta charset="UTF-8" />
     <title>Space Combat Rush</title>
     <script src="Libraries/phaser.js"></script>
+
+    <!-- CSS INPUT TEXT DE OTROS HTML QUE SE INTRODUCEN EN EL DOM DE NUESTRO CANVAS -->
+    <style>
+      #usuario_txt {
+        position: relative;
+        padding: 3px;
+        background-color: black;
+      }
+      #usuario_txt input {
+        padding: 5px;
+        font-size: 20px;
+        width: 300px;
+      }
+
+      /*AÑADIMOS NUESTRA FUENTE TIPOGRAFICA*/
+      @font-face {
+        font-family: Minecraft;
+        src: local("Fonts/Minecraft.ttf");
+      }
+
+    </style>
+
   </head>
   <body style="background-color:#000905;">
     <!--Cambiar el estilo a un archivo css más adelante-->
-    <div id="Juego" style="text-align: center"></div>
+    <div id="Juego" style="text-align: center; width: 100%; height: 100%;"></div>
+    <!--Terminamos de añadir nuestra fuente tipografica-->
+    <div style="font-family:Minecraft; position:absolute; left:-1000px; visibility:hidden;">.</div>
 
     <!----------->
     <!--SCRIPTS-->
@@ -21,6 +45,7 @@
     <script src="Assets/Scripts/Clases/Booster.js"></script>
     <!--componentes-->
     <script src="Assets/Scripts/Componentes/BotonVolver.js"></script>
+    <script src="Assets/Scripts/Componentes/VarsGlobales.js"></script>
     <!--Proyectiles-->
     <script src="Assets/Scripts/Clases/Proyectiles/Proyectil.js"></script>
     <script src="Assets/Scripts/Clases/Proyectiles/Misil.js"></script>
@@ -32,6 +57,10 @@
     <script src="Assets/Scripts/Escenas/InterfazJuego.js"></script>
     <script src="Assets/Scripts/Escenas/EscenaPrincipal.js"></script>
     <script src="Assets/Scripts/Escenas/MenuCreditos.js"></script>
+    <script src="Assets/Scripts/Escenas/IniciarSesion.js"></script>
+    <script src="Assets/Scripts/Escenas/OpcionesAPI.js"></script>
+    <script src="Assets/Scripts/Escenas/MenuResultados.js"></script>
+    <script src="Assets/Scripts/Escenas/MenuResultados2.js"></script>
     <script src="Assets/Scripts/Escenas/MenuControles.js"></script>
     <script src="Assets/Scripts/Escenas/MenuBoosters.js"></script>
     <script src="Assets/Scripts/Escenas/MenuInicial.js"></script>

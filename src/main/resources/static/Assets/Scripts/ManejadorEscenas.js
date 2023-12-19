@@ -6,6 +6,11 @@ var config = {
   parent: "Juego",
   width: 1200,
   height: 700,
+  //dom sobre el canvas para añadir html como objetos para el input text
+  dom:{
+    createContainer: true
+  },
+  //escenas de nuestro juego
   scene: [
     MenuInicial,
     MenuControles,
@@ -14,6 +19,10 @@ var config = {
     EscenaPrincipal,
     InterfazJuego,
     GanarPerder,
+    MenuResultados,
+    MenuResultados2,
+    IniciarSesion,
+    OpcionesAPI
   ],
   audio: {
     disableWebAudio: true

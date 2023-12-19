@@ -8,7 +8,7 @@ class MenuControles extends Phaser.Scene{
         //cargamos imagenes
         this.load.image('fondoControles','Assets/Sprites/Menus/MenuControles.png');
         this.load.image('decorLienzo','Assets/Sprites/Menus/DecorLienzo.png');
-        this.load.spritesheet('botonBoosters','Assets/Sprites/Menus/BoostersSpriteSheet.png',{frameWidth: 946,frameHeight: 385})
+        this.load.spritesheet('botonBoosters','Assets/Sprites/Menus/BoostersSpriteSheet.png',{frameWidth: 946,frameHeight: 345})
         this.botonVolver.preload();
     }
 
@@ -29,7 +29,7 @@ class MenuControles extends Phaser.Scene{
         ///////////
 
         this.botonVolver.create();
-        var botBooster = this.add.sprite(1000, 650,'botonBoosters').setScale(0.1,0.1).setInteractive();
+        var botBooster = this.add.sprite(975, 650,'botonBoosters').setScale(0.125,0.125).setInteractive();
 
         /////////////////////////
         //FUNCIONALIDAD BOTONES//

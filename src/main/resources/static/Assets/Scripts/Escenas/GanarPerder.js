@@ -46,7 +46,7 @@ class GanarPerder extends Phaser.Scene {
                 this.time.delayedCall(2000, function (){
                     this.scene.stop('EscenaPrincipal');
                     this.scene.stop('InterfazJuego');
-                    this.scene.start('MenuInicial');
+                    this.scene.start('MenuResultados2');
                 }, [], this);
 
 
