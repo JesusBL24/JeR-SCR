@@ -18,14 +18,14 @@ public class UsuarioController {
 
 	@GetMapping
 	//USAMOS GET PARA AUTENTICAR AL USUARIO
-	public ResponseEntity<String> autenticarUsuario(@RequestBody String JSon) {
+	public ResponseEntity<String> autenticarUsuario(@RequestHeader("usuario") String cabecera) {
 		try{
-			//INTENTAMOS GENERAR EL USUARIO, A PARTIR DEL CUERPO DEL MENSAJE
-			Usuario usuario = gson.fromJson(JSon, Usuario.class);
+			//INTENTAMOS GENERAR EL USUARIO, A PARTIR DE LA CABECERA "usuario" DEL MENSAJE
+			Usuario usuario = gson.fromJson(cabecera, Usuario.class);
 
 			//SI ALGUNO DE LOS CAMPOS ES NULL, DEVOLVEMOS QUE EL CUERPO ES INVALIDO
 			if((usuario.getNombre() == null || usuario.getNombre().isEmpty()) || (usuario.getPassword() == null || usuario.getPassword().isEmpty()))
-				return new ResponseEntity<String>("ERROR: CUERPO INVALIDO",HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("ERROR: CABECERA INVALIDA",HttpStatus.BAD_REQUEST);
 
 			//COMPROBAMOS SI EXISTE EL USUARIO EN LA BASE DE DATOS
 			Usuario usuarioEnBaseDeDatos = Usuario.recuperarUsuario(usuario.getNombre());
@@ -43,13 +43,14 @@ public class UsuarioController {
 
 		}
 		catch(Exception e){
-			//SI NO SE PUEDE GENERAR EL USUARIO A PARTIR DEL CUERPO DEL MENSAJE, SE LANZA UN ERROR
-			return new ResponseEntity<String>("ERROR: CUERPO INVALIDO",HttpStatus.BAD_REQUEST);
+			//SI NO SE PUEDE GENERAR EL USUARIO A PARTIR DE LA CABECERA DEL MENSAJE, SE LANZA UN ERROR
+			return new ResponseEntity<String>("ERROR: CABECERA INVALIDA",HttpStatus.BAD_REQUEST);
 		}
 	}
 
 	@PostMapping
 	public ResponseEntity<String> postUsuario(@RequestBody String JSon){
+		System.out.println(JSon);
 		try{
 			//INTENTAMOS GENERAR EL USUARIO, A PARTIR DEL CUERPO DEL MENSAJE
 			Usuario usuario = gson.fromJson(JSon, Usuario.class);
@@ -74,7 +75,6 @@ public class UsuarioController {
 		}
 	}
 
-	//TODO
 	@PutMapping
 	public ResponseEntity<String> putUsuario(@RequestBody String JSon){
 		try{
@@ -122,14 +122,14 @@ public class UsuarioController {
 	}
 
 	@DeleteMapping
-	public ResponseEntity<String> deleteUsuario(@RequestBody String JSon){
+	public ResponseEntity<String> deleteUsuario(@RequestHeader("usuario") String cabecera){
 		try{
-			//INTENTAMOS GENERAR EL USUARIO, A PARTIR DEL CUERPO DEL MENSAJE
-			Usuario usuario = gson.fromJson(JSon, Usuario.class);
+			//INTENTAMOS GENERAR EL USUARIO, A PARTIR DE LA CABECERA "usuario" DEL MENSAJE
+			Usuario usuario = gson.fromJson(cabecera, Usuario.class);
 
 			//SI ALGUNO DE LOS CAMPOS ES NULL, DEVOLVEMOS QUE EL CUERPO ES INVALIDO
 			if((usuario.getNombre() == null || usuario.getNombre().isEmpty()) || (usuario.getPassword() == null || usuario.getPassword().isEmpty()))
-				return new ResponseEntity<String>("ERROR: CUERPO INVALIDO",HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("ERROR: CABECERA INVALIDA",HttpStatus.BAD_REQUEST);
 
 			//COMPROBAMOS SI EXISTE EL USUARIO EN LA BASE DE DATOS
 			Usuario usuarioEnBaseDeDatos = Usuario.recuperarUsuario(usuario.getNombre());
@@ -151,8 +151,8 @@ public class UsuarioController {
 				return new ResponseEntity<String>("ERROR: EL USUARIO NO EXISTE",HttpStatus.BAD_REQUEST);
 		}
 		catch(Exception e){
-			//SI NO SE PUEDE GENERAR EL USUARIO A PARTIR DEL CUERPO DEL MENSAJE, SE LANZA UN ERROR
-			return new ResponseEntity<String>("ERROR: CUERPO INVALIDO",HttpStatus.BAD_REQUEST);
+			//SI NO SE PUEDE GENERAR EL USUARIO A PARTIR DE LA CABECERA DEL MENSAJE, SE LANZA UN ERROR
+			return new ResponseEntity<String>("ERROR: CABECERA INVALIDA",HttpStatus.BAD_REQUEST);
 		}
 	}
 
