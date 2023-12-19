@@ -50,7 +50,6 @@ public class UsuarioController {
 
 	@PostMapping
 	public ResponseEntity<String> postUsuario(@RequestBody String JSon){
-		System.out.println(JSon);
 		try{
 			//INTENTAMOS GENERAR EL USUARIO, A PARTIR DEL CUERPO DEL MENSAJE
 			Usuario usuario = gson.fromJson(JSon, Usuario.class);

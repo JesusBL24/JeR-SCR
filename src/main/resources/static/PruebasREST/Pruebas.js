@@ -20,6 +20,8 @@ var borrar = document.getElementById("borrar");
 var nombre = document.getElementById("usuario");
 var password = document.getElementById("contraseña");
 
+var usuariosConectados = document.getElementById("usuariosConectados");
+
 var loggedIn = false;
 
 $(logout).attr("disabled", true);
@@ -189,3 +191,57 @@ $(logout).click(function() {
     //quitar la variable loggedin
     loggedIn = false;
 });
+
+//////USUARIOS CONECTADOS
+$(document).ready(function() {
+
+    //Petición AJAX
+    $.ajax({
+        type: "POST",
+        url: 'http://localhost:8080/clientesConectados/conectar',
+        success: function(response)
+        {
+            console.log(response);
+            $(usuariosConectados).val(response);
+        },
+        error:function(error){
+            console.log(error);
+        }
+    });
+
+});
+
+$(window).on("beforeunload", function() {
+
+    //Petición AJAX
+    $.ajax({
+        type: "POST",
+        url: 'http://localhost:8080/clientesConectados/desconectar',
+        success: function(response)
+        {
+            console.log("Saliendo de la aplicación");
+        },
+        error:function(error){
+            console.log(error);
+        }
+    });
+
+});
+
+function ObtenerUsuariosConectados(){
+    $.ajax({
+        type: "GET",
+        url: 'http://localhost:8080/clientesConectados',
+        success: function(response)
+        {
+            console.log(response);
+            $(usuariosConectados).val(response);
+        },
+        error:function(error){
+            console.log(error);
+        }
+    });
+}
+
+setInterval(ObtenerUsuariosConectados, 500);
+
