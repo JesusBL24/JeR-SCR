@@ -27,50 +27,7 @@ public class PuntuacionesController {
 
 		return puntuaciones.getPuntuaciones();
 	}
-/*
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	//crea la lista de puntuaciones
-	public Puntuacion nuevaPuntuacion(@RequestBody Puntuacion puntuacion) throws IOException {
 
-		List<Puntuacion> puntuaciones = leerPuntuaciones();
-
-		puntuaciones.add(puntuacion);
-	//y las añadimos a un fichero
-		try(FileWriter writer = new FileWriter(FICHERO_PUNTUACIONES)) {
-			gson.toJson(puntuaciones, writer);
-			writer.flush();
-		}
-
-		return puntuacion;
-	}
-
-	@PutMapping
-	//actualiza las puntuaciones
-	public ResponseEntity<Puntuacion> actualizarPuntuacion(@RequestBody Puntuacion puntuacion) throws IOException {
-		List<Puntuacion> puntuaciones = leerPuntuaciones();
-	//comparamos cada puntuacion y, si es mas alta que la actual, se sustituye
-		for(int i = 0; i < puntuaciones.size(); i++) {
-			Puntuacion puntuacionActual = puntuaciones.get(i);
-
-			if(puntuacionActual.getId().equals(puntuacion.getId())
-			&& puntuacion.getPuntuacion() > puntuacionActual.getPuntuacion()) {
-				puntuaciones.remove(i);
-				puntuaciones.add(puntuacion);
-
-				try(FileWriter writer = new FileWriter(FICHERO_PUNTUACIONES)) {
-					gson.toJson(puntuaciones, writer);
-					//guardamos la puntuacion
-					writer.flush();
-				}
-				//en caso de que se vaya a sustituir un dato de un usuario que exista --> OK
-				return new ResponseEntity<>(HttpStatus.OK);
-			}
-		}
-				//en caso de que se vaya a sustituir un dato de un usuario que no exista --> salta un error
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
-*/
 @PutMapping
 //actualiza las puntuaciones
 public ResponseEntity<String> actualizarPuntuacion(@RequestBody String puntuacion) throws IOException {

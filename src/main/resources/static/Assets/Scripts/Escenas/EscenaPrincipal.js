@@ -203,13 +203,15 @@ class EscenaPrincipal extends Phaser.Scene {
         element.Update();
       });
 
-      //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePArtida"
+      //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePartida"
       if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
         if(this.nave1.vida <= 0){
-          this.nave2.score += 100
+          this.nave2.score += 100;
+          puntuacionPUT(usuario.nombre, this.nave2.score);
         }
         else{
-          this.nave1.score += 100
+          this.nave1.score += 100;
+          puntuacionPUT(usuario.nombre, this.nave1.score);
         }
 
         this.events.emit("finDePartida");

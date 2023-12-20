@@ -25,16 +25,16 @@ function showPuntuacion(puntuacionToShow) {
         + " Puntuacion: "+ puntuacionToShow.posicion);
 }
 //GET
-$(obtener).click(puntuacionGET);
+//$(obtener).click(puntuacionGET);
 
 //PUT
-$(mandar).click(puntuacionPUT(nombre, numero));
+//$(mandar).click(puntuacionPUT(nombre, numero));
 
 function puntuacionPUT(nombre, pPuntuacion){
     console.log(nombre, pPuntuacion);
     //rellenar la variable usuario actualizado
-    puntuacion.id = "e"//$(nombre).val();
-    puntuacion.puntuacion = 1500 //$(pPuntuacion).val();
+    puntuacion.id = nombre //$(nombre).val();
+    puntuacion.puntuacion = pPuntuacion //$(pPuntuacion).val();
     puntuacion.posicion = 5;
 
     //Petición AJAX
@@ -53,7 +53,7 @@ function puntuacionPUT(nombre, pPuntuacion){
     });
 }
 
-function puntuacionGET(){
+function puntuacionGETPruebas(){
     //console.log("Hola");
     //Petición Ajax
     $.ajax({
@@ -65,8 +65,8 @@ function puntuacionGET(){
             for (var i = 0; i < loadPuntuaciones.length; i++) {
                 showPuntuacion(loadPuntuaciones[i]);
             }
-            return loadPuntuaciones;
-        },error:function(error){
+        },
+        error:function(error){
             console.log(error.responseText);
         }
     });
