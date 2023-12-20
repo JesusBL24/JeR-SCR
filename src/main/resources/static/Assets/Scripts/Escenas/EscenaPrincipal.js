@@ -192,10 +192,9 @@ class EscenaPrincipal extends Phaser.Scene {
     this.scene.run("InterfazJuego");
   }
 
-  puntuacionPUT(nombre, pPuntuacion, escena){
-    //console.log(nombre, pPuntuacion);
-
+  puntuacionPUT(nombre, pPuntuacion){
     //rellenar la variable usuario actualizado
+    puntuacion = new Puntuacion();
     puntuacion.id = nombre;
     puntuacion.puntuacion = pPuntuacion;
     puntuacion.posicion = 5;
@@ -209,7 +208,6 @@ class EscenaPrincipal extends Phaser.Scene {
       success: function(response)
       {
         console.log(response);
-        escena.events.emit('actualizarClasificacion');
       },
       error:function(error){
         console.log(error.responseText);
@@ -231,11 +229,14 @@ class EscenaPrincipal extends Phaser.Scene {
       if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
         if(this.nave1.vida <= 0){
           this.nave2.score += 100;
-          this.puntuacionPUT(usuario.nombre, this.nave2.score, this);
+          this.puntuacionPUT(usuario.nombre, this.nave2.score);
+          puntuacion = this.nave2.score;
         }
         else{
           this.nave1.score += 100;
-          this.puntuacionPUT(usuario.nombre, this.nave1.score, this);
+          console.log(usuario.nombre)
+          this.puntuacionPUT(usuario.nombre, this.nave1.score);
+          puntuacion = this.nave1.score;
         }
 
         this.events.emit("finDePartida");

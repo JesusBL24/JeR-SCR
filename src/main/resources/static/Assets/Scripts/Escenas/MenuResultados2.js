@@ -29,16 +29,18 @@ class MenuResultados2 extends Phaser.Scene{
         /////////////////////////////////////////
 
         //clasificatoria
+        var escena = this;
+        puntuacionGET();
         function printClasificacion(clasificacion){
             console.log(clasificacion);
-            this.add.text(425, 225, '1. ' + clasificacion[0].id + ' ' + clasificacion[0].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
-            this.add.text(425, 325, '2. ' + clasificacion[1].id + ' ' + clasificacion[1].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
-            this.add.text(425, 425, '3. ' + clasificacion[2].id + ' ' + clasificacion[2].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
-            this.add.text(425, 525, '4. ' + clasificacion[3].id + ' ' + clasificacion[3].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
-            this.add.text(425, 625, '5. ' + clasificacion[4].id + ' ' + clasificacion[4].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+            escena.add.text(425, 225, '1. ' + clasificacion[0].id + ' ' + clasificacion[0].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+            escena.add.text(425, 325, '2. ' + clasificacion[1].id + ' ' + clasificacion[1].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+            escena.add.text(425, 425, '3. ' + clasificacion[2].id + ' ' + clasificacion[2].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+            escena.add.text(425, 525, '4. ' + clasificacion[3].id + ' ' + clasificacion[3].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+            escena.add.text(425, 625, '5. ' + clasificacion[4].id + ' ' + clasificacion[4].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
         }
         function printClasificacionSinConexion(){
-            this.add.text(350, 225, "No se pudieron cargar las puntuaciones", {fontFamily: 'Minecraft', fontSize: "40px"});
+            escena.add.text(350, 225, "No se pudieron cargar las puntuaciones", {fontFamily: 'Minecraft', fontSize: "40px"});
         }
 
         function puntuacionGET(){
@@ -61,12 +63,9 @@ class MenuResultados2 extends Phaser.Scene{
                 }
             });
         }
-        this.scene.get('EscenaPrincipal').events.on('actualizarClasificacion', () => {
-            puntuacionGET();
-        });
 
         //mi puntuacion
-        this.add.text(50, 625, 'Tu puntuacion es:  3ptos', {fontFamily: 'Minecraft', fontSize: "35px"});
+        this.add.text(50, 625, 'Puntuación: ' + puntuacion, {fontFamily: 'Minecraft', fontSize: "35px"});
 
         /////////
         //BOTON//
