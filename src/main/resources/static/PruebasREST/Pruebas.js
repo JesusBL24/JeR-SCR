@@ -1,3 +1,5 @@
+var ip = location.host;
+console.log(ip);
 class Usuario{
     constructor() {
         this.nombre = null;
@@ -41,7 +43,7 @@ $(login).click(function() {
     //Petición Ajax
     $.ajax({
         type: "GET",
-        url: 'http://localhost:8080/usuario',
+        url: 'http://'+ip+'/usuario',
         headers: {'usuario': JSON.stringify(usuario)},
         success: function(response)
         {
@@ -112,7 +114,7 @@ $(actualizar).click(function() {
     //Petición AJAX
     $.ajax({
         type: "PUT",
-        url: 'http://localhost:8080/usuario',
+        url: 'http://'+ip+'/usuario',
         data: JSON.stringify(usuarios),
         contentType: "app/json",
         success: function(response)
@@ -146,7 +148,7 @@ $(borrar).click(function() {
     //Petición Ajax
     $.ajax({
         type: "DELETE",
-        url: 'http://localhost:8080/usuario',
+        url: 'http://'+ip+'/usuario',
         headers: {'usuario': JSON.stringify(usuario)},
         success: function(response)
         {
@@ -198,7 +200,7 @@ $(document).ready(function() {
     //Petición AJAX
     $.ajax({
         type: "POST",
-        url: 'http://localhost:8080/clientesConectados/conectar',
+        url: 'http://' + ip +'/clientesConectados/conectar',
         success: function(response)
         {
             console.log(response);
@@ -216,7 +218,7 @@ $(window).on("beforeunload", function() {
     //Petición AJAX
     $.ajax({
         type: "POST",
-        url: 'http://localhost:8080/clientesConectados/desconectar',
+        url: 'http://' + ip +'/clientesConectados/desconectar',
         success: function(response)
         {
             console.log("Saliendo de la aplicación");
@@ -231,7 +233,7 @@ $(window).on("beforeunload", function() {
 function ObtenerUsuariosConectados(){
     $.ajax({
         type: "GET",
-        url: 'http://localhost:8080/clientesConectados',
+        url: 'http://' + ip +'/clientesConectados',
         success: function(response)
         {
             console.log(response);

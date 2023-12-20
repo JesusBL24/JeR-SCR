@@ -5,6 +5,9 @@ class Puntuacion{
     }
 }
 
+var ip = location.host;
+console.log(ip);
+
 var puntuacion = new Puntuacion();
 var puntuaciones = [];
 
@@ -22,21 +25,25 @@ function showPuntuacion(puntuacionToShow) {
 }
 //GET
 $(obtener).click(function() {
-
+    console.log("Hola");
     //Petición Ajax
     $.ajax({
+
         type: "GET",
-        url: 'http://localhost:8080/TablaPuntuaciones',
+        url: 'http://' + ip + '/puntuaciones',
         success: function(loadPuntuaciones)
         {
+            console.log(loadPuntuaciones);
             for (var i = 0; i < loadPuntuaciones.length; i++) {
                 showPuntuacion(loadPuntuaciones[i]);
             }
+        },error:function(error){
+            console.log(error.responseText);
         }
     });
 });
 
-//POST
+//PUT
 $(mandar).click(function() {
 
     //rellenar la variable usuario actualizado
