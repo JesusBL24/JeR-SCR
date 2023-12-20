@@ -195,56 +195,5 @@ $(logout).click(function() {
     loggedIn = false;
 });
 
-//////USUARIOS CONECTADOS
-$(document).ready(function() {
 
-    //Petición AJAX
-    $.ajax({
-        type: "POST",
-        url: 'http://' + ip +'/clientesConectados/conectar',
-        success: function(response)
-        {
-            console.log(response);
-            $(usuariosConectados).val(response);
-        },
-        error:function(error){
-            console.log(error);
-        }
-    });
-
-});
-
-$(window).on("beforeunload", function() {
-
-    //Petición AJAX
-    $.ajax({
-        type: "POST",
-        url: 'http://' + ip +'/clientesConectados/desconectar',
-        success: function(response)
-        {
-            console.log("Saliendo de la aplicación");
-        },
-        error:function(error){
-            console.log(error);
-        }
-    });
-
-});
-
-function ObtenerUsuariosConectados(){
-    $.ajax({
-        type: "GET",
-        url: 'http://' + ip +'/clientesConectados',
-        success: function(response)
-        {
-            console.log(response);
-            $(usuariosConectados).val(response);
-        },
-        error:function(error){
-            console.log(error);
-        }
-    });
-}
-
-setInterval(ObtenerUsuariosConectados, 500);
 

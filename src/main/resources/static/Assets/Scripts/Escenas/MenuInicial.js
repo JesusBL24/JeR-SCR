@@ -54,6 +54,10 @@ class MenuInicial extends Phaser.Scene{
             this.botOpciones.visible = true;
         }
 
+
+        //CONTADOR DE USUARIOS CONECTADOS
+        usuariosConectados = this.add.text(200, 635, "Usuarios conectados: 0", {fontFamily: 'Minecraft', fontSize: "30px"});
+
         ///////////////////////////
         //FUNCIONALIDADES BOTONES//
         ///////////////////////////

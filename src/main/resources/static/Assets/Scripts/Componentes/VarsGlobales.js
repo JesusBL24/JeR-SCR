@@ -23,3 +23,5 @@ var usuario = new Usuario();
 usuario.nombre = "ANONIMO";
 
 var puntuacion = 0;
+
+var usuariosConectados = null;
