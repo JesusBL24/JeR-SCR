@@ -1,7 +1,8 @@
 class Puntuacion{
     constructor() {
-        this.nombre = null;
+        this.id = null;
         this.puntuacion = null;
+        this.posicion = null;
     }
 }
 
@@ -24,37 +25,23 @@ function showPuntuacion(puntuacionToShow) {
         + " Puntuacion: "+ puntuacionToShow.posicion);
 }
 //GET
-$(obtener).click(function() {
-    console.log("Hola");
-    //Petición Ajax
-    $.ajax({
-
-        type: "GET",
-        url: 'http://' + ip + '/puntuaciones',
-        success: function(loadPuntuaciones)
-        {
-            console.log(loadPuntuaciones);
-            for (var i = 0; i < loadPuntuaciones.length; i++) {
-                showPuntuacion(loadPuntuaciones[i]);
-            }
-        },error:function(error){
-            console.log(error.responseText);
-        }
-    });
-});
+$(obtener).click(puntuacionGET);
 
 //PUT
-$(mandar).click(function() {
+$(mandar).click(puntuacionPUT(nombre, numero));
 
+function puntuacionPUT(nombre, pPuntuacion){
+    console.log(nombre, pPuntuacion);
     //rellenar la variable usuario actualizado
-    puntuacion.nombre = $(nombre).val();
-    puntuacion.puntuacion = $(numero).val();
+    puntuacion.id = "e"//$(nombre).val();
+    puntuacion.puntuacion = 1500 //$(pPuntuacion).val();
+    puntuacion.posicion = 5;
 
     //Petición AJAX
     $.ajax({
         type: "PUT",
-        url: 'http://localhost:8080/TablaPuntuaciones',
-        data: JSON.stringify(usuarios),
+        url: 'http://' + ip + '/puntuaciones',
+        data: JSON.stringify(puntuacion),
         contentType: "app/json",
         success: function(response)
         {
@@ -64,7 +51,25 @@ $(mandar).click(function() {
             console.log(error.responseText);
         }
     });
+}
 
-});
+function puntuacionGET(){
+    //console.log("Hola");
+    //Petición Ajax
+    $.ajax({
+        type: "GET",
+        url: 'http://' + ip + '/puntuaciones',
+        success: function(loadPuntuaciones)
+        {
+            console.log(loadPuntuaciones);
+            for (var i = 0; i < loadPuntuaciones.length; i++) {
+                showPuntuacion(loadPuntuaciones[i]);
+            }
+            return loadPuntuaciones;
+        },error:function(error){
+            console.log(error.responseText);
+        }
+    });
+}
 
 

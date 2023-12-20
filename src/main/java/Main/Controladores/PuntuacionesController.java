@@ -2,6 +2,7 @@ package Main.Controladores;
 
 import Main.Clases.Puntuacion;
 import Main.Clases.TablaPuntuaciones;
+import Main.Clases.Usuario;
 import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,7 +73,10 @@ public class PuntuacionesController {
 */
 @PutMapping
 //actualiza las puntuaciones
-public ResponseEntity<String> actualizarPuntuacion(@RequestBody Puntuacion newPuntuacion) throws IOException {
+public ResponseEntity<String> actualizarPuntuacion(@RequestBody String puntuacion) throws IOException {
+	Puntuacion newPuntuacion = gson.fromJson(puntuacion, Puntuacion.class);
+	System.out.println(puntuacion);
+
 	//SI ALGUNO DE LOS CAMPOS ES NULL, DEVOLVEMOS QUE EL CUERPO ES INVALIDO
 	if((newPuntuacion.getPuntuacion() == 0) || (newPuntuacion.getId() == null || newPuntuacion.getId().isEmpty()))
 		return new ResponseEntity<String>("ERROR: CUERPO INVALIDO",HttpStatus.BAD_REQUEST);
