@@ -81,6 +81,7 @@ class OpcionesAPI extends Phaser.Scene{
             //despausamos el menu inicial para poder usarlo y escondemos el pop-up
             this.scene.setVisible(false,'OpcionesAPI');
             this.scene.resume('MenuInicial');
+            this.scene.stop('OpcionesAPI');
         });
 
 
@@ -102,6 +103,9 @@ class OpcionesAPI extends Phaser.Scene{
 
             //variable global para indicar en Menu Inicial qué boton debe estar activo inicialmente
             desactivarBoton = false;
+            sesionIniciada = false;
+            usuario.nombre = "ANONIMO";
+            usuario.password = null;
 
             //tras un delay de tiempo, quitamos el pop-up
             this.time.delayedCall(2000, function (){
@@ -113,6 +117,7 @@ class OpcionesAPI extends Phaser.Scene{
                 //despausamos el menu inicial para poder usarlo y escondemos el pop-up
                 this.scene.setVisible(false,'OpcionesAPI');
                 this.scene.resume('MenuInicial');
+                this.scene.stop('OpcionesAPI');
             }, [], this);
         });
 
@@ -133,8 +138,24 @@ class OpcionesAPI extends Phaser.Scene{
             //creamos imagen feedback
             var cuentaBorrada = this.add.image(0,0,'cuentaBorrada').setScale(0.6, 0.58).setOrigin(0,0);
 
-            //variable global para indicar en Menu Inicial qué boton debe estar activo inicialmente
-            desactivarBoton = false;
+            //DELETE USUARIO
+            $.ajax({
+                type: "DELETE",
+                url: 'http://'+ip+'/usuario',
+                headers: {'usuario': JSON.stringify(usuario)},
+                success: function(response)
+                {
+                    console.log(response);
+                    sesionIniciada = false;
+                    //variable global para indicar en Menu Inicial qué boton debe estar activo inicialmente
+                    desactivarBoton = false;
+                    usuario.nombre = "ANONIMO";
+                    usuario.password = null;
+                },
+                error:function(error){
+                    console.log(error.responseText);
+                }
+            });
 
             //tras un delay de tiempo, quitamos el pop-up
             this.time.delayedCall(2000, function (){
@@ -146,6 +167,7 @@ class OpcionesAPI extends Phaser.Scene{
                 //despausamos el menu inicial para poder usarlo y escondemos el pop-up
                 this.scene.setVisible(false,'OpcionesAPI');
                 this.scene.resume('MenuInicial');
+                this.scene.stop('OpcionesAPI');
             }, [], this);
         });
 
@@ -159,6 +181,20 @@ class OpcionesAPI extends Phaser.Scene{
             botActualizar.setFrame(0);
         });
         botActualizar.on('pointerdown',()=>{
+
+            var boton = this;
+
+            //GENERAMOS UN USUARIO TEMPORAL
+            var uTemporal = new Usuario();
+            uTemporal.nombre = $("#usu").val();
+            uTemporal.password = $("#contr").val();
+            uTemporal.ofuscarContraseña();
+            if(uTemporal.password == null){
+                uTemporal.password = usuario.password;
+            }
+
+            var usuarios = [usuario, uTemporal];
+
             //destruimos el dom para ocultarlo
             this.usuarioInput.destroy();
             this.contrInput.destroy();
@@ -167,36 +203,43 @@ class OpcionesAPI extends Phaser.Scene{
             var actulizadoBien = this.add.image(0,0,'cuentaActualizada').setScale(0.6, 0.58).setOrigin(0,0);
             var actulizadoMal = this.add.image(0,0,'cuentaNoExiste').setScale(0.6, 0.58).setOrigin(0,0);
 
-            //segun si se actualiza bien la cuenta o no
-            if(desactivarBoton == true){
-                ////////////////////
-                //ACTUALIZADO BIEN//
-                ////////////////////
-                actulizadoBien.visible = true;
-                actulizadoMal.visible = false;
+            //ACTUALIZACIÓN DEL USUARIO
+            $.ajax({
+                type: "PUT",
+                url: 'http://'+ip+'/usuario',
+                data: JSON.stringify(usuarios),
+                contentType: "app/json",
+                success: function(response)
+                {
+                    console.log(response);
 
-                //tras un delay de tiempo quitamos el feedback pero permanecemos en pop-up
-                this.time.delayedCall(2000, function (){
-                    //ocultamos la imagen
-                    actulizadoBien.visible = false;
-                    //volvemos a generar el dom de cada elemento de input text
-                    this.createDom();
-                }, [], this);
-            }else{
-                ///////////////////
-                //ACTUALIZADO MAL//
-                ///////////////////
-                actulizadoBien.visible = false;
-                actulizadoMal.visible = true;
+                    usuario = uTemporal;
 
-                //tras un delay de tiempo quitamos el feedback pero permanecemos en pop-up
-                this.time.delayedCall(2000, function (){
-                    //ocultamos la imagen
+                    actulizadoBien.visible = true;
                     actulizadoMal.visible = false;
-                    //volvemos a generar el dom de cada elemento de input text
-                    this.createDom();
-                }, [], this);
-            }
+
+                    //tras un delay de tiempo quitamos el feedback pero permanecemos en pop-up
+                    boton.time.delayedCall(2000, function (){
+                        //ocultamos la imagen
+                        actulizadoBien.visible = false;
+                        //volvemos a generar el dom de cada elemento de input text
+                        boton.createDom();
+                    }, [], boton);
+                },
+                error:function(error){
+                    console.log(error.responseText);
+                    actulizadoBien.visible = false;
+                    actulizadoMal.visible = true;
+
+                    //tras un delay de tiempo quitamos el feedback pero permanecemos en pop-up
+                    boton.time.delayedCall(2000, function (){
+                        //ocultamos la imagen
+                        actulizadoMal.visible = false;
+                        //volvemos a generar el dom de cada elemento de input text
+                        boton.createDom();
+                    }, [], this);
+                }
+            });
         });
 
     }
@@ -204,6 +247,7 @@ class OpcionesAPI extends Phaser.Scene{
     //funcion que nos crea el dominio de los input text
     createDom(){
         this.contrInput = this.add.dom(window.innerWidth/1.85, window.innerHeight/1.85).createFromCache("usuarioTXT");
+        $("#usu").val(usuario.nombre);
         this.usuarioInput = this.add.dom(window.innerWidth/1.75, window.innerHeight/1.5).createFromCache("contrTXT");
     }
 
