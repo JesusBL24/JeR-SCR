@@ -13,6 +13,11 @@ class IniciarSesion extends Phaser.Scene{
         this.load.image('fondoIniSes','Assets/Sprites/Menus/IniciarSesion.png');
         this.load.spritesheet('botonEnviar','Assets/Sprites/Menus/EnviarSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
         this.load.spritesheet('botonCerrar','Assets/Sprites/Menus/CruzSpriteSheet.png',{frameWidth: 500,frameHeight: 500});
+
+        //cargamos imagenes de feedback pop-up
+        this.load.image('usuarioCreado','Assets/Sprites/Menus/Pop-up_mensajes/UsuarioCreado.png');
+        this.load.image('contrIncorrecta','Assets/Sprites/Menus/Pop-up_mensajes/ContrasenaIncorrecta.png');
+        this.load.image('bienvenido','Assets/Sprites/Menus/Pop-up_mensajes/Bienvenido.png');
     }
 
     create(){
@@ -29,8 +34,7 @@ class IniciarSesion extends Phaser.Scene{
         ////////////////
 
         //generamos el dom de cada elemento de input text
-        this.contrInput = this.add.dom(window.innerWidth/1.85, window.innerHeight/1.85).createFromCache("usuarioTXT");
-        this.usuarioInput = this.add.dom(window.innerWidth/1.75, window.innerHeight/1.5).createFromCache("contrTXT");
+        this.createDom();
 
         ////SI NO SE USA ELIMINAR ESTA SECCION HASTA BOTONES
         this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
@@ -58,6 +62,7 @@ class IniciarSesion extends Phaser.Scene{
         ///////////////////////////
 
         //funcionalidad boton CERRAR
+        ////////////////////////////
         botCerrar.on('pointerover',()=>{
             botCerrar.setFrame(1);
         });
@@ -73,26 +78,84 @@ class IniciarSesion extends Phaser.Scene{
             this.scene.resume('MenuInicial');
         });
 
+
         //funcionalidad boton ENVIAR
+        ////////////////////////////
         botEnviar.on('pointerover',()=>{
             botEnviar.setFrame(1);
         });
         botEnviar.on('pointerout',()=>{
             botEnviar.setFrame(0);
         });
+
         botEnviar.on('pointerdown',()=>{
-            //variable globar para indicar en Menu Inicial qué boton debe estar activo inicialmente
-            desactivarBoton = true;
-            //activamos/desactivamos los botones necesarios
-            this.scene.get('MenuInicial').botIniSes.visible = false;
-            this.scene.get('MenuInicial').botOpciones.visible = true;
             //destruimos el dom para ocultarlo
             this.usuarioInput.destroy();
             this.contrInput.destroy();
-            //despausamos el menu inicial para poder usarlo y escondemos el pop-up
-            this.scene.setVisible(false,'IniciarSesion');
-            this.scene.resume('MenuInicial');
+
+            //creamos imagen feedback
+            var usuarioCreado = this.add.image(0,0,'usuarioCreado').setScale(0.6, 0.58).setOrigin(0,0);
+            var contrIncorrecta = this.add.image(0,0,'contrIncorrecta').setScale(0.6, 0.58).setOrigin(0,0);
+            var bienvenido = this.add.image(0,0,'bienvenido').setScale(0.6, 0.58).setOrigin(0,0);
+
+            //dependiendo de si ha entrado con cuenta existente bien, creando nueva cuenta o
+            //intenta crear cuenta que ya existe
+
+            if(desactivarBoton == false){
+                ///////////////////////////////////////////////////////////
+                //NUEVO USUARIO CREADO O ACCESO CORRECTO CON YA EXISTENTE//
+                ///////////////////////////////////////////////////////////
+                if(desactivarBoton == false){
+                    //CUANDO USUARIO CREADO
+                    usuarioCreado.visible = true;
+                    contrIncorrecta.visible = false;
+                    bienvenido.visible = false;
+                }else{
+                    //CUANDO ACCESO CORRECTO
+                    usuarioCreado.visible = false;
+                    contrIncorrecta.visible = false;
+                    bienvenido.visible = true;
+                }
+
+                //variable globar para indicar en Menu Inicial qué boton debe estar activo inicialmente
+                desactivarBoton = true;
+
+                //tras un delay de tiempo, quitamos el pop-up
+                this.time.delayedCall(2000, function (){
+                    //activamos/desactivamos los botones necesarios
+                    this.scene.get('MenuInicial').botIniSes.visible = false;
+                    this.scene.get('MenuInicial').botOpciones.visible = true;
+                    //ocultamos feedback
+                    usuarioCreado.visible = false;
+                    bienvenido.visible = false;
+                    //despausamos el menu inicial para poder usarlo y escondemos el pop-up
+                    this.scene.setVisible(false,'IniciarSesion');
+                    this.scene.resume('MenuInicial');
+                }, [], this);
+            }else{
+                //////////////////////////////////////////////
+                //CONTRASEÑA INCORRECTA DE USUARIO YA CREADO//
+                //////////////////////////////////////////////
+                usuarioCreado.visible = false;
+                contrIncorrecta.visible = true;
+                bienvenido.visible = false;
+
+                //tras un delay de tiempo, quitamos el feedback pero permanecemos en pop-up
+                this.time.delayedCall(2000, function (){
+                    //ocultamos feedback
+                    contrIncorrecta.visible = false;
+
+                    //volvemos a generar el dom de cada elemento de input text
+                    this.createDom();
+                }, [], this);
+            }
         });
 
+    }
+
+    //funcion que nos crea el dominio de los input text
+    createDom(){
+        this.contrInput = this.add.dom(window.innerWidth/1.85, window.innerHeight/1.85).createFromCache("usuarioTXT");
+        this.usuarioInput = this.add.dom(window.innerWidth/1.75, window.innerHeight/1.5).createFromCache("contrTXT");
     }
 }

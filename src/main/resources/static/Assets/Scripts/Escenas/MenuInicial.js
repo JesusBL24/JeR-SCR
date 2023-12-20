@@ -59,6 +59,7 @@ class MenuInicial extends Phaser.Scene{
         ///////////////////////////
 
         //funcionalidad boton START
+        ///////////////////////////
         botStart.on('pointerover',()=>{
             botStart.setFrame(1);
         });
@@ -69,7 +70,9 @@ class MenuInicial extends Phaser.Scene{
             this.scene.start('EscenaPrincipal');
         });
 
+
         //funcionalidad boton CONTROLES
+        ///////////////////////////////
         botControles.on('pointerover',()=>{
             botControles.setFrame(1);
         });
@@ -80,7 +83,9 @@ class MenuInicial extends Phaser.Scene{
             this.scene.start('MenuControles');
         });
 
+
         //funcionalidad boton RESULTADOS
+        ////////////////////////////////
         botResultados.on('pointerover',()=>{
             botResultados.setFrame(1);
         });
@@ -91,7 +96,9 @@ class MenuInicial extends Phaser.Scene{
             this.scene.start('MenuResultados');
         });
 
+
         //funcionalidad boton CREDITOS
+        //////////////////////////////
         botCreditos.on('pointerover',()=>{
             botCreditos.setFrame(1);
         });
@@ -108,6 +115,7 @@ class MenuInicial extends Phaser.Scene{
         ////////////////////////////////////
 
         //funcionalidad boton INICIAR SESION
+        ////////////////////////////////////
         this.botIniSes.on('pointerover',()=>{
             this.botIniSes.setFrame(1);
         });
@@ -120,7 +128,9 @@ class MenuInicial extends Phaser.Scene{
             this.scene.launch('IniciarSesion');
         });
 
+
         //funcionalidad boton OPCIONES
+        //////////////////////////////
         this.botOpciones.on('pointerover',()=>{
             this.botOpciones.setFrame(1);
         });
