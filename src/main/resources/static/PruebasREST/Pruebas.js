@@ -7,6 +7,7 @@ class Usuario{
     }
 
     ofuscarContraseña(){
+        console.log(this.password);
         if(this.password != '')
             this.password = md5(this.password);
     }

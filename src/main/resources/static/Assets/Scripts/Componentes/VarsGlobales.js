@@ -12,8 +12,10 @@ class Usuario{
     }
 
     ofuscarContraseña(){
-        if(this.password != '')
+        if(this.password != null && this.password != '')
             this.password = md5(this.password);
+        else
+            this.password = null;
     }
 }
 

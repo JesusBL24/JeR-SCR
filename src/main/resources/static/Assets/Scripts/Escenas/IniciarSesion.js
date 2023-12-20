@@ -76,6 +76,7 @@ class IniciarSesion extends Phaser.Scene{
             //despausamos el menu inicial para poder usarlo y escondemos el pop-up
             this.scene.setVisible(false,'IniciarSesion');
             this.scene.resume('MenuInicial');
+            this.scene.stop('IniciarSesión');
         });
 
 
@@ -117,7 +118,7 @@ class IniciarSesion extends Phaser.Scene{
             //GENERAMOS UN USUARIO TEMPORAL
             var uTemporal = new Usuario();
             uTemporal.nombre = $("#usu").val();
-            uTemporal.nombre = $("#contr").val();
+            uTemporal.password = $("#contr").val();
             uTemporal.ofuscarContraseña();
 
             //destruimos el dom para ocultarlo
@@ -169,6 +170,7 @@ class IniciarSesion extends Phaser.Scene{
                         //despausamos el menu inicial para poder usarlo y escondemos el pop-up
                         boton.scene.setVisible(false,'IniciarSesion');
                         boton.scene.resume('MenuInicial');
+                        boton.scene.stop('IniciarSesión');
                     }, [], boton);
                 },
                 error:function(error){
