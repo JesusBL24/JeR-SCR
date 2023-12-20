@@ -48,6 +48,9 @@ class Nave {
     //SONIDOS
     this.thrust = null;
     this.shoot = null;
+
+    //PUNTUACIÓN
+    this.score = 0;
   }
   //FUNCIÓN DE ACTUALIZACIÓN DE LA NAVE
   Update(escena) {

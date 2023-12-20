@@ -23,6 +23,9 @@ class Meteorito{
 
         //SI EL METEORITO TIENE UN BOOSTER
         this.tieneBooster = false;
+
+        //SCORE
+        this.score = 0;
     }
 
     //FUNCIÓN DE ACTUALIZACIÓN DEL METEORITO
@@ -73,6 +76,16 @@ class Meteorito{
                 this.SpawnBooster(jugador1, escena);
                 this.tieneBooster = false;
             }
+
+            //PUNTUACION
+            if(jugador1){
+                escena.nave1.score += this.score;
+            }
+            else{
+                escena.nave2.score += this.score;
+            }
+
+            //DESTRUIR EL CUERPO
             this.cuerpo.destroy();
         }
     }
@@ -100,12 +113,15 @@ class Meteorito{
             switch(this.size){
                 case 0:
                     this.cuerpo.setSize(950, 950);
+                    this.score = 50;
                     break;
                 case 1:
                     this.cuerpo.setSize(700, 700, 110, 100);
+                    this.score = 30
                     break;
                 case 2:
                     this.cuerpo.setSize(450, 450, 250, 250);
+                    this.score = 10;
                     break;
                 default:
                     break;
@@ -123,6 +139,7 @@ class Meteorito{
 
             this.vidaTotal = (1 + Math.floor(Math.random() * 3)) * 200;
             this.vida = this.vidaTotal;
+            this.score = 25;
 
             //HITBOXES
             switch(tipoChatarra){

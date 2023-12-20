@@ -205,11 +205,20 @@ class EscenaPrincipal extends Phaser.Scene {
 
       //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePArtida"
       if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
+        if(this.nave1.vida <= 0){
+          this.nave2.score += 100
+        }
+        else{
+          this.nave1.score += 100
+        }
+
         this.events.emit("finDePartida");
         this.finDePartida = true;
+
         //HACEMOS UN FADE OUT DE AMBAS CAMARAS
         this.cameras.main.fadeOut(3000);
         this.camaraSecundaria.fadeOut(3000);
+
         //HACEMOS UN FADE OUT DE LA INTERFAZ DEL JUEGO
         this.scene.get("InterfazJuego").cameras.main.fadeOut(3000);
       }
