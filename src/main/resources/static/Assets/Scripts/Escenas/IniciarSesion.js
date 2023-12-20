@@ -85,7 +85,7 @@ class IniciarSesion extends Phaser.Scene{
             //Petición AJAX
             $.ajax({
                 type: "POST",
-                url: 'http://localhost:8080/usuario',
+                url: 'http://'+ip+'/usuario',
                 data: JSON.stringify(nuevoUsuario),
                 contentType: "app/json",
                 success: function(response)

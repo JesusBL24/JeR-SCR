@@ -32,7 +32,6 @@ class MenuResultados2 extends Phaser.Scene{
         var escena = this;
         puntuacionGET();
         function printClasificacion(clasificacion){
-            console.log(clasificacion);
             escena.add.text(425, 225, '1. ' + clasificacion[0].id + ' ' + clasificacion[0].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
             escena.add.text(425, 325, '2. ' + clasificacion[1].id + ' ' + clasificacion[1].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
             escena.add.text(425, 425, '3. ' + clasificacion[2].id + ' ' + clasificacion[2].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
