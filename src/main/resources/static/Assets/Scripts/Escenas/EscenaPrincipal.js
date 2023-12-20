@@ -190,7 +190,31 @@ class EscenaPrincipal extends Phaser.Scene {
     this.scene.run("GanarPerder");
     //INICIA LA ESCENA DE LA INTERFAZ DEL JUEGO
     this.scene.run("InterfazJuego");
+  }
 
+  puntuacionPUT(nombre, pPuntuacion, escena){
+    //console.log(nombre, pPuntuacion);
+
+    //rellenar la variable usuario actualizado
+    puntuacion.id = nombre;
+    puntuacion.puntuacion = pPuntuacion;
+    puntuacion.posicion = 5;
+
+    //Petición AJAX
+    $.ajax({
+      type: "PUT",
+      url: 'http://' + ip + '/puntuaciones',
+      data: JSON.stringify(puntuacion),
+      contentType: "app/json",
+      success: function(response)
+      {
+        console.log(response);
+        escena.events.emit('actualizarClasificacion');
+      },
+      error:function(error){
+        console.log(error.responseText);
+      }
+    });
   }
 
   update() {
@@ -207,11 +231,11 @@ class EscenaPrincipal extends Phaser.Scene {
       if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
         if(this.nave1.vida <= 0){
           this.nave2.score += 100;
-          puntuacionPUT(usuario.nombre, this.nave2.score);
+          this.puntuacionPUT(usuario.nombre, this.nave2.score, this);
         }
         else{
           this.nave1.score += 100;
-          puntuacionPUT(usuario.nombre, this.nave1.score);
+          this.puntuacionPUT(usuario.nombre, this.nave1.score, this);
         }
 
         this.events.emit("finDePartida");

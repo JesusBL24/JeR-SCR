@@ -16,7 +16,6 @@ class MenuResultados2 extends Phaser.Scene{
         //FADE IN
         this.cameras.main.fadeIn(2000);
 
-
         /////////
         //FONDO//
         /////////
@@ -30,11 +29,44 @@ class MenuResultados2 extends Phaser.Scene{
         /////////////////////////////////////////
 
         //clasificatoria
-        this.add.text(425, 225, '1. Jugador 1  20ptos', {fontFamily: 'Minecraft', fontSize: "40px"});
+        function printClasificacion(clasificacion){
+            console.log(clasificacion);
+            this.add.text(425, 225, '1. ' + clasificacion[0].id + ' ' + clasificacion[0].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+            this.add.text(425, 325, '2. ' + clasificacion[1].id + ' ' + clasificacion[1].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+            this.add.text(425, 425, '3. ' + clasificacion[2].id + ' ' + clasificacion[2].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+            this.add.text(425, 525, '4. ' + clasificacion[3].id + ' ' + clasificacion[3].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+            this.add.text(425, 625, '5. ' + clasificacion[4].id + ' ' + clasificacion[4].puntuacion, {fontFamily: 'Minecraft', fontSize: "40px"});
+        }
+        function printClasificacionSinConexion(){
+            this.add.text(350, 225, "No se pudieron cargar las puntuaciones", {fontFamily: 'Minecraft', fontSize: "40px"});
+        }
+
+        function puntuacionGET(){
+            //console.log("Hola");
+            //Petición Ajax
+            $.ajax({
+                type: "GET",
+                url: 'http://' + ip + '/puntuaciones',
+                success: function(loadPuntuaciones)
+                {
+                    console.log(loadPuntuaciones);
+                    for (var i = 0; i < loadPuntuaciones.length; i++) {
+                        showPuntuacion(loadPuntuaciones[i]);
+                    }
+                    printClasificacion(loadPuntuaciones);
+                },
+                error:function(error){
+                    printClasificacionSinConexion();
+                    console.log(error.responseText);
+                }
+            });
+        }
+        this.scene.get('EscenaPrincipal').events.on('actualizarClasificacion', () => {
+            puntuacionGET();
+        });
 
         //mi puntuacion
         this.add.text(50, 625, 'Tu puntuacion es:  3ptos', {fontFamily: 'Minecraft', fontSize: "35px"});
-
 
         /////////
         //BOTON//
@@ -42,4 +74,5 @@ class MenuResultados2 extends Phaser.Scene{
 
         this.botonVolver.create();
     }
+
 }

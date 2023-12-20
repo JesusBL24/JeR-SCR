@@ -30,7 +30,7 @@ function showPuntuacion(puntuacionToShow) {
 //PUT
 //$(mandar).click(puntuacionPUT(nombre, numero));
 
-function puntuacionPUT(nombre, pPuntuacion){
+function puntuacionPUTPruebas(nombre, pPuntuacion){
     console.log(nombre, pPuntuacion);
     //rellenar la variable usuario actualizado
     puntuacion.id = nombre //$(nombre).val();
