@@ -201,7 +201,7 @@ Y la saga de juegos de Konami [Gradius](https://es.wikipedia.org/wiki/Gradius) (
 </p>
 
 
-# FASE 2 (ACTUALIZACIÓN)
+# FASE 2 (ACTUALIZACIÓN - JUEGO)
 ---
 
 A continuación detallaremos todos los cambios y adiciones que se han realizado sobre el juego durante su desarrollo en esta segunda fase. 
@@ -328,6 +328,97 @@ Nuestro juego, en su mayoría, es artesanal. Los únicos elementos externos no h
 
 Estos se referencian en el apartado correspondiente de este documento (Referencias y Anexos).
 
+# FASE 3 (ACTUALIZACIÓN - API REST)
+---
+Para esta nueva actualización, se ha decidido implementar el acceso de usuarios al juego (opcional) y una tabla de puntuaciones.
+
+## Flujograma y pantallas nuevas
+
+En esta nueva fase se han incorporado 2 nuevas pantallas en el juego más dos 2 pop-ups que aparecen en el Menú Principal. A continuación se puede observar el nuevo flujograma del juego, tanto de la parte de los pop-ups (Figura 27: flujograma pop-ups) como el del resto de pantallas del juego (Figura 28: flujograma juego):
+
+<p align="center">
+ <img width=1200 heigth=1200 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/FlujoGramaUsuario.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/FlujoGramaUsuario.png">Figura 27: flujograma pop-ups</a>
+</p>
+
+<p align="center">
+ <img width=1000 heigth=1000 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/FlujogramaJuego.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/FlujogramaJuego.png">Figura 28: flujograma juego</a>
+</p>
+
+**Pop-up Inicio Sesión:** este pop-up (Figura 29: pop-up iniciar sesión) permite al jugador introducir un usuario y una contraseña. Este pop-up permite cerrarlo para volver al Menú Principal o permite dar 3 respuestas si se pulsa el botón "Enviar". En el caso de que se introduzca una nueva cuenta que no exista, este indicará que se ha creado este nuevo usuario. Si se usa un usuario ya existente y la contraseña no coincide, se envía un mensaje informando sobre esto para o cambiar la contraseña o crear una nueva cuenta. Y, si se accede con un usuario ya existente y la contraseña es correcta, se le da la bienvenida al usuario.
+
+<p align="center">
+ <img width=600 heigth=600 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/PopUpIniSesF.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/PopUpIniSesF.png">Figura 29: pop-up iniciar sesión</a>
+</p>
+
+**Pop-up Opciones:** este pop up (Figura 30: pop-up opciones) es únicamente accesible cuando se ha iniciado sesión dándole al botón "Enviar" del anterior pop-up; puesto que el botón de "Iniciar sesión" cambia al de "Opciones". Este pop-up permite cerrarlo para volver a utilizar el Menú Principal y tiene 3 botones. Uno de ellos permite cerrar la sesión (cerrando el pop-up y volviendo a activar el botón de "Iniciar sesión"), otro permite borrar la cuenta (cerrando también el pop-up y volviendo a activar el botón de "Iniciar sesión") y, el último botón, permite actualizar la contraseña (este te mantiene en el pop-up por si deseas realizar otras modificaciones).
+
+<p align="center">
+ <img width=600 heigth=600 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/PopUPOpciones.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/PopUPOpciones.png">Figura 30: pop-up opciones</a>
+</p>
+
+**Menú Resultados accesible desde el Menú Principal:** a este menú (Figura 31: pantalla resultados 1) se puede acceder desde el botón de "Resultados" desde el Menú Inicial para poder ver el top 5 de puntuaciones existentes. Una vez consultadas, se puede volver al Menú Inicial.
+
+<p align="center">
+ <img width=575 heigth=575 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/PantallaResultados.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/PantallaResultados.png">Figura 31: pantalla resultados 1</a>
+</p>
+
+**Menú Resultados accesible después del juego:** este menú (Figura 32: pantalla resultados 2) es una variable de la anterior a la que únicamente se puede acceder tras completar el juego. Te enseña el nuevo top 5 y se diferencia, respecto al otro Menú Resultados, con el hecho de que te indica tu puntuación obtenida en esta partida (aparezcas o no en el top 5).
+
+<p align="center">
+ <img width=550 heigth=550 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/ResultadosPostGame.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/ResultadosPostGame.png">Figura 32: pantalla resultados 2</a>
+</p>
+
+## Apartado técnico
+
+En esta tercera fase se ha creado una API REST que permite la creación, manipulación y almacenamiento de cuentas de usuarios, y el almacenamiento y muestra de puntuaciones asociadas a las cuentas. La interacción entre los distintos archivos relacionados a estos se muestra por el siguiente diagrama de clases (Figura 33: diagrama de clases SCR):
+
+<p align="center">
+ <img width=600 heigth=600 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/DiagramaClases.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/DiagramaClases.png">Figura 33: diagrama de clases SCR</a>
+</p>
+
+Además de la creación del flujo nuevo entre menús con los pop-ups integrados.
+
+Por añadido, se ha incluido un favicon en nuestro juego para personalizar más la página.
+
+## Apartado artístico
+
+En esta fase, este apartado únicamente incluye el diseño de los nuevos menús estáticos y pop-ups que se han podido observar previamente en este documento.
+
+## Elementos no propios
+
+Durante este tercer desarrollo se han utilizado 2 elementos externos relacionados al código. Uno de ellos es en relación al hash de las contraseñas y, el otro, es en relación a la creación del dominio para poder incorporar input de textos de manera InGame.
+
+Ambos se referencian correctamente en el apartado de Anexos y Referencias de la Fase 3.
+
+## Instrucciones para ejecutar la aplicación
+
+**Requisitos previos:**
+
+ - Esta aplicación se ha generado usando Java 1.8 y como tal necesita de esa versión instalada en el ordenador en el que vaya a ejecutarse. El servidor no se ejecutara bajo ninguna otra versión.
+ - La carpeta RecursosRest, así como su contenido, el archivo Usuarios y el archivo Puntuaciones deben estar en la misma ubicación que el archivo .jar para que el servidor funcione.
+
+**Compilación:**
+
+ - Las instrucciones de compilación dependeran del IDE que se use, en nuestro caso intelliJ. Debemos configurar un artefacto tipo jar en el menu Project Structure, tras esto, bajo la pestaña build tendremos la opción de crear dicho artefacto.
+
+**Ejecución:**
+
+ - Para ejecutar la aplicación, abrir un terminal en la ubicación del archivo .jar y ejecutar:
+   - java -jar nombredelarchivo.jar
+   - Sustituyendo nombredelarchivo por el nombre de vuestro archivo .jar.
+
+ - La ip en la que se ejecutara el servidor sera la ip del ordenador en la que ejecuteis el .jar. Para acceder al juego, escribir en el navegador:
+  _ipdelordenadorenelqueseejecuta:8080_
+	
+	 Sustituyendo _ipdelordenadorenelqueseejecuta_ por la ip del ordenador en la que se ejecute el archivo .jar.
+
 # REFERENCIAS Y ANEXOS
 ---
 
@@ -349,3 +440,8 @@ A modo de resumen de todo el material utilizado durante este documento, se han u
 - Pixabay, (6 julio 2022). _010406_Rocket Thrust effect_. Nombre del sitio web: [https://pixabay.com/es/sound-effects/010406-rocket-thrust-effectwav-59704/](https://pixabay.com/es/sound-effects/010406-rocket-thrust-effectwav-59704/)
 - Craftron Gaming, (12 julio 2015). _Minecraft_. Nombre del sitio web: [https://www.dafont.com/es/minecraft.font](https://www.dafont.com/es/minecraft.font)
 - photonstorm, (abril 2023). _asteroids movement_. Nombre del sitio web: [https://github.com/photonstorm/phaser3-examples/blob/master/public/src/physics/arcade/asteroids%20movement.js](https://github.com/photonstorm/phaser3-examples/blob/master/public/src/physics/arcade/asteroids%20movement.js)
+
+**Fase 3:**
+
+- blueimp, (20 diciembre 2021). _JavaScript-MD5_. Nombre del sitio web: [https://github.com/blueimp/JavaScript-MD5](https://github.com/blueimp/JavaScript-MD5)
+- Nic Raboy, (16 septiembre 2020). _Accept Text Input from Users in a Phaser Game_. Nombre del sitio web: [https://www.thepolyglotdeveloper.com/2020/09/accept-text-input-user-phaser-game/](https://www.thepolyglotdeveloper.com/2020/09/accept-text-input-user-phaser-game/)
