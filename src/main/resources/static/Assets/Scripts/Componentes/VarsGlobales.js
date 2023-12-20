@@ -18,3 +18,4 @@ class Usuario{
 }
 
 var usuario = new Usuario();
+usuario.nombre = "ANONIMO";

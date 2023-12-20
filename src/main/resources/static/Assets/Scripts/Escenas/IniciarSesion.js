@@ -79,6 +79,29 @@ class IniciarSesion extends Phaser.Scene{
         });
 
 
+        //GENERA UN NUEVO USUARIO CON UN POST
+        function nuevoUsuario(nuevoUsuario){
+            //Petición AJAX
+            $.ajax({
+                type: "POST",
+                url: 'http://localhost:8080/usuario',
+                data: JSON.stringify(nuevoUsuario),
+                contentType: "app/json",
+                success: function(response)
+                {
+                    console.log(response);
+                    //SESION INICIADA
+                    sesionIniciada = true;
+                    usuario = nuevoUsuario;
+                },
+                error:function(error){
+                    console.log(error.responseText);
+                    usuario.nombre = "ANONIMO";
+                    usuario.password = null;
+                }
+            });
+        }
+
         //funcionalidad boton ENVIAR
         ////////////////////////////
         botEnviar.on('pointerover',()=>{
@@ -89,6 +112,14 @@ class IniciarSesion extends Phaser.Scene{
         });
 
         botEnviar.on('pointerdown',()=>{
+            var boton = this;
+
+            //GENERAMOS UN USUARIO TEMPORAL
+            var uTemporal = new Usuario();
+            uTemporal.nombre = $("#usu").val();
+            uTemporal.nombre = $("#contr").val();
+            uTemporal.ofuscarContraseña();
+
             //destruimos el dom para ocultarlo
             this.usuarioInput.destroy();
             this.contrInput.destroy();
@@ -101,57 +132,69 @@ class IniciarSesion extends Phaser.Scene{
             //dependiendo de si ha entrado con cuenta existente bien, creando nueva cuenta o
             //intenta crear cuenta que ya existe
 
-            if(desactivarBoton == false){
-                ///////////////////////////////////////////////////////////
-                //NUEVO USUARIO CREADO O ACCESO CORRECTO CON YA EXISTENTE//
-                ///////////////////////////////////////////////////////////
-                if(desactivarBoton == false){
-                    //CUANDO USUARIO CREADO
-                    usuarioCreado.visible = true;
-                    contrIncorrecta.visible = false;
-                    bienvenido.visible = false;
-                }else{
-                    //CUANDO ACCESO CORRECTO
+            $.ajax({
+                type: "GET",
+                url: 'http://'+ip+'/usuario',
+                headers: {'usuario': JSON.stringify(uTemporal)},
+                success: function(response)
+                {
+                    console.log(response);
+                    if(response == "CREAR NUEVO USUARIO")
+                    {
+                        nuevoUsuario(uTemporal);
+                        usuarioCreado.visible = true;
+                        contrIncorrecta.visible = false;
+                        bienvenido.visible = false;
+                    }
+                    else{
+                        //SESIÓN INICIADA
+                        sesionIniciada = true;
+                        usuarioCreado.visible = false;
+                        contrIncorrecta.visible = false;
+                        bienvenido.visible = true;
+                        usuario = uTemporal;
+                    }
+
+                    //variable globar para indicar en Menu Inicial qué boton debe estar activo inicialmente
+                    desactivarBoton = true;
+
+                    //tras un delay de tiempo, quitamos el pop-up
+                    boton.time.delayedCall(2000, function (){
+                        //activamos/desactivamos los botones necesarios
+                        boton.scene.get('MenuInicial').botIniSes.visible = false;
+                        boton.scene.get('MenuInicial').botOpciones.visible = true;
+                        //ocultamos feedback
+                        usuarioCreado.visible = false;
+                        bienvenido.visible = false;
+                        //despausamos el menu inicial para poder usarlo y escondemos el pop-up
+                        boton.scene.setVisible(false,'IniciarSesion');
+                        boton.scene.resume('MenuInicial');
+                    }, [], boton);
+                },
+                error:function(error){
+                    console.log(error.responseText);
+                    //activar el boton
                     usuarioCreado.visible = false;
-                    contrIncorrecta.visible = false;
-                    bienvenido.visible = true;
+                    contrIncorrecta.visible = true;
+                    bienvenido.visible = false;
+
+                    //tras un delay de tiempo, quitamos el feedback pero permanecemos en pop-up
+                    boton.time.delayedCall(2000, function (){
+                        //ocultamos feedback
+                        contrIncorrecta.visible = false;
+
+                        //volvemos a generar el dom de cada elemento de input text
+                        boton.createDom();
+                    }, [], boton);
+                    usuario.nombre = "ANONIMO";
+                    usuario.password = null;
                 }
-
-                //variable globar para indicar en Menu Inicial qué boton debe estar activo inicialmente
-                desactivarBoton = true;
-
-                //tras un delay de tiempo, quitamos el pop-up
-                this.time.delayedCall(2000, function (){
-                    //activamos/desactivamos los botones necesarios
-                    this.scene.get('MenuInicial').botIniSes.visible = false;
-                    this.scene.get('MenuInicial').botOpciones.visible = true;
-                    //ocultamos feedback
-                    usuarioCreado.visible = false;
-                    bienvenido.visible = false;
-                    //despausamos el menu inicial para poder usarlo y escondemos el pop-up
-                    this.scene.setVisible(false,'IniciarSesion');
-                    this.scene.resume('MenuInicial');
-                }, [], this);
-            }else{
-                //////////////////////////////////////////////
-                //CONTRASEÑA INCORRECTA DE USUARIO YA CREADO//
-                //////////////////////////////////////////////
-                usuarioCreado.visible = false;
-                contrIncorrecta.visible = true;
-                bienvenido.visible = false;
-
-                //tras un delay de tiempo, quitamos el feedback pero permanecemos en pop-up
-                this.time.delayedCall(2000, function (){
-                    //ocultamos feedback
-                    contrIncorrecta.visible = false;
-
-                    //volvemos a generar el dom de cada elemento de input text
-                    this.createDom();
-                }, [], this);
-            }
+            });
         });
 
     }
+
+
 
     //funcion que nos crea el dominio de los input text
     createDom(){
