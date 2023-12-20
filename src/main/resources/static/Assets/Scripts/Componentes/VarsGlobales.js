@@ -25,3 +25,18 @@ usuario.nombre = "ANONIMO";
 var puntuacion = 0;
 
 var usuariosConectados = null;
+
+
+
+class Puntuacion{
+    constructor() {
+        this.id = null;
+        this.puntuacion = null;
+        this.posicion = null;
+    }
+}
+function showPuntuacion(puntuacionToShow) {
+
+    $('#informacion').append("Posicion :" + puntuacionToShow.posicion + " Nombre: " + puntuacionToShow.id
+        + " Puntuacion: "+ puntuacionToShow.posicion);
+}

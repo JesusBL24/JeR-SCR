@@ -1,0 +1,30 @@
+Requisitos previos:
+
+	-Esta aplicación se ha generado usando Java 1.8 y como tal necesita de esa versión instalada en el
+	 ordenador en el que vaya a ejecutarse. El servidor no se ejecutara bajo ninguna otra versión.
+
+	-La carpeta RecursosRest, así como su contenido, el archivo Usuarios y el archivo Puntuaciones
+	 deben estar en la misma ubicación que el archivo .jar para que el servidor funcione.
+
+Compilación:
+
+	-Las instrucciones de compilación dependeran del IDE que se use, en nuestro caso intelliJ.
+	 Debemos configurar un artefacto tipo jar en el menu Project Structure, tras esto, bajo la pestaña
+	 build tendremos la opción de crear dicho artefacto.
+
+Ejecución:
+
+	-Para ejecutar la aplicación, abrir un terminal en la ubicación del archivo .jar y ejecutar:
+
+		java -jar nombredelarchivo.jar
+
+	 Sustituyendo nombredelarchivo por el nombre de vuestro archivo .jar.
+
+	-La ip en la que se ejecutara el servidor sera la ip del ordenador en la que ejecuteis el .jar.
+	 Para acceder al juego, escribir en el navegador: 
+
+		ipdelordenadorenelqueseejecuta:8080
+	
+	 Sustituyendo ipdelordenadorenelqueseejecuta por la ip del ordenador en la que se ejecute el archivo .jar.
+	
+		 
