@@ -1,11 +1,29 @@
 package Main;
 
+import Ejemplo.ChatHandler;
+import Ejemplo.WebsocketEchoHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 
 @SpringBootApplication
-public class Lanzador {
+@EnableWebSocket
+public class Lanzador implements WebSocketConfigurer {
+
+	@Override
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		registry.addHandler(createChatHandler(), "/chat")
+				.setAllowedOrigins("*");
+	}
+
+	@Bean
+	public ChatHandler createChatHandler() {
+		return new ChatHandler();
+	}
 
 	public static void main(String[] args) {
 		//COMPROBAMOS QUE ESTAMOS EN LA VERSIÓN CORRECTA DE JAVA
