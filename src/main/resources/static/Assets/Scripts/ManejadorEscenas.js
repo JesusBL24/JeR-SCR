@@ -22,7 +22,9 @@ var config = {
     MenuResultados,
     MenuResultados2,
     IniciarSesion,
-    OpcionesAPI
+    OpcionesAPI,
+    MenuMatchmaking,
+    EscenaPrincipalOnline
   ],
   audio: {
     disableWebAudio: true

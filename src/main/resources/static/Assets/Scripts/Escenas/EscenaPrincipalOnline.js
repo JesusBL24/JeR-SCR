@@ -1,6 +1,6 @@
-class EscenaPrincipal extends Phaser.Scene {
+class EscenaPrincipalOnline extends Phaser.Scene {
   constructor() {
-    super({ key: "EscenaPrincipal" });
+    super({ key: "EscenaPrincipalOnline" });
     this.nave1 = null;
     this.nave2 = null;
     this.mapa = null;

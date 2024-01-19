@@ -11,12 +11,14 @@ class MenuInicial extends Phaser.Scene{
         //se cargan las imagenes
         this.load.image('fondoMI','Assets/Sprites/Menus/MenuInicial.png');
         this.load.image('decorLienzo','Assets/Sprites/Menus/DecorLienzo.png');
-        this.load.spritesheet('botonStart','Assets/Sprites/Menus/StartSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
+        //this.load.spritesheet('botonStart','Assets/Sprites/Menus/StartSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
+        this.load.spritesheet('botonLocal','Assets/Sprites/Menus/LocalSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
         this.load.spritesheet('botonControles','Assets/Sprites/Menus/ControlesSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
         this.load.spritesheet('botonCreditos','Assets/Sprites/Menus/CreditosSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
         this.load.spritesheet('botonResultados','Assets/Sprites/Menus/ResultadosSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
         this.load.spritesheet('botonIniSes','Assets/Sprites/Menus/IniciarSesSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
         this.load.spritesheet('botonOpciones','Assets/Sprites/Menus/OpcionesSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
+        this.load.spritesheet('botonOnline','Assets/Sprites/Menus/OnlineSpriteSheet.png',{frameWidth: 946,frameHeight: 345});
     }
 
     create(){
@@ -36,7 +38,9 @@ class MenuInicial extends Phaser.Scene{
         //BOTONES//
         ///////////
 
-        var botStart = this.add.sprite(850,300,'botonStart').setScale(0.2,0.2).setInteractive();
+        //var botStart = this.add.sprite(850,,300,'botonStart').setScale(0.2,0.2).setInteractive();
+        var botStart = this.add.sprite(750,300,'botonLocal').setScale(0.2,0.2).setInteractive();
+        var botOnline = this.add.sprite(950,300,'botonOnline').setScale(0.2,0.2).setInteractive();
         var botControles = this.add.sprite(850,400,'botonControles').setScale(0.2,0.2).setInteractive();
         var botResultados = this.add.sprite(850,500,'botonResultados').setScale(0.2,0.2).setInteractive();
         var botCreditos = this.add.sprite(850,600,'botonCreditos').setScale(0.2,0.2).setInteractive();
@@ -72,6 +76,18 @@ class MenuInicial extends Phaser.Scene{
         });
         botStart.on('pointerdown',()=>{
             this.scene.start('EscenaPrincipal');
+        });
+
+        //funcionalidad boton ONLINE
+        ///////////////////////////
+        botOnline.on('pointerover',()=>{
+            botOnline.setFrame(1);
+        });
+        botOnline.on('pointerout',()=>{
+            botOnline.setFrame(0);
+        });
+        botOnline.on('pointerdown',()=>{
+            this.scene.start('MenuMatchmaking');
         });
 
 
