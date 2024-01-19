@@ -1,7 +1,7 @@
 package Main;
 
 import Ejemplo.ChatHandler;
-import Ejemplo.WebsocketEchoHandler;
+import Main.WebSockets.MatchHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,13 +16,23 @@ public class Lanzador implements WebSocketConfigurer {
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		//EJEMPLO
 		registry.addHandler(createChatHandler(), "/chat")
+				.setAllowedOrigins("*");
+
+		registry.addHandler(createMatchHandler(), "/matchHandler")
 				.setAllowedOrigins("*");
 	}
 
+	//EJEMPLO
 	@Bean
 	public ChatHandler createChatHandler() {
 		return new ChatHandler();
+	}
+
+	@Bean
+	public MatchHandler createMatchHandler() {
+		return new MatchHandler();
 	}
 
 	public static void main(String[] args) {

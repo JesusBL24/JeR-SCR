@@ -40,3 +40,9 @@ function showPuntuacion(puntuacionToShow) {
     $('#informacion').append("Posicion :" + puntuacionToShow.posicion + " Nombre: " + puntuacionToShow.id
         + " Puntuacion: "+ puntuacionToShow.posicion);
 }
+
+//VARIABLES WEBSOCKETS
+var conexion = null;
+
+//SI EL EQUIPO LOCAL ES EL JUGADOR 1 O EL 2
+var posicion = null;
