@@ -6,10 +6,10 @@ function avisarDeConexion() {
         type: "POST",
         url: 'http://' + ip + '/clientesConectados/conectar',
         success: function (response) {
-            console.log(response);
+            //console.log(response);
         },
         error: function (error) {
-            console.log(error);
+            //console.log(error);
         }
     });
 }
@@ -39,7 +39,7 @@ function ObtenerUsuariosConectados(){
         url: 'http://' + ip +'/clientesConectados',
         success: function(response)
         {
-            console.log(response);
+            //console.log(response);
             if(usuariosConectados != null)
                 usuariosConectados.text = "Usuarios conectados: " + response;
         },

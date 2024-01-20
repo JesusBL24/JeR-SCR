@@ -1,7 +1,10 @@
 //CONTROL DE LA ACTUALIZACION CON PASO FIJO
 var lag = 0;
-var pasoFijo = 1/60;
+var fps = 60;
+var pasoFijo = 1/fps * 1000;
 var lastTime = 0;
+var lastSynced = 0;
+var syncRate = 5;
 
 class EscenaPrincipalOnline extends Phaser.Scene {
   constructor() {
@@ -234,8 +237,8 @@ class EscenaPrincipalOnline extends Phaser.Scene {
 
     if (this.partidaEmpezada && !this.finDePartida) {
       lag += this.deltaTime();
-      //while(lag >= pasoFijo)
-      //{
+      while(lag >= pasoFijo)
+      {
         this.mapa.Update(this, this.nave1, this.nave2);
         this.nave1.Update(this);
         this.nave2.Update(this);
@@ -243,8 +246,15 @@ class EscenaPrincipalOnline extends Phaser.Scene {
         this.mapa.meteoritos.forEach(element => {
           element.Update();
         });
-        //lag -= pasoFijo;
-      //}
+        lag -= pasoFijo;
+
+        if(Date.now() >= (lastSynced + pasoFijo * fps / syncRate))
+        {
+          this.syncNaves();
+          this.syncMeteoritos();
+        }
+
+      }
     }
 
     //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePartida"
@@ -281,15 +291,42 @@ class EscenaPrincipalOnline extends Phaser.Scene {
       if(tiempoParaEmpezar < Date.now())
       {
         this.partidaEmpezada = true;
+        lastSynced = Date.now();
       }
 
     }
     //ACTUALIZA EL MOMENTO EN EL QUE SE HIZO LA ULTIMA ACTUALIZACION
-    lastTime = Date.now();
+    if(this.partidaEmpezada)
+      lastTime = Date.now();
   }
 
   deltaTime()
   {
     return Date.now() - lastTime;
+  }
+
+  syncNaves()
+  {
+    if(posicion == 1)
+    {
+      var objetos = [[this.nave1.cuerpo.x, this.nave1.cuerpo.y, this.nave1.cuerpo.rotation, this.nave1.cuerpo.body.velocity],[this.nave2.cuerpo.x, this.nave2.cuerpo.y, this.nave2.cuerpo.rotation, this.nave2.cuerpo.body.velocity]];
+      mandarMensaje("SyncNaves;" + JSON.stringify(objetos));
+    }
+  }
+
+  syncMeteoritos()
+  {
+    if(posicion == 1)
+    {
+      var objetos = [];
+      for(var i = 0; i < this.mapa.cuerposMeteoritos.length; i++)
+      {
+        if(this.mapa.cuerposMeteoritos[i].body !== undefined)
+          objetos[i] = [this.mapa.cuerposMeteoritos[i].x, this.mapa.cuerposMeteoritos[i].y, this.mapa.cuerposMeteoritos[i].rotation, this.mapa.cuerposMeteoritos[i].body.velocity];
+        else
+          objetos[i] = null;
+      }
+      mandarMensaje("SyncMeteoritos;" + JSON.stringify(objetos));
+    }
   }
 }

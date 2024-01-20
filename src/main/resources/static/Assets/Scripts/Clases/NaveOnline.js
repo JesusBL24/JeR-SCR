@@ -165,9 +165,6 @@ class NaveOnline {
 
       if(!this.thrust.isPlaying)
         this.thrust.play();
-
-
-      console.log(this.estaArriba + ", " + this.Arriba.isDown);
     }
     else{
 
@@ -184,10 +181,7 @@ class NaveOnline {
     //PARA GIRAR LATERALMENTE
     if (this.Izquierda.isDown && !this.Derecha.isDown) {
       this.cuerpo.setAngularVelocity(-this.velocidadDeRotacion);
-
-      console.log("IZQUIERDA")
       if(!this.estaIzquierda){
-        console.log("EMPEZAR IZQUIERDA")
         this.estaIzquierda = true;
         this.estaDerecha = false;
         if(this.jugadorLocal)
@@ -198,7 +192,6 @@ class NaveOnline {
     }
     else{
       if(this.estaIzquierda){
-        console.log("TERMINAR IZQUIERDA")
         this.estaIzquierda = false;
         if(this.jugadorLocal)
           mandarMensaje(this.MensajeMovimiento());
@@ -342,8 +335,6 @@ class NaveOnline {
       );
    //SI ES EL OTRO JUGADOR, LE ASIGNA INPUTS FALSOS
     } else{
-      console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
       this.Arriba = new InputFalso();
 
       this.Abajo = new InputFalso();
@@ -474,7 +465,6 @@ class NaveOnline {
 
   //FUNCIÓN QUE ACTUALIZA EL MOVIMIENTO DE LA NAVE DEL OTRO JUGADOR
   RecibirMovimientoOnline(arriba, izquierda, abajo, derecha){
-    console.log("Movimiento pillado");
     this.Arriba.isDown = arriba;
     this.Izquierda.isDown = izquierda;
     this.Abajo.isDown  = abajo;

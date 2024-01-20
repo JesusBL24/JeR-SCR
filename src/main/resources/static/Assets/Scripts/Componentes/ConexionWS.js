@@ -23,10 +23,11 @@ function abrirConexionWS() {
             var atributos = msg.data.split(";");
             posicion = Number(atributos[1])
             tiempoParaEmpezar = Number(atributos[3]);
-        }else if(msg.data.includes("Movimiento"))
+        }
+        if(msg.data.includes("Movimiento"))
         {
             var atributos = msg.data.split(";");
-            console.log("Movimiento: " + atributos[1] + ", "+ atributos[2] + ", " + atributos[3] + ", " + atributos[4]);
+            //console.log("Movimiento: " + atributos[1] + ", "+ atributos[2] + ", " + atributos[3] + ", " + atributos[4]);
             if(posicion == 1){
                 escenaOnline.nave2.RecibirMovimientoOnline(atributos[1] === "true", atributos[2] === "true"
                     , atributos[3]=== "true", atributos[4] === "true");
@@ -34,7 +35,8 @@ function abrirConexionWS() {
                 escenaOnline.nave1.RecibirMovimientoOnline(atributos[1] === "true", atributos[2] === "true"
                     , atributos[3]=== "true", atributos[4] === "true");
             }
-        }else if(msg.data.includes("Disparo"))
+        }
+        if(msg.data.includes("Disparo"))
         {
             var atributos = msg.data.split(";");
             if(posicion == 1) {
@@ -44,12 +46,44 @@ function abrirConexionWS() {
             }
 
         }
-        else if(msg.data.includes("Booster")) {
+        if(msg.data.includes("Booster")) {
             var atributos = msg.data.split(";");   
             if(posicion == 1){
                 escenaOnline.nave2.RecibirBoosterOnline(JSON.parse(atributos[1]));
             }else{
                 escenaOnline.nave1.RecibirBoosterOnline(JSON.parse(atributos[1]));
+            }
+        }
+        if(msg.data.includes("SyncNaves"))
+        {
+            if(posicion == 2)
+            {
+                var atributos = msg.data.split(";");
+                var objetos = JSON.parse(atributos[1]);
+                //console.log(objetos);
+                escenaOnline.nave1.cuerpo.x = objetos[0][0];
+                escenaOnline.nave1.cuerpo.y = objetos[0][1];
+                escenaOnline.nave1.cuerpo.rotation = objetos[0][2];
+                escenaOnline.nave1.cuerpo.body.setVelocity(objetos[1][3].x, objetos[1][3].y);
+                escenaOnline.nave2.cuerpo.x = objetos[1][0];
+                escenaOnline.nave2.cuerpo.y = objetos[1][1];
+                escenaOnline.nave2.cuerpo.rotation = objetos[1][2];
+                escenaOnline.nave2.cuerpo.body.setVelocity(objetos[1][3].x, objetos[1][3].y);
+
+            }
+        }
+        if(msg.data.includes("SyncMeteoritos"))
+        {
+            var atributos = msg.data.split(";");
+            var objetos = JSON.parse(atributos[1]);
+            for(var i = 0; i < escenaOnline.mapa.cuerposMeteoritos.length; i++) {
+                if(objetos[i] != null && escenaOnline.mapa.cuerposMeteoritos[i].body !== undefined)
+                {
+                    escenaOnline.mapa.cuerposMeteoritos[i].x = objetos[i][0];
+                    escenaOnline.mapa.cuerposMeteoritos[i].y = objetos[i][1];
+                    escenaOnline.mapa.cuerposMeteoritos[i].rotation = objetos[i][2];
+                    escenaOnline.mapa.cuerposMeteoritos[i].body.setVelocity(objetos[i][3].x, objetos[i][3].y);
+                }
             }
         }
 
