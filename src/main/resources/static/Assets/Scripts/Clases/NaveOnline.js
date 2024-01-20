@@ -42,14 +42,19 @@ class NaveOnline {
     this.radioCollider = 24;
 
     //TECLAS DE LAS QUE DISPONE EL JUGADOR
+    //ESTUVO_X PARA NO MANDAR MENSAJES CADA FRAME
     this.Arriba = null;
     this.estuvoArriba = false;
+
     this.Abajo = null;
     this.estuvoAbajo = false;
+
     this.Izquierda = null;
     this.estuvoIzquierda = false;
+
     this.Derecha = null;
     this.estuvoDerecha = false;
+
     this.TeclaDisparo = null;
     this.estuvoDisparo = false;
 
@@ -66,6 +71,15 @@ class NaveOnline {
     this.Movimiento(escena);
     if (this.TeclaDisparo.isDown) {
       this.Disparar(escena);
+
+      if(!this.estuvoDisparo){
+        this.estuvoDisparo = true;
+        mandarMensaje("Disparo " + this.estuvoDisparo);
+      }
+
+    } else if(this.estuvoDisparo){
+      this.estuvoDisparo = false;
+      mandarMensaje("Disparo " + this.estuvoDisparo);
     }
     if(this.shield > 0){
       this.shieldTexture.setVisible(true);
@@ -129,8 +143,12 @@ class NaveOnline {
   Movimiento(escena) {
     //PARA ACELERAR
     if (this.Arriba.isDown) {
-      mandarMensaje();
-      this.estuvoArriba = true;
+
+      if(!this.estuvoArriba){
+        mandarMensaje("alante");
+        this.estuvoArriba = true;
+      }
+
       escena.physics.velocityFromRotation(
         this.cuerpo.rotation,
         this.velocidadActual,
@@ -142,8 +160,12 @@ class NaveOnline {
       this.thrust.play();
     }
     else if(this.estuvoArriba){
-      conexion.send()
-      this.estuvoArriba = false;
+
+      if(this.estuvoArriba){
+        mandarMensaje("no alante");
+        this.estuvoArriba = false;
+      }
+
       this.cuerpo.setAcceleration(0);
       this.thrust.pause();
     }
@@ -155,27 +177,33 @@ class NaveOnline {
     //PARA GIRAR LATERALMENTE
     if (this.Izquierda.isDown) {
       this.cuerpo.setAngularVelocity(-this.velocidadDeRotacion);
-      this.estuvoIzquierda = true;
-      this.estuvoDerecha = false;
-      mandarMensaje();
+
+      if(!this.estuvoIzquierda){
+        this.estuvoIzquierda = true;
+        this.estuvoDerecha = false;
+        mandarMensaje("izquierda " + this.estuvoIzquierda);
+      }
 
     } else if (this.Derecha.isDown) {
       this.cuerpo.setAngularVelocity(this.velocidadDeRotacion);
-      this.estuvoDerecha = true;
-      this.estuvoIzquierda = false;
-      mandarMensaje();
+
+      if(!this.estuvoDerecha){
+        this.estuvoDerecha = true;
+        this.estuvoIzquierda = false;
+        mandarMensaje("derecha " + this.estuvoDerecha);
+      }
 
     //CONTROLES PARA SABER SI HA DEJADO DE PULSAR
 
     } else if(this.estuvoDerecha) {
       this.estuvoDerecha = false;
       this.cuerpo.setAngularVelocity(0);
-      mandarMensaje();
+      mandarMensaje("derecha " + this.estuvoDerecha);
 
     } else if(this.estuvoIzquierda){
       this.estuvoIzquierda = false;
       this.cuerpo.setAngularVelocity(0);
-      mandarMensaje();
+      mandarMensaje("izquierda " + this.estuvoIzquierda);
 
     } else {
       this.cuerpo.setAngularVelocity(0);

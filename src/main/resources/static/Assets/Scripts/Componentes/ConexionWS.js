@@ -45,12 +45,12 @@ function cerrarConexionWS()
 }
 
 //FUNCIÓN PARA PROBAR LA CONEXION DESDE CONSOLA
-function mandarMensaje()
+function mandarMensaje(mensaje)
 {
     if(conexion != null)
     {
-        var otroJugador = (posicion == 1)?2:1;
-        var mensaje = "Hola jugador " + otroJugador;
+        //var otroJugador = (posicion == 1)?2:1;
+        //var mensaje = "Hola jugador " + otroJugador;
     }
         conexion.send(mensaje);
 }
