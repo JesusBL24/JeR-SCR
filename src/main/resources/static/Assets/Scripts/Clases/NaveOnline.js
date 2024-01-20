@@ -43,10 +43,15 @@ class NaveOnline {
 
     //TECLAS DE LAS QUE DISPONE EL JUGADOR
     this.Arriba = null;
+    this.estuvoArriba = false;
     this.Abajo = null;
+    this.estuvoAbajo = false;
     this.Izquierda = null;
+    this.estuvoIzquierda = false;
     this.Derecha = null;
+    this.estuvoDerecha = false;
     this.TeclaDisparo = null;
+    this.estuvoDisparo = false;
 
     //SONIDOS
     this.thrust = null;
@@ -54,6 +59,7 @@ class NaveOnline {
 
     //PUNTUACIÓN
     this.score = 0;
+
   }
   //FUNCIÓN DE ACTUALIZACIÓN DE LA NAVE
   Update(escena) {
@@ -123,23 +129,54 @@ class NaveOnline {
   Movimiento(escena) {
     //PARA ACELERAR
     if (this.Arriba.isDown) {
+      mandarMensaje();
+      this.estuvoArriba = true;
       escena.physics.velocityFromRotation(
         this.cuerpo.rotation,
         this.velocidadActual,
         this.cuerpo.body.acceleration
       );
 
+
     if(!this.thrust.isPlaying)
       this.thrust.play();
-    } else {
+    }
+    else if(this.estuvoArriba){
+      conexion.send()
+      this.estuvoArriba = false;
       this.cuerpo.setAcceleration(0);
       this.thrust.pause();
     }
+    else {
+      this.cuerpo.setAcceleration(0);
+      this.thrust.pause();
+    }
+
     //PARA GIRAR LATERALMENTE
     if (this.Izquierda.isDown) {
       this.cuerpo.setAngularVelocity(-this.velocidadDeRotacion);
+      this.estuvoIzquierda = true;
+      this.estuvoDerecha = false;
+      mandarMensaje();
+
     } else if (this.Derecha.isDown) {
       this.cuerpo.setAngularVelocity(this.velocidadDeRotacion);
+      this.estuvoDerecha = true;
+      this.estuvoIzquierda = false;
+      mandarMensaje();
+
+    //CONTROLES PARA SABER SI HA DEJADO DE PULSAR
+
+    } else if(this.estuvoDerecha) {
+      this.estuvoDerecha = false;
+      this.cuerpo.setAngularVelocity(0);
+      mandarMensaje();
+
+    } else if(this.estuvoIzquierda){
+      this.estuvoIzquierda = false;
+      this.cuerpo.setAngularVelocity(0);
+      mandarMensaje();
+
     } else {
       this.cuerpo.setAngularVelocity(0);
     }
@@ -230,39 +267,43 @@ class NaveOnline {
 
   //FUNCIÓN PARA ASIGNAR LOS CONTROLES DE LA NAVE
   AsignarTeclas(escena) {
-    if (this.jugador1) {
+    //SI ES EL JUGADOR LOCAL, ASIGNAR LOS INPUTS
+    if(this.jugadorLocal){
+
       this.Arriba = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.W
+          Phaser.Input.Keyboard.KeyCodes.W
       );
+
       this.Abajo = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.S
+          Phaser.Input.Keyboard.KeyCodes.S
       );
+
       this.Izquierda = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.A
+          Phaser.Input.Keyboard.KeyCodes.A
       );
+
       this.Derecha = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.D
+          Phaser.Input.Keyboard.KeyCodes.D
       );
+
       this.TeclaDisparo = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.SPACE
+          Phaser.Input.Keyboard.KeyCodes.SPACE
       );
-    } else {
-      this.Arriba = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.NUMPAD_EIGHT
-      );
-      this.Abajo = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.NUMPAD_FIVE
-      );
-      this.Izquierda = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.NUMPAD_FOUR
-      );
-      this.Derecha = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.NUMPAD_SIX
-      );
-      this.TeclaDisparo = escena.input.keyboard.addKey(
-        Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO
-      );
+   //SI ES EL OTRO JUGADOR, LE ASIGNA INPUTS FALSOS
+    } else{
+
+      this.Arriba = new InputFalso();
+
+      this.Abajo = new InputFalso();
+
+      this.Izquierda = new InputFalso();
+
+      this.Derecha = new InputFalso();
+
+      this.TeclaDisparo = new InputFalso();
     }
+
+
   }
 
   //FUNCIÓN PARA GENERAR LA NAVE DENTRO DE LA ESCENA
