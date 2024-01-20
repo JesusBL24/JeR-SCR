@@ -12,6 +12,7 @@ function abrirConexionWS() {
     //SI OCURRE UN ERROR
     conexion.onerror = function(e) {
         console.log("ERROR AL CREAR EL WEBSOCKET: " + e);
+        conexion = null;
     }
 
     //SI SE RECIBE UN MENSAJE
@@ -31,6 +32,7 @@ function abrirConexionWS() {
     //SI SE CIERRA LA CONEXION
     conexion.onclose = function() {
         console.log("CERRANDO CONEXIÓN CON EL SERVIDOR");
+        conexion = null;
     }
 }
 
