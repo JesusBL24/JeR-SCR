@@ -28,14 +28,21 @@ function abrirConexionWS() {
             var atributos = msg.data.split(";");
             console.log("Movimiento: " + atributos[1] + ", "+ atributos[2] + ", " + atributos[3] + ", " + atributos[4]);
             if(posicion == 1){
-                escenaOnline.nave2.RecibirMovimientoOnline(atributos[1], atributos[2], atributos[3], atributos[4]);
+                escenaOnline.nave2.RecibirMovimientoOnline(atributos[1] === "true", atributos[2] === "true"
+                    , atributos[3]=== "true", atributos[4] === "true");
             }else{
-                escenaOnline.nave1.RecibirMovimientoOnline(atributos[1], atributos[2], atributos[3], atributos[4]);
+                escenaOnline.nave1.RecibirMovimientoOnline(atributos[1] === "true", atributos[2] === "true"
+                    , atributos[3]=== "true", atributos[4] === "true");
             }
         }else if(msg.data.includes("Disparo"))
         {
             var atributos = msg.data.split(";");
-            console.log("Disparo: " + atributos[1]);
+            if(posicion == 1) {
+                escenaOnline.nave2.RecibirDisparoOnline(atributos[1] === "true");
+            }else{
+                escenaOnline.nave1.RecibirDisparoOnline(atributos[1] === "true");
+            }
+
         }
         else if(msg.data.includes("Booster")) {
             var atributos = msg.data.split(";");   

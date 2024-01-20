@@ -77,13 +77,16 @@ class NaveOnline {
       //MANDAR MENSAJES AL SERVIDOR
       if(!this.estaDisparo){
         this.estaDisparo = true;
-        mandarMensaje(this.MensajeDisparo());
+        if(this.jugadorLocal)
+          mandarMensaje(this.MensajeDisparo());
       }
 
     } else if(this.estaDisparo){
       this.estaDisparo = false;
-      mandarMensaje(this.MensajeDisparo());
+      if(this.jugadorLocal)
+        mandarMensaje(this.MensajeDisparo());
     }
+
     if(this.shield > 0){
       this.shieldTexture.setVisible(true);
       this.shieldTexture.x = this.cuerpo.x;
@@ -149,7 +152,8 @@ class NaveOnline {
 
       if(!this.estaArriba){
         this.estaArriba = true;
-        mandarMensaje(this.MensajeMovimiento());
+        if(this.jugadorLocal)
+          mandarMensaje(this.MensajeMovimiento());
       }
 
       escena.physics.velocityFromRotation(
@@ -159,58 +163,74 @@ class NaveOnline {
       );
 
 
-    if(!this.thrust.isPlaying)
-      this.thrust.play();
+      if(!this.thrust.isPlaying)
+        this.thrust.play();
+
+
+      console.log(this.estaArriba + ", " + this.Arriba.isDown);
     }
-    else if(this.estaArriba){
+    else{
 
       if(this.estaArriba){
         this.estaArriba = false;
-        mandarMensaje(this.MensajeMovimiento());
+        if(this.jugadorLocal)
+         mandarMensaje(this.MensajeMovimiento());
       }
 
-      this.cuerpo.setAcceleration(0);
-      this.thrust.pause();
-    }
-    else {
       this.cuerpo.setAcceleration(0);
       this.thrust.pause();
     }
 
     //PARA GIRAR LATERALMENTE
-    if (this.Izquierda.isDown) {
+    if (this.Izquierda.isDown && !this.Derecha.isDown) {
       this.cuerpo.setAngularVelocity(-this.velocidadDeRotacion);
 
+      console.log("IZQUIERDA")
       if(!this.estaIzquierda){
+        console.log("EMPEZAR IZQUIERDA")
         this.estaIzquierda = true;
         this.estaDerecha = false;
-        mandarMensaje(this.MensajeMovimiento());
+        if(this.jugadorLocal)
+          mandarMensaje(this.MensajeMovimiento());
       }
 
-    } else if (this.Derecha.isDown) {
+      //console.log(this.estaIzquierda + ", " + this.Izquierda.isDown);
+    }
+    else{
+      if(this.estaIzquierda){
+        console.log("TERMINAR IZQUIERDA")
+        this.estaIzquierda = false;
+        if(this.jugadorLocal)
+          mandarMensaje(this.MensajeMovimiento());
+      }
+
+    }
+
+
+    if (this.Derecha.isDown && !this.Izquierda.isDown)  {
       this.cuerpo.setAngularVelocity(this.velocidadDeRotacion);
 
       if(!this.estaDerecha){
         this.estaDerecha = true;
         this.estaIzquierda = false;
-        mandarMensaje(this.MensajeMovimiento());
+        if(this.jugadorLocal)
+          mandarMensaje(this.MensajeMovimiento());
       }
 
-    //CONTROLES PARA SABER SI HA DEJADO DE PULSAR
-
-    } else if(this.estaDerecha) {
-      this.estaDerecha = false;
-      this.cuerpo.setAngularVelocity(0);
-      mandarMensaje(this.MensajeMovimiento());
-
-    } else if(this.estaIzquierda){
-      this.estaIzquierda = false;
-      this.cuerpo.setAngularVelocity(0);
-      mandarMensaje(this.MensajeMovimiento());
 
     } else {
+      if(this.estaDerecha){
+        this.estaDerecha = false;
+        if(this.jugadorLocal)
+          mandarMensaje(this.MensajeMovimiento());
+      }
+    }
+
+    if(!this.Derecha.isDown && !this.Izquierda.isDown){
       this.cuerpo.setAngularVelocity(0);
     }
+
+
   }
 
   //FUNCIÓN DE DISPARO DE LA NAVE, POSEE CADENCIA DE DISPARO

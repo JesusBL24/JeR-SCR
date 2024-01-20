@@ -82,7 +82,7 @@ class Proyectil{
     Impacto(proyectil, objetoImpacto,) {
 
         //DAÑO A LA NAVE ENEMIGA
-        if (objetoImpacto && objetoImpacto instanceof Nave) {
+        if (objetoImpacto && objetoImpacto instanceof Nave || objetoImpacto && objetoImpacto instanceof NaveOnline) {
             if(objetoImpacto.shield > 0){
                 objetoImpacto.shield -= this.daño;
 
