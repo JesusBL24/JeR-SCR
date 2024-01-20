@@ -255,36 +255,36 @@ class EscenaPrincipalOnline extends Phaser.Scene {
         }
 
       }
-    }
 
-    //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePartida"
-    if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
-      if(this.nave1.vida <= 0){
-        this.nave2.score += 100;
-        this.puntuacionPUT(usuario.nombre, this.nave2.score);
-        puntuacion = this.nave2.score;
+      //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePartida"
+      if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
+        if(this.nave1.vida <= 0){
+          this.nave2.score += 100;
+          this.puntuacionPUT(usuario.nombre, this.nave2.score);
+          puntuacion = this.nave2.score;
+        }
+        else{
+          this.nave1.score += 100;
+          console.log(usuario.nombre)
+          this.puntuacionPUT(usuario.nombre, this.nave1.score);
+          puntuacion = this.nave1.score;
+        }
+
+        this.events.emit("finDePartida");
+        this.finDePartida = true;
+
+        //HACEMOS UN FADE OUT DE AMBAS CAMARAS
+        this.cameras.main.fadeOut(3000);
+        this.camaraSecundaria.fadeOut(3000);
+
+        //HACEMOS UN FADE OUT DE LA INTERFAZ DEL JUEGO
+        this.scene.get("InterfazJuego").cameras.main.fadeOut(3000);
+
+        //CERRAMOS LA CONEXION
+        cerrarConexionWS();
       }
-      else{
-        this.nave1.score += 100;
-        console.log(usuario.nombre)
-        this.puntuacionPUT(usuario.nombre, this.nave1.score);
-        puntuacion = this.nave1.score;
-      }
-
-      this.events.emit("finDePartida");
-      this.finDePartida = true;
-
-      //HACEMOS UN FADE OUT DE AMBAS CAMARAS
-      this.cameras.main.fadeOut(3000);
-      this.camaraSecundaria.fadeOut(3000);
-
-      //HACEMOS UN FADE OUT DE LA INTERFAZ DEL JUEGO
-      this.scene.get("InterfazJuego").cameras.main.fadeOut(3000);
-
-      //CERRAMOS LA CONEXION
-      cerrarConexionWS();
     }
-
+    
     //SI LA PARTIDA NO SE HA INICIADO
     if(!this.partidaEmpezada)
     {
