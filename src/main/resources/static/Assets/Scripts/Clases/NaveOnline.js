@@ -395,6 +395,8 @@ class NaveOnline {
     //console.log(booster);
     //booster.cuerpo.disableBody(true, true);
 
+    mandarMensaje(`Booster;${JSON.stringify(booster)}`);
+
     switch (booster.tipo) {
       // Para el booster de velocidad: aumentamos la velocidad del personaje x1.15 hasta el final de la ronda
       case BoosterType.Speed:
@@ -461,6 +463,10 @@ class NaveOnline {
 
   RecibirDisparoOnline(disparo){
     this.TeclaDisparo.isDown = disparo;
+  }
+
+  RecibirBoosterOnline(booster){
+    this.escena.events.emit('booster_obtenido', booster);
   }
 
   MensajeMovimiento(){

@@ -37,6 +37,14 @@ function abrirConexionWS() {
             var atributos = msg.data.split(";");
             console.log("Disparo: " + atributos[1]);
         }
+        else if(msg.data.includes("Booster")) {
+            var atributos = msg.data.split(";");   
+            if(posicion == 1){
+                escenaOnline.nave2.RecibirBoosterOnline(JSON.parse(atributos[1]));
+            }else{
+                escenaOnline.nave1.RecibirBoosterOnline(JSON.parse(atributos[1]));
+            }
+        }
 
     }
 
@@ -62,6 +70,6 @@ function mandarMensaje(mensaje)
     {
         //var otroJugador = (posicion == 1)?2:1;
         //var mensaje = "Hola jugador " + otroJugador;
-    }
         conexion.send(mensaje);
+    }
 }
