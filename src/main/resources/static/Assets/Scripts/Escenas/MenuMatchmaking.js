@@ -12,6 +12,11 @@ class MenuMatchmaking extends Phaser.Scene {
     }
 
     create(){
+        //PONE POSICION A NULL
+        posicion = null;
+
+        //LLAMA A LA FUNCION PARA CREAR UN WS
+        abrirConexionWS();
 
         //FADE IN
         this.cameras.main.fadeIn(2000);
@@ -55,7 +60,16 @@ class MenuMatchmaking extends Phaser.Scene {
             botVolver.setFrame(0);
         });
         botVolver.on('pointerdown',()=>{
+            cerrarConexionWS();
             this.scene.start('MenuInicial');
         });
+    }
+
+    update()
+    {
+        if(posicion != null)
+        {
+            this.scene.start('EscenaPrincipalOnline');
+        }
     }
 }

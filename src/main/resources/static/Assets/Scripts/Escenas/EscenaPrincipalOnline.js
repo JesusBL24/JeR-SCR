@@ -1,3 +1,8 @@
+//CONTROL DE LA ACTUALIZACION CON PASO FIJO
+var lag = 0;
+var pasoFijo = 1/60;
+var lastTime = 0;
+
 class EscenaPrincipalOnline extends Phaser.Scene {
   constructor() {
     super({ key: "EscenaPrincipalOnline" });
@@ -6,6 +11,7 @@ class EscenaPrincipalOnline extends Phaser.Scene {
     this.mapa = null;
     this.camaraSecundaria = null;
     this.finDePartida = null;
+    this.partidaEmpezada = false;
   }
 
   preload() {
@@ -190,6 +196,11 @@ class EscenaPrincipalOnline extends Phaser.Scene {
     this.scene.run("GanarPerder");
     //INICIA LA ESCENA DE LA INTERFAZ DEL JUEGO
     this.scene.run("InterfazJuego");
+
+    //PONE EL LAG a 0
+    lag = 0;
+    //INDICA QUE NO SE HA INICIADO LA PARTIDA
+    this.partidaEmpezada = false
   }
 
   puntuacionPUT(nombre, pPuntuacion){
@@ -216,39 +227,65 @@ class EscenaPrincipalOnline extends Phaser.Scene {
   }
 
   update() {
-    if (!this.finDePartida) {
-      this.mapa.Update(this, this.nave1, this.nave2);
-      this.nave1.Update(this);
-      this.nave2.Update(this);
 
-      this.mapa.meteoritos.forEach(element => {
-        element.Update();
-      });
+    if (this.partidaEmpezada && !this.finDePartida) {
+      lag += this.deltaTime();
+      //while(lag >= pasoFijo)
+      //{
+        this.mapa.Update(this, this.nave1, this.nave2);
+        this.nave1.Update(this);
+        this.nave2.Update(this);
 
-      //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePartida"
-      if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
-        if(this.nave1.vida <= 0){
-          this.nave2.score += 100;
-          this.puntuacionPUT(usuario.nombre, this.nave2.score);
-          puntuacion = this.nave2.score;
-        }
-        else{
-          this.nave1.score += 100;
-          console.log(usuario.nombre)
-          this.puntuacionPUT(usuario.nombre, this.nave1.score);
-          puntuacion = this.nave1.score;
-        }
-
-        this.events.emit("finDePartida");
-        this.finDePartida = true;
-
-        //HACEMOS UN FADE OUT DE AMBAS CAMARAS
-        this.cameras.main.fadeOut(3000);
-        this.camaraSecundaria.fadeOut(3000);
-
-        //HACEMOS UN FADE OUT DE LA INTERFAZ DEL JUEGO
-        this.scene.get("InterfazJuego").cameras.main.fadeOut(3000);
-      }
+        this.mapa.meteoritos.forEach(element => {
+          element.Update();
+        });
+        //lag -= pasoFijo;
+      //}
     }
+
+    //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePartida"
+    if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
+      if(this.nave1.vida <= 0){
+        this.nave2.score += 100;
+        this.puntuacionPUT(usuario.nombre, this.nave2.score);
+        puntuacion = this.nave2.score;
+      }
+      else{
+        this.nave1.score += 100;
+        console.log(usuario.nombre)
+        this.puntuacionPUT(usuario.nombre, this.nave1.score);
+        puntuacion = this.nave1.score;
+      }
+
+      this.events.emit("finDePartida");
+      this.finDePartida = true;
+
+      //HACEMOS UN FADE OUT DE AMBAS CAMARAS
+      this.cameras.main.fadeOut(3000);
+      this.camaraSecundaria.fadeOut(3000);
+
+      //HACEMOS UN FADE OUT DE LA INTERFAZ DEL JUEGO
+      this.scene.get("InterfazJuego").cameras.main.fadeOut(3000);
+
+      //CERRAMOS LA CONEXION
+      cerrarConexionWS();
+    }
+
+    //SI LA PARTIDA NO SE HA INICIADO
+    if(!this.partidaEmpezada)
+    {
+      if(tiempoParaEmpezar < Date.now())
+      {
+        this.partidaEmpezada = true;
+      }
+
+    }
+    //ACTUALIZA EL MOMENTO EN EL QUE SE HIZO LA ULTIMA ACTUALIZACION
+    lastTime = Date.now();
+  }
+
+  deltaTime()
+  {
+    return Date.now() - lastTime;
   }
 }

@@ -41,8 +41,14 @@ function showPuntuacion(puntuacionToShow) {
         + " Puntuacion: "+ puntuacionToShow.posicion);
 }
 
-//VARIABLES WEBSOCKETS
+//VARIABLES WEBSOCKETS/////
+
 var conexion = null;
 
 //SI EL EQUIPO LOCAL ES EL JUGADOR 1 O EL 2
 var posicion = null;
+
+//MOMENTO EN EL QUE INICIAR LA PARTIDA
+var tiempoParaEmpezar = 0;
+
+///////////////////////////

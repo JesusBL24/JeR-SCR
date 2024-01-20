@@ -17,9 +17,11 @@ function abrirConexionWS() {
     //SI SE RECIBE UN MENSAJE
     conexion.onmessage = function(msg) {
         console.log("MENSAJE: " + msg.data);
-        if(msg.data === "1" || msg.data === "2")
+        if(msg.data.includes("TiempoDeInicio"))
         {
-            posicion = parseInt(msg.data)
+            var atributos = msg.data.split(";");
+            posicion = Number(atributos[1])
+            tiempoParaEmpezar = Number(atributos[3]);
         }else
         {
             //TODO

@@ -88,11 +88,13 @@ public class MatchHandler extends TextWebSocketHandler {
         int posicionSesion1 = random.nextInt(2) + 1;
         int posicionSesion2 = 3 - posicionSesion1;
 
+        long tiempoParaEmpezar = System.currentTimeMillis() + 2 * 1000;
+
         //SI LOS JUGADORES ESTAN EN EL MAPA DE SESIONES, SE LES MANDA UN MENSAJE, AVISANDO DE SU POSICION
         if(sessions.containsKey(jugadores[0]) && sessions.containsKey(jugadores[1]))
         {
-            sessions.get(jugadores[0]).sendMessage(new TextMessage(Integer.toString(posicionSesion1)));
-            sessions.get(jugadores[1]).sendMessage(new TextMessage(Integer.toString(posicionSesion2)));
+            sessions.get(jugadores[0]).sendMessage(new TextMessage("Posicion;"+posicionSesion1+";TiempoDeInicio;"+tiempoParaEmpezar+";"));
+            sessions.get(jugadores[1]).sendMessage(new TextMessage("Posicion;"+posicionSesion2+";TiempoDeInicio;"+tiempoParaEmpezar+";"));
         }
     }
 }
