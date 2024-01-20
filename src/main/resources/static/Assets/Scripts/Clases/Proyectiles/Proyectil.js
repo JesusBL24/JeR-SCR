@@ -102,7 +102,8 @@ class Proyectil{
             objetoImpacto.Hit();
             //console.log(objetoImpacto.vida);
         }
-        else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito){
+        //DAÑO OBSTACULOS
+        else if(objetoImpacto && (objetoImpacto.datos instanceof Meteorito || objetoImpacto.datos instanceof MeteoritoOnline)){
             objetoImpacto.datos.vida -= this.daño;
             objetoImpacto.datos.Hit(this.jugador1, this.escena);
             //console.log(objetoImpacto.datos.vida);

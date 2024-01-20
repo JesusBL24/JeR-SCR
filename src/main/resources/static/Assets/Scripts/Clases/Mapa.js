@@ -76,6 +76,41 @@ class Mapa {
     //COLOCAMOS LOS METEORITOS EN EL MAPA
     var limiteMeteoritos = new Phaser.Geom.Circle(0, 0, this.diametro * 0.8);
     Phaser.Actions.RandomCircle(this.cuerposMeteoritos, limiteMeteoritos);
+
+    //this.GuardarMapa();
+  }
+
+  GuardarMapa(){
+    //PRUEBA GUARDADO EN JSON DEL MAPA
+    var datosMeteoritos = [];
+
+    // Recorrer los meteoritos y guardar la información
+    for(var i = 0; i < this.numeroDeMeteoritos; i++){
+      var meteorito = this.meteoritos[i];
+      var datos = {
+        x: meteorito.cuerpo.x,
+        y: meteorito.cuerpo.y,
+        tipo: meteorito.tipo,
+        size: meteorito.size,
+        direccionDeRotacion: meteorito.direccionDeRotacion,
+        // Agrega más propiedades según sea necesario
+      };
+      datosMeteoritos.push(datos);
+    }
+
+    // Convertir el array de datos a JSON
+    var datosMeteoritosJSON = JSON.stringify(datosMeteoritos);
+
+    // Guardar el JSON en un archivo o hacer lo que necesites con él
+    console.log(datosMeteoritosJSON);
+    var enlaceDescarga = document.createElement('a');
+    enlaceDescarga.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(datosMeteoritosJSON);
+    enlaceDescarga.download = 'mapaOnline.json';
+
+    // Agregar el elemento <a> al DOM y simular un clic para iniciar la descarga
+    document.body.appendChild(enlaceDescarga);
+    enlaceDescarga.click();
+    document.body.removeChild(enlaceDescarga);
   }
 
   //FUNCIÓN DE ACTUALIZACIÓN DEL MAPA

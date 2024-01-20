@@ -113,6 +113,67 @@ class InterfazJuego extends Phaser.Scene{
 
         });
 
+        // EN PARTIDA ONLINE
+        this.scene.get('EscenaPrincipalOnline').events.on('booster_obtenido', (data) => {
+            var scale = 1/25;
+            switch(data.tipo){
+                //SI ES DE VELOCIDAD
+                case BoosterType.Speed:
+                    if(data.esjugador1){
+                        console.log("entra aqui")
+                        j1b1.destroy();
+                        j1b1 = this.add.sprite(booster1.x, booster1.y, "boosters", 2).setScale(scale);
+                    } else{
+                        j2b1.destroy();
+                        j2b1 = this.add.sprite(booster4.x, booster4.y, "boosters", 2).setScale(scale);
+                    }
+                    break;
+
+                //SI ES DE DAÑO
+                case BoosterType.Damage:
+                    if(data.esjugador1){
+                        j1b2.destroy();
+                        switch(data.arma){
+                            case 1:
+                                j1b2 = this.add.sprite(booster2.x, booster2.y, "boosters", 0).setScale(scale);
+                                break;
+                            case 2:
+                                j1b2 = this.add.sprite(booster2.x, booster2.y, "boosters", 1).setScale(scale);
+                                break;
+                            case 3:
+                                j1b2 = this.add.sprite(booster2.x, booster2.y, "boosters", 7).setScale(scale);
+                                break;
+                        }
+                    } else{
+                        j2b2.destroy();
+                        switch(data.arma){
+                            case 1:
+                                j2b2 = this.add.sprite(booster5.x, booster5.y, "boosters", 0).setScale(scale);
+                                break;
+                            case 2:
+                                j2b2 = this.add.sprite(booster5.x, booster5.y, "boosters", 1).setScale(scale);
+                                break;
+                            case 3:
+                                j2b2 = this.add.sprite(booster5.x, booster5.y, "boosters", 7).setScale(scale);
+                                break;
+                        }
+                    }
+                    break;
+
+                //SI ES DE ESCUDO
+                case BoosterType.Shield:
+                    if(data.esjugador1){
+                        j1b3.destroy();
+                        j1b3 = this.add.sprite(booster3.x, booster3.y, "boosters", 4).setScale(scale);
+                    } else{
+                        j2b3.destroy();
+                        j2b3 = this.add.sprite(booster6.x, booster6.y, "boosters", 4).setScale(scale);
+                    }
+                    break;
+            }
+
+        });
+
         //COMUNICACIÓN CON LA ESCENA 
         this.scene.get('EscenaPrincipal').events.on('booster_perdido', (data) => {
             switch(data.tipo){
@@ -136,14 +197,46 @@ class InterfazJuego extends Phaser.Scene{
             }
         });
 
+        // ESCENA DEL ONLINE
+        this.scene.get('EscenaPrincipalOnline').events.on('booster_perdido', (data) => {
+            switch(data.tipo){
+                //SI ES DE DAÑO
+                case BoosterType.Damage:
+                    if(data.esjugador1){
+                        j1b2.destroy();
+                    } else{
+                        j2b2.destroy();
+                    }
+                    break;
+
+                //SI ES DE ESCUDO
+                case BoosterType.Shield:
+                    if(data.esjugador1){
+                        j1b3.destroy();
+                    } else{
+                        j2b3.destroy();
+                    }
+                    break;
+            }
+        });
+
         /////////////////////////
         //VIDA DE LOS JUGADORES//
         /////////////////////////
-        this.vidaNave1 = new BarraVida(this, 13, 13, 0);
-        this.vidaNave1.Init(this.scene.get("EscenaPrincipal").nave1);
+        if(this.scene.get("EscenaPrincipal").nave1 != undefined){
+            this.vidaNave1 = new BarraVida(this, 13, 13, 0);
+            this.vidaNave1.Init(this.scene.get("EscenaPrincipal").nave1);
 
-        this.vidaNave2 = new BarraVida(this, 888, 13, 1);;
-        this.vidaNave2.Init(this.scene.get("EscenaPrincipal").nave2);
+            this.vidaNave2 = new BarraVida(this, 888, 13, 1);
+            this.vidaNave2.Init(this.scene.get("EscenaPrincipal").nave2);
+        }
+        else{
+            this.vidaNave1 = new BarraVida(this, 13, 13, 0);
+            this.vidaNave1.Init(this.scene.get("EscenaPrincipalOnline").nave1);
+
+            this.vidaNave2 = new BarraVida(this, 888, 13, 1);
+            this.vidaNave2.Init(this.scene.get("EscenaPrincipalOnline").nave2);
+        }
 
         //////////////
         //MUNICIONES//

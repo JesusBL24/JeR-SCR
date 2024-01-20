@@ -1,4 +1,4 @@
-class Meteorito{
+class MeteoritoOnline{
     constructor() {
         //SPRITE DEL METEORITO (GAMEOBJECT)
         this.cuerpo = null;
@@ -91,17 +91,18 @@ class Meteorito{
     }
 
     //FUNCIÓN QUE HACE APARECER METEORITOS
-    SpawnMeteorito(escena){
+    SpawnMeteoritoOnline(escena, size, tipo, x, y, direccionDeRotacion){
 
         //SELECCIÓN ENTRE METEORITO O CHATARRA
         this.escena = escena;
-        this.tipo = Math.floor(Math.random() * 2);
-        this.direccionDeRotacion = Math.random() - 0.5;
+        this.tipo = tipo;
+        this.direccionDeRotacion = direccionDeRotacion;
+        this.size = size;
+
 
         //SI ES METEORITO
-        if(this.tipo == 0){
+        if(this.tipo === 0){
             this.filter = 0x00ff0000;
-            this.size = Math.floor(Math.random() * 3)
             this.tieneBooster = Math.random() >= 0.20 * (this.size+1);
             this.cuerpo = escena.physics.add.sprite(400, 400, 'meteorite', this.size);
             this.cuerpo.setScale(1/16);
@@ -130,19 +131,17 @@ class Meteorito{
 
         //SI ES CHATARRA
         else{
-            var tipoChatarra = 1 + Math.floor(Math.random() * 5);
-            
             this.filter = 0x00666666;
             this.tieneBooster = false;
-            this.cuerpo = escena.physics.add.sprite(400, 400, 'trash' + tipoChatarra);
+            this.cuerpo = escena.physics.add.sprite(400, 400, 'trash' + this.size);
             this.cuerpo.setScale(1/16);
 
-            this.vidaTotal = (1 + Math.floor(Math.random() * 3)) * 200;
+            this.vidaTotal = (this.size * 200);
             this.vida = this.vidaTotal;
             this.score = 25;
 
             //HITBOXES
-            switch(tipoChatarra){
+            switch(this.size){
                 case 1:
                     this.cuerpo.setSize(500, 500);
                     break;
@@ -163,5 +162,7 @@ class Meteorito{
             }
             //console.log(this.tipo, this.size, tipoChatarra);
         }
+        this.cuerpo.x = x;
+        this.cuerpo.y = y;
     }
 }

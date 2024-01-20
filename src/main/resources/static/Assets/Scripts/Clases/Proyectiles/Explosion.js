@@ -122,7 +122,8 @@ class Explosion {
         }
 
         //DAÑO A LOS METEORITOS
-        else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito && !this.meteoritosGolpeados.includes(objetoImpacto.datos)){
+        else if(objetoImpacto && (objetoImpacto.datos instanceof Meteorito || objetoImpacto.datos instanceof MeteoritoOnline)
+                && !this.meteoritosGolpeados.includes(objetoImpacto.datos)){
             console.log(objetoImpacto.datos);
             objetoImpacto.datos.Hit(this.jugador1, this.escena);
             objetoImpacto.datos.vida -= this.daño;

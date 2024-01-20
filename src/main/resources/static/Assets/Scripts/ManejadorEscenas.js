@@ -17,14 +17,14 @@ var config = {
     MenuBoosters,
     MenuCreditos,
     EscenaPrincipal,
+    EscenaPrincipalOnline,
     InterfazJuego,
     GanarPerder,
     MenuResultados,
     MenuResultados2,
     IniciarSesion,
     OpcionesAPI,
-    MenuMatchmaking,
-    EscenaPrincipalOnline
+    MenuMatchmaking
   ],
   audio: {
     disableWebAudio: true

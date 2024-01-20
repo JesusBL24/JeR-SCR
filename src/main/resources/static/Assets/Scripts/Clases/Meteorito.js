@@ -130,11 +130,11 @@ class Meteorito{
 
         //SI ES CHATARRA
         else{
-            var tipoChatarra = 1 + Math.floor(Math.random() * 5);
+            this.size = 1 + Math.floor(Math.random() * 5);
             
             this.filter = 0x00666666;
             this.tieneBooster = false;
-            this.cuerpo = escena.physics.add.sprite(400, 400, 'trash' + tipoChatarra);
+            this.cuerpo = escena.physics.add.sprite(400, 400, 'trash' + this.size);
             this.cuerpo.setScale(1/16);
 
             this.vidaTotal = (1 + Math.floor(Math.random() * 3)) * 200;
@@ -142,7 +142,7 @@ class Meteorito{
             this.score = 25;
 
             //HITBOXES
-            switch(tipoChatarra){
+            switch(this.size){
                 case 1:
                     this.cuerpo.setSize(500, 500);
                     break;

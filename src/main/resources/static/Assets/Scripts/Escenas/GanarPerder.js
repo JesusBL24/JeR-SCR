@@ -53,7 +53,32 @@ class GanarPerder extends Phaser.Scene {
             }, [], this);
         }, this);
 
+
+        this.scene.get('EscenaPrincipalOnline').events.on('finDePartida', function ()
+        {
+            //SI PIERDE EL JUGADOR 1
+            if(this.scene.get('EscenaPrincipalOnline').nave1.vida <= 0){
+                this.cameras.main.startFollow(this.hasPerdido, true);
+                this.camaraSecundaria.startFollow(this.hasGanado, true);
+            }
+            //SI GANA EL JUGADOR 1
+            else{
+                this.cameras.main.startFollow(this.hasGanado, true);
+                this.camaraSecundaria.startFollow(this.hasPerdido, true);
+            }
+
+            //DESPUES DE TRES SEGUNDOS SE HACE UN FADE OUT DE AMBAS CAMARAS
+            this.time.delayedCall(3000, function (){
+                this.cameras.main.fadeOut(2000);
+                this.camaraSecundaria.fadeOut(2000);
+
+                //TRAS EL FADE OUT SE CAMBIA DE ESCENA
+                this.time.delayedCall(2000, function (){
+                    this.scene.stop('EscenaPrincipalOnline');
+                    this.scene.stop('InterfazJuego');
+                    this.scene.start('MenuResultados2');
+                }, [], this);
+            }, [], this);
+        }, this);
     }
-
-
 }

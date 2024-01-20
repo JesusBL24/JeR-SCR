@@ -130,11 +130,13 @@ class EscenaPrincipalOnline extends Phaser.Scene {
     });
 
     //MAPA
-    this.mapa = new Mapa();
+    this.mapa = new MapaOnline();
     this.mapa.GenerarMapa(this);
+
     //JUGADOR 1
     this.nave1 = new Nave();
     this.nave1.GenerarNave(this);
+
     //JUGADOR 2
     this.nave2 = new Nave();
     this.nave2.jugador1 = false;

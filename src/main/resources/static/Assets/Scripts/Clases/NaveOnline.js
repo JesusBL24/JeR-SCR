@@ -1,4 +1,4 @@
-class Nave {
+class NaveOnline {
   constructor() {
     //SPRITE DE LA NAVE (GAMEOBJECT)
     this.cuerpo = null;
