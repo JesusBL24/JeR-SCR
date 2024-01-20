@@ -134,11 +134,11 @@ class EscenaPrincipalOnline extends Phaser.Scene {
     this.mapa.GenerarMapa(this);
 
     //JUGADOR 1
-    this.nave1 = new NaveOnline();
+    this.nave1 = new NaveOnline(posicion == 1);
     this.nave1.GenerarNave(this);
 
     //JUGADOR 2
-    this.nave2 = new NaveOnline();
+    this.nave2 = new NaveOnline(posicion == 2);
     this.nave2.jugador1 = false;
     this.nave2.GenerarNave(this);
 
@@ -153,6 +153,8 @@ class EscenaPrincipalOnline extends Phaser.Scene {
     this.meteorites.children.iterate((meteorito, index) => {
       meteorito.datos = this.mapa.meteoritos[index];
       //console.log(meteorito);
+
+      escenaOnline = this;
   });
 
     //COLISIONES ENTRE METEORITOS Y NAVES

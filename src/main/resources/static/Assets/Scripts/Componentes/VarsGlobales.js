@@ -51,4 +51,7 @@ var posicion = null;
 //MOMENTO EN EL QUE INICIAR LA PARTIDA
 var tiempoParaEmpezar = 0;
 
+//EscenaOnline
+var escenaOnline = null;
+
 ///////////////////////////

@@ -17,16 +17,27 @@ function abrirConexionWS() {
 
     //SI SE RECIBE UN MENSAJE
     conexion.onmessage = function(msg) {
-        console.log("MENSAJE: " + msg.data);
+        //console.log("MENSAJE: " + msg.data);
         if(msg.data.includes("TiempoDeInicio"))
         {
             var atributos = msg.data.split(";");
             posicion = Number(atributos[1])
             tiempoParaEmpezar = Number(atributos[3]);
-        }else
+        }else if(msg.data.includes("Movimiento"))
         {
-            //TODO
+            var atributos = msg.data.split(";");
+            console.log("Movimiento: " + atributos[1] + ", "+ atributos[2] + ", " + atributos[3] + ", " + atributos[4]);
+            if(posicion == 1){
+                escenaOnline.nave2.RecibirMovimientoOnline(atributos[1], atributos[2], atributos[3], atributos[4]);
+            }else{
+                escenaOnline.nave1.RecibirMovimientoOnline(atributos[1], atributos[2], atributos[3], atributos[4]);
+            }
+        }else if(msg.data.includes("Disparo"))
+        {
+            var atributos = msg.data.split(";");
+            console.log("Disparo: " + atributos[1]);
         }
+
     }
 
     //SI SE CIERRA LA CONEXION

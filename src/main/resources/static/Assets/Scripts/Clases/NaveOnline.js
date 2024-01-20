@@ -1,5 +1,5 @@
 class NaveOnline {
-  constructor() {
+  constructor(jugadorLocal) {
     //SPRITE DE LA NAVE (GAMEOBJECT)
     this.cuerpo = null;
 
@@ -7,7 +7,7 @@ class NaveOnline {
     this.jugador1 = true;
 
     //SI EL JUGADOR ESTA EN ESTE ORDENADOR
-    this.jugadorLocal = true;
+    this.jugadorLocal = jugadorLocal;
 
     //VIDA DE LA NAVE
     this.vidaTotal = 100;
@@ -44,19 +44,19 @@ class NaveOnline {
     //TECLAS DE LAS QUE DISPONE EL JUGADOR
     //ESTUVO_X PARA NO MANDAR MENSAJES CADA FRAME
     this.Arriba = null;
-    this.estuvoArriba = false;
+    this.estaArriba = false;
 
     this.Abajo = null;
-    this.estuvoAbajo = false;
+    this.estaAbajo = false;
 
     this.Izquierda = null;
-    this.estuvoIzquierda = false;
+    this.estaIzquierda = false;
 
     this.Derecha = null;
-    this.estuvoDerecha = false;
+    this.estaDerecha = false;
 
     this.TeclaDisparo = null;
-    this.estuvoDisparo = false;
+    this.estaDisparo = false;
 
     //SONIDOS
     this.thrust = null;
@@ -66,20 +66,23 @@ class NaveOnline {
     this.score = 0;
 
   }
+
   //FUNCIÓN DE ACTUALIZACIÓN DE LA NAVE
   Update(escena) {
-    this.Movimiento(escena);
+    this.Movimiento(escena)
+
     if (this.TeclaDisparo.isDown) {
       this.Disparar(escena);
 
-      if(!this.estuvoDisparo){
-        this.estuvoDisparo = true;
-        mandarMensaje("Disparo " + this.estuvoDisparo);
+      //MANDAR MENSAJES AL SERVIDOR
+      if(!this.estaDisparo){
+        this.estaDisparo = true;
+        mandarMensaje(this.MensajeDisparo());
       }
 
-    } else if(this.estuvoDisparo){
-      this.estuvoDisparo = false;
-      mandarMensaje("Disparo " + this.estuvoDisparo);
+    } else if(this.estaDisparo){
+      this.estaDisparo = false;
+      mandarMensaje(this.MensajeDisparo());
     }
     if(this.shield > 0){
       this.shieldTexture.setVisible(true);
@@ -144,9 +147,9 @@ class NaveOnline {
     //PARA ACELERAR
     if (this.Arriba.isDown) {
 
-      if(!this.estuvoArriba){
-        mandarMensaje("alante");
-        this.estuvoArriba = true;
+      if(!this.estaArriba){
+        this.estaArriba = true;
+        mandarMensaje(this.MensajeMovimiento());
       }
 
       escena.physics.velocityFromRotation(
@@ -159,11 +162,11 @@ class NaveOnline {
     if(!this.thrust.isPlaying)
       this.thrust.play();
     }
-    else if(this.estuvoArriba){
+    else if(this.estaArriba){
 
-      if(this.estuvoArriba){
-        mandarMensaje("no alante");
-        this.estuvoArriba = false;
+      if(this.estaArriba){
+        this.estaArriba = false;
+        mandarMensaje(this.MensajeMovimiento());
       }
 
       this.cuerpo.setAcceleration(0);
@@ -178,32 +181,32 @@ class NaveOnline {
     if (this.Izquierda.isDown) {
       this.cuerpo.setAngularVelocity(-this.velocidadDeRotacion);
 
-      if(!this.estuvoIzquierda){
-        this.estuvoIzquierda = true;
-        this.estuvoDerecha = false;
-        mandarMensaje("izquierda " + this.estuvoIzquierda);
+      if(!this.estaIzquierda){
+        this.estaIzquierda = true;
+        this.estaDerecha = false;
+        mandarMensaje(this.MensajeMovimiento());
       }
 
     } else if (this.Derecha.isDown) {
       this.cuerpo.setAngularVelocity(this.velocidadDeRotacion);
 
-      if(!this.estuvoDerecha){
-        this.estuvoDerecha = true;
-        this.estuvoIzquierda = false;
-        mandarMensaje("derecha " + this.estuvoDerecha);
+      if(!this.estaDerecha){
+        this.estaDerecha = true;
+        this.estaIzquierda = false;
+        mandarMensaje(this.MensajeMovimiento());
       }
 
     //CONTROLES PARA SABER SI HA DEJADO DE PULSAR
 
-    } else if(this.estuvoDerecha) {
-      this.estuvoDerecha = false;
+    } else if(this.estaDerecha) {
+      this.estaDerecha = false;
       this.cuerpo.setAngularVelocity(0);
-      mandarMensaje("derecha " + this.estuvoDerecha);
+      mandarMensaje(this.MensajeMovimiento());
 
-    } else if(this.estuvoIzquierda){
-      this.estuvoIzquierda = false;
+    } else if(this.estaIzquierda){
+      this.estaIzquierda = false;
       this.cuerpo.setAngularVelocity(0);
-      mandarMensaje("izquierda " + this.estuvoIzquierda);
+      mandarMensaje(this.MensajeMovimiento());
 
     } else {
       this.cuerpo.setAngularVelocity(0);
@@ -319,6 +322,7 @@ class NaveOnline {
       );
    //SI ES EL OTRO JUGADOR, LE ASIGNA INPUTS FALSOS
     } else{
+      console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
       this.Arriba = new InputFalso();
 
@@ -367,11 +371,7 @@ class NaveOnline {
     
     //SE ASIGNAN LAS TECLAS AL JUGADOR
     this.AsignarTeclas(escena);
-    
-    //SE ASIGNA EL EVENTO DE DISPARO
-    this.TeclaDisparo.on("down", (event) => {
-      this.Disparar(escena);
-    });
+
 
     //SE ASIGNA LA TEXTURA DEL ESCUDO
     this.shieldTexture = escena.physics.add.sprite(this.cuerpo.x, this.cuerpo.y, "shield");
@@ -449,4 +449,29 @@ class NaveOnline {
         break;
     }
   }
+
+  //FUNCIÓN QUE ACTUALIZA EL MOVIMIENTO DE LA NAVE DEL OTRO JUGADOR
+  RecibirMovimientoOnline(arriba, izquierda, abajo, derecha){
+    console.log("Movimiento pillado");
+    this.Arriba.isDown = arriba;
+    this.Izquierda.isDown = izquierda;
+    this.Abajo.isDown  = abajo;
+    this.Derecha.isDown  = derecha;
+  }
+
+  RecibirDisparoOnline(disparo){
+    this.TeclaDisparo.isDown = disparo;
+  }
+
+  MensajeMovimiento(){
+    var mensaje = "Movimiento;" + this.estaArriba + ";" + this.estaIzquierda + ";" + this.estaAbajo + ";" + this.estaDerecha;
+    return mensaje;
+  }
+
+  MensajeDisparo(){
+    var mensaje = "Disparo;" + this.estaDisparo;
+    return mensaje;
+  }
+
+
 }
