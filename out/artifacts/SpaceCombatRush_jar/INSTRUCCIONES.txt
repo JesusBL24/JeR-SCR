@@ -1,3 +1,14 @@
+Datos del equipo:
+
+	- URL del repositorio: https://github.com/JesusBL24/JeR-SCR
+	- Número del grupo: 9
+	- Integrantes:
+		- Jesús Bastante López - Correo URJC: j.bastante.2021@alumnos.urjc.es - GitHub: JesusBL24
+		- José Antonio González Mesado - Correo URJC: ja.gonzalezme.2021@alumnos.urjc.es - GitHub: jagonmes
+		- Anastasia Ihnatsenka Shakhova - Correo URJC: a.ihnatsenka.2021@alumnos.urjc.es - GitHub: TasiaTas
+		- Lorena Martínez González - Correo URJC: l.martinezg.2021@alumnos.urjc.es - GitHub: LorenaMartinez2704
+		- Jorge Juan Xuclá Esparza - Correo URJC: jj.xucla.2021@alumnos.urjc.es - GitHub: LordOrco
+
 Requisitos previos:
 
 	-Esta aplicación se ha generado usando Java 1.8 y como tal necesita de esa versión instalada en el
