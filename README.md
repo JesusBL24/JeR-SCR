@@ -9,12 +9,12 @@
 
 "Space Combat Rush" es un juego multijugador creado en 2023 por la empresa [Wild Claw Studio](https://www.youtube.com/@WildClawGS) (Figura 1: logo de la empresa); creadora de otros juegos como [Mr Erazer's Revenge](https://lordorco.itch.io/mr-erazers-revenge) y [The Inner Doors](https://tasiatas.itch.io/the-inner-doors). 
 
-En este juego (Figura 2: InGame SCR), dos o más jugadores se enfrentarán en batallas de naves espaciales en un campo de asteroides. Cada jugador controlará una nave y su misión será acabar con el resto de jugadores; mientras navega evitando los asteroides y destruyéndolos para conseguir mejoras para su nave.
+En este juego (Figura 2: Vídeo de nuestro juego), dos o más jugadores se enfrentarán en batallas de naves espaciales en un campo de asteroides. Cada jugador controlará una nave y su misión será acabar con el resto de jugadores; mientras navega evitando los asteroides y destruyéndolos para conseguir mejoras para su nave.
 
-<p align="center">
- <img width=600 heigth=300 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/Capturas%20de%20Pantalla/Pantalla%20Principal.JPG"> <br>
- <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/Capturas%20de%20Pantalla/Pantalla%20Principal.JPG">Figura 2: InGame SCR</a>
-</p>
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=ddWQzOBMfrc"><img src="https://img.youtube.com/vi/ddWQzOBMfrc/0.jpg" alt="Vídeo explicativo"></a>
+  <p>Figura 2: Vídeo de nuestro juego</p>
+</div>
 
 
 # Integrantes del equipo
@@ -52,7 +52,7 @@ Finalmente, la forma de interactuar con este juego será a través de teclado.
 
 ### Historia:
 
-Con el avance de la tecnología y las ingeniería espacial, la humanidad ha conseguido extenderse a través del cosmos. La población humana crece exponencialmente, los recursos obtenidos de las colonias son casi infinitos y las naves cada vez más extravagantes y potentes. En este contexto nació Space Combat Rush(placeholder), el deporte más letal y espectacular a escala galáctica. La gloria y la fama esperan a nuestros pilotos en un emocionante combate 1vs1 lleno de metal, plasma y mucho fuego en el que se lo juegan todo.
+Con el avance de la tecnología y las ingeniería espacial, la humanidad ha conseguido extenderse a través del cosmos. La población humana crece exponencialmente, los recursos obtenidos de las colonias son casi infinitos y las naves cada vez más extravagantes y potentes. En este contexto nació Space Combat Rush, el deporte más letal y espectacular a escala galáctica. La gloria y la fama esperan a nuestros pilotos en un emocionante combate 1vs1 lleno de metal, plasma y mucho fuego en el que se lo juegan todo.
 
 ¿Quién caerá?
 
@@ -418,6 +418,92 @@ Ambos se referencian correctamente en el apartado de Anexos y Referencias de la 
   _ipdelordenadorenelqueseejecuta:8080_
 	
 	 Sustituyendo _ipdelordenadorenelqueseejecuta_ por la ip del ordenador en la que se ejecute el archivo .jar.
+
+# FASE 4 (ACTUALIZACIÓN - WEBSOCKETS)
+---
+
+En esta última fase se implementa lo relacionado a los websockets para permitir a 2 o más usuarios jugar nuestro juego, SCR, en máquinas distintas. A continuación, en los isguientes apartados, se detallará la implementación de esta cuarta fase.
+
+## Flujograma y pantallas
+
+Nuestro juego ha tenido leves modificaciones para permitir 2 opciones de juego: el modo LOCAL y el modo ONLINE. El modo local no tiene modificaciones aplicadas sobre él, pero para permitir el modo online ha habido leves cambios en algunas pantallas y se han añadido las nuevas correspondientes a este modo. En el siguiente flujograma (Figura 34: flujograma con modo online) del juego se puede ver la navegación entre menús:
+
+<p align="center">
+ <img width=1200 heigth=1200 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/FlujogramaNuevo.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/FlujogramaNuevo.png">Figura 34: flujograma con modo online</a>
+</p>
+
+En el caso de las nuevas pantallas añadidas a nuestro juego tenemos las dos desarrolladas a continuación.
+
+**Menú Matchmaking:** esta pantalla (Figura 35: menú matchmaking) permite darle feedback al usuario, a través de una barra de carga personalizada (contiene una nave perteneciente a parte del logotipo de nuestro juego), sobre la búsqueda de un contrincante en el modo online. Si encuentra uno, pasará a la pantalla siguiente de juego de forma automática. También permite que el jugador cancele este matchmaking en cualquier momento de su estancia en esta pantalla; volviendo, así, al menú principal.
+
+<p align="center">
+ <img width=550 heigth=550 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/MenuCarga.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/MenuCarga.png">Figura 35: menú matchmaking</a>
+</p>
+
+**Pantalla de juego online:** esta pantalla (Figura 36: pantalla de juego online) de juego es igual a nivel visual que la de local, los cambios que tiene estánpor debajo a nivel de funcionamiento para permitir la comunicación de dos dispositivos a través de un servidor y, así, poder jugar 2 usuarios en máquinas distintas. Esta implementación se describirá más en el apartado técnico.
+
+<p align="center">
+ <img width=550 heigth=550 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/Capturas%20de%20Pantalla/Pantalla%20Principal.JPG"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/Capturas%20de%20Pantalla/Pantalla%20Principal.JPG">Figura 36: pantalla de juego online</a>
+</p>
+
+En cuanto a pantallas modificadas para permitir la adición del modo online, se han cambiado 2 de ellas que son las siguientes.
+
+**Menú inicial:** en esta pantalla (Figura 37: menú inicial con modos) se ha cambiado el botón de "EMPEZAR" que hubo originalmente por 2 nuevos botones: "LOCAL" y "ONLINE". Estos permiten redirigir al jugador a la forma de juego que quiera ya sea 2 jugadores en la misma máquina o 2 jugadores en máquinas distintas.
+
+<p align="center">
+ <img width=550 heigth=550 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/MenuPrincipalOnline.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/MenuPrincipalOnline.png">Figura 37: menú inicial con modos</a>
+</p>
+
+**Menú controles:** en esta pantalla (Figura 38: menú controles nuevo) se ha realizado una leve modificación para especificarle a cualquier jugador que acceda a esta pantalla para informarse sobre los controles que debe usar. Y se ha especificado cuales son para el modo online y local.
+
+<p align="center">
+ <img width=550 heigth=550 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/MenuControlesOnline.png"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/MenuControlesOnline.png">Figura 38: menú controles nuevo</a>
+</p>
+
+## Apartado técnico
+
+En este apartado se procede a describir la implementación de websockets y, antes de comenzar, se puede observar en la siguiente imagen (Figura 39: diagrama de clases SCR websockets) el diagrama de clases que implementa toda la funcionalidad para la conexión en red.
+
+<p align="center">
+ <img width=600 heigth=600 src="https://github.com/jagonmes/Imagenes-JeR/blob/main/UML_WS.PNG"> <br>
+ <a href="https://github.com/jagonmes/Imagenes-JeR/blob/main/UML_WS.PNG">Figura 39: diagrama de clases SCR websockets</a>
+</p>
+
+Para permitir el acceso a esta opción de modo online, debe haber al menos 2 jugadores conectados en este modo. La pantalla de matchmaking realiza por debajo una llamada a una función que abre la conexión y, según un parámetro que revisamos constántemente en la actualización de la página, permitimos pasar a la pantalla siguiente si se encuentra a otro jugador (si el parámetro deja de estar a nulo). Además, permitimos al jugador cerrar la conexión en cualquier momento a través de un botón que le devuelve a la pantalla principal.
+
+Una vez dentro del juego, se ha implementado que se intercambie la siguiente información entre dos jugadores que están en dos máquinas distintas:
+-   El momento de comienzo del juego.
+-   La indicación de qué nave es perteneciente a la máquina local (nave 1 o nave 2).
+-   El movimiento de la nave de la máquina local.
+-   El momento en el que la nave de la máquina local realiza un disparo.
+-   El momento en el que la nave de la máquina local recibe un booster y el tipo del que es.
+-   La actualización de los elementos asociados a las naves y a los meteoritos (posición, rotación, etc). Estos datos se mandan cada 0'2s tiempo para que ambas máquinas se sincronicen, esta sincornización la realiza la máquina a la que se le ha asociado la nave 1.
+
+De esta forma, a través de un servidor, dos jugadores son capaces de jugar una partida donde uno está utilizando una máquina distinta a la del otro.
+
+## Apartado artístico
+
+A nivel artístico han habido pocas modificaciones. Únicamente se han añadido algunso botones y se ha creado una nueva pantalla (la pantalla de matchmaking). El resto de elementos ha quedado igual que estaban anteriormente.
+
+## Vídeo
+Para acompañar a este documento README, se ha creado un vídeo (Figura 40: Vídeo de nuestro juego) explicando cómo se navega a través del juego, cómo pueden acceder a él los jugadores, y qué elmentos hemos aplicado de API REST y WEBSOCKETS. Este vídeo se puede ver al principio de este documento, pero se añade en este apartado aquí ya que pertenece a la fase 4 del desarrollo de este juego.
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=ddWQzOBMfrc"><img src="https://img.youtube.com/vi/ddWQzOBMfrc/0.jpg" alt="Vídeo explicativo"></a>
+  <p>Figura 40: Vídeo de nuestro juego</p>
+</div>
+
+# FASE 5 (ACTUALIZACIÓN - PUBLICACIÓN DEL JUEGO)
+---
+
+Esta última fáse es un extra en la que nosotros hemos decidido publicar el juego en 5 plataformas distintas. Los enlaces a nuestro juego en ellas son:
+-   <a href="https://tasiatas.itch.io/space-combat-rush">SCR en itch.io</a>
+-   <a href="https://jagonmes.github.io/SpaceCombatRush/">SCR en github</a>
 
 # REFERENCIAS Y ANEXOS
 ---
