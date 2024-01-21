@@ -259,15 +259,28 @@ class EscenaPrincipalOnline extends Phaser.Scene {
       //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePartida"
       if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
         if(this.nave1.vida <= 0){
-          this.nave2.score += 100;
-          this.puntuacionPUT(usuario.nombre, this.nave2.score);
-          puntuacion = this.nave2.score;
+          if(posicion == 1)
+          {
+            this.puntuacionPUT(usuario.nombre, this.nave1.score);
+            puntuacion = this.nave1.score;
+          }else
+          {
+            this.nave2.score += 100;
+            this.puntuacionPUT(usuario.nombre, this.nave2.score);
+            puntuacion = this.nave2.score;
+          }
         }
         else{
-          this.nave1.score += 100;
-          console.log(usuario.nombre)
-          this.puntuacionPUT(usuario.nombre, this.nave1.score);
-          puntuacion = this.nave1.score;
+          if(posicion == 2)
+          {
+            this.puntuacionPUT(usuario.nombre, this.nave2.score);
+            puntuacion = this.nave2.score;
+          }else
+          {
+            this.nave1.score += 100;
+            this.puntuacionPUT(usuario.nombre, this.nave1.score);
+            puntuacion = this.nave1.score;
+          }
         }
 
         this.events.emit("finDePartida");
