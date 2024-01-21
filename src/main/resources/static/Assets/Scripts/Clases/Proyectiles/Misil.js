@@ -39,6 +39,7 @@ class Misil extends Proyectil {
             );
         }
 
+
         //CON LA NAVE1
         else if (this.jugador1 == false) {
             escena.physics.add.overlap(
@@ -75,12 +76,12 @@ class Misil extends Proyectil {
     Impacto(escena, proyectil, objetoImpacto) {
 
         //DAÑO A LA NAVE ENEMIGA
-        if (objetoImpacto && objetoImpacto instanceof Nave) {
+        if (objetoImpacto && objetoImpacto instanceof Nave || objetoImpacto && objetoImpacto instanceof NaveOnline) {
             this.Explotar(escena);
             //console.log(objetoImpacto.vida);
             //console.log("A");
         }
-        else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito){
+        else if(objetoImpacto && objetoImpacto.datos instanceof Meteorito || objetoImpacto && objetoImpacto.datos instanceof MeteoritoOnline){
             this.Explotar(escena);
             //console.log(objetoImpacto.datos.vida);
             //console.log("B");
