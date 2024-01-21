@@ -81,7 +81,7 @@ class Explosion {
 
         //DAÑO A LA NAVE1
         if ((objetoImpacto && objetoImpacto instanceof Nave && objetoImpacto == escena.nave1  && this.nave1Golpeada != true)
-        || objetoImpacto && objetoImpacto instanceof NaveOnline && objetoImpacto == escena.nave1  && this.nave1Golpeada != true) {
+        || (objetoImpacto && objetoImpacto instanceof NaveOnline && objetoImpacto == escena.nave1  && this.nave1Golpeada != true)) {
             if(objetoImpacto.shield > 0){
                 objetoImpacto.shield -= this.daño;
 
@@ -105,8 +105,8 @@ class Explosion {
         }
 
         //DAÑO A LA NAVE 2
-        else if((objetoImpacto && objetoImpacto instanceof Nave && objetoImpacto == escena.nave2  && this.nave1Golpeada != true)
-            || objetoImpacto && objetoImpacto instanceof NaveOnline && objetoImpacto == escena.nave2  && this.nave1Golpeada != true){
+        else if((objetoImpacto && objetoImpacto instanceof Nave && objetoImpacto == escena.nave2  && this.nave2Golpeada != true)
+            || (objetoImpacto && objetoImpacto instanceof NaveOnline && objetoImpacto == escena.nave2  && this.nave2Golpeada != true)){
             if(objetoImpacto.shield > 0){
                 objetoImpacto.shield -= this.daño;
                 if(objetoImpacto.shield < 0){
