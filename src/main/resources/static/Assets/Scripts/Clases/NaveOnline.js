@@ -461,7 +461,22 @@ class NaveOnline {
     }
     if(this.jugadorLocal)
     {
-      mandarMensaje(`Booster;` + booster.tipo + ";" + "tipoMunicion;" + this.tipoDisparo + ";");
+      if(booster.tipo === "Shield")
+      {
+        mandarMensaje(`Booster;` + booster.tipo + ";" + "tipoMunicion;" + this.tipoDisparo + ";" + boosterEscudoEnviado);
+        boosterEscudoEnviado++;
+      }
+      if(booster.tipo === "Speed")
+      {
+        mandarMensaje(`Booster;` + booster.tipo + ";" + "tipoMunicion;" + this.tipoDisparo + ";" + boosterVelocidadEnviado);
+        boosterVelocidadEnviado++;
+      }
+      if(booster.tipo === "Damage")
+      {
+        mandarMensaje(`Booster;` + booster.tipo + ";" + "tipoMunicion;" + this.tipoDisparo + ";" + boosterMunicionEnviado);
+        boosterMunicionEnviado++;
+      }
+
     }
 
   }
@@ -533,12 +548,14 @@ class NaveOnline {
   }
 
   MensajeMovimiento(){
-    var mensaje = "Movimiento;" + this.estaArriba + ";" + this.estaIzquierda + ";" + this.estaAbajo + ";" + this.estaDerecha;
+    var mensaje = "Movimiento;" + this.estaArriba + ";" + this.estaIzquierda + ";" + this.estaAbajo + ";" + this.estaDerecha + ";" + movimientoEnviado;
+    movimientoEnviado++;
     return mensaje;
   }
 
   MensajeDisparo(){
-    var mensaje = "Disparo;" + this.estaDisparo;
+    var mensaje = "Disparo;" + this.estaDisparo + ";" + disparoEnviado;
+    disparoEnviado++;
     return mensaje;
   }
 

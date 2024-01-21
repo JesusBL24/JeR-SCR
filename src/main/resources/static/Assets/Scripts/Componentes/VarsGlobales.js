@@ -54,4 +54,26 @@ var tiempoParaEmpezar = 0;
 //EscenaOnline
 var escenaOnline = null;
 
+//CONTADORES PARA LOS MENSAJE
+var movimientoRecibido = -1;
+var movimientoEnviado = 0;
+
+var disparoRecibido = -1;
+var disparoEnviado = 0;
+
+var boosterEscudoRecibido = -1;
+var boosterEscudoEnviado = 0;
+
+var boosterMunicionRecibido = -1;
+var boosterMunicionEnviado = 0;
+
+var boosterVelocidadRecibido = -1;
+var boosterVelocidadEnviado = 0;
+
+var syncNavesRecibido = -1;
+var syncNavesEnviado = 0;
+
+var syncMeteoritosRecibido = -1;
+var syncMeteoritosEnviado = 0;
+
 ///////////////////////////

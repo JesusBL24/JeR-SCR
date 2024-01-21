@@ -208,6 +208,28 @@ class EscenaPrincipalOnline extends Phaser.Scene {
     lag = 0;
     //INDICA QUE NO SE HA INICIADO LA PARTIDA
     this.partidaEmpezada = false
+
+    //CONTADORES PARA LOS MENSAJE
+    movimientoRecibido = -1;
+    movimientoEnviado = 0;
+
+    disparoRecibido = -1;
+    disparoEnviado = 0;
+
+    boosterEscudoRecibido = -1;
+    boosterEscudoEnviado = 0;
+
+    boosterMunicionRecibido = -1;
+    boosterMunicionEnviado = 0;
+
+    boosterVelocidadRecibido = -1;
+    boosterVelocidadEnviado = 0;
+
+    syncNavesRecibido = -1;
+    syncNavesEnviado = 0;
+
+    syncMeteoritosRecibido = -1;
+    syncMeteoritosEnviado = 0;
   }
 
   puntuacionPUT(nombre, pPuntuacion){
@@ -323,7 +345,8 @@ class EscenaPrincipalOnline extends Phaser.Scene {
     if(posicion == 1)
     {
       var objetos = [[this.nave1.cuerpo.x, this.nave1.cuerpo.y, this.nave1.cuerpo.rotation, this.nave1.cuerpo.body.velocity],[this.nave2.cuerpo.x, this.nave2.cuerpo.y, this.nave2.cuerpo.rotation, this.nave2.cuerpo.body.velocity]];
-      mandarMensaje("SyncNaves;" + JSON.stringify(objetos));
+      mandarMensaje("SyncNaves;" + JSON.stringify(objetos) + ";" + syncNavesEnviado);
+      syncNavesEnviado++;
     }
   }
 
@@ -339,7 +362,8 @@ class EscenaPrincipalOnline extends Phaser.Scene {
         else
           objetos[i] = null;
       }
-      mandarMensaje("SyncMeteoritos;" + JSON.stringify(objetos));
+      mandarMensaje("SyncMeteoritos;" + JSON.stringify(objetos)  + ";" + syncMeteoritosEnviado);
+      syncMeteoritosEnviado++;
     }
   }
 }
