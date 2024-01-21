@@ -37,5 +37,34 @@ Ejecución:
 		ipdelordenadorenelqueseejecuta:8080
 	
 	 Sustituyendo ipdelordenadorenelqueseejecuta por la ip del ordenador en la que se ejecute el archivo .jar.
-	
-		 
+
+
+Funcionalidades implementadas de API REST:
+	- Usuarios: creación (POST), actualización (PUT), borrado (DELETE) y autenticación (GET).
+	- Clientes conectados: conexión (POST), desconexión (POST), número de clientes conectados (GET).
+	- Puntuaciones top 5: actualización (PUT), obtención (GET).
+
+FUNCIONALIDADES IMPLEMENTADAS CON WEBSOCKETS
+
+    En el servidor, todo el tratamiento de WS sucede en el archivo MatchHandler.java
+    Aqui se lleva la lista de sesiones, asi como la lista de jugadores buscando oponenete, y las parejas de jugadores.
+    También es donde se realiza el reenvio de mensajes.
+
+    En el cliente, todo el tratamiento de WS sucede en el archivo ConexionWS.js
+
+    -Emparejamiento:  Al entrar en la escena MenuMatchmaking (al darle al botón online) se abre un nuevo WS con el servidor.
+        Se espera en esta escena hasta que se cancela la busqueda, o el servidor nos manda un mensaje a traves del WS con
+        una posicion (si seremos el jugador 1 o el 2) y un tiempo de inicio (al que deberemos esperar para iniciar la partida).
+
+    -Movimientos del jugador local: cuando el jugador local pulsa (o deja de pulsar) una tecla de movimiento,
+        envia esta pulsacion a su oponente a traves del WS para que actualice el movimiento del jugador contrario en su cliente.
+
+    -Disparos del jugador local: cuando el jugador local pulsa (o deja de pulsar) la tecla de disparo,
+        envia esta pulsacion a su oponente a traves del WS para que el jugador contrario en su cliente dispare.
+
+    -Recogida de mejoras: cuando el jugador local obtiene una mejora, envia esta información al oponente a traves del WS
+        para que el jugador contrario obtenga ese booster en su cliente.
+
+    -Sincronización: cada aproximadamente 200ms (actualizamos el juego 60 veces por segundo, asi que cada 12 actualizaciones (60/5 = 12))
+        se envian las posiciones, velocidad y rotación de las naves y los meteoritos, para sincronizar el estado de todos los jugadores.
+        Esta actualización se manda siempre desde la maquina del jugador 1.
