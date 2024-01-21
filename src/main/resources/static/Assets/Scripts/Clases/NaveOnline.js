@@ -73,7 +73,7 @@ class NaveOnline {
 
     if (this.TeclaDisparo.isDown) {
       this.Disparar(escena);
-
+      //console.log("Disparo isDown: " + this.TeclaDisparo.isDown)
       //MANDAR MENSAJES AL SERVIDOR
       if(!this.estaDisparo){
         this.estaDisparo = true;
@@ -406,8 +406,6 @@ class NaveOnline {
     //console.log(booster);
     //booster.cuerpo.disableBody(true, true);
 
-    mandarMensaje(`Booster;${JSON.stringify(booster)}`);
-
     switch (booster.tipo) {
       // Para el booster de velocidad: aumentamos la velocidad del personaje x1.15 hasta el final de la ronda
       case BoosterType.Speed:
@@ -461,6 +459,11 @@ class NaveOnline {
       default:
         break;
     }
+    if(this.jugadorLocal)
+    {
+      mandarMensaje(`Booster;` + booster.tipo + ";" + "tipoMunicion;" + this.tipoDisparo + ";");
+    }
+
   }
 
   //FUNCIÓN QUE ACTUALIZA EL MOVIMIENTO DE LA NAVE DEL OTRO JUGADOR
@@ -475,8 +478,58 @@ class NaveOnline {
     this.TeclaDisparo.isDown = disparo;
   }
 
-  RecibirBoosterOnline(booster){
-    this.escena.events.emit('booster_obtenido', booster);
+  RecibirBoosterOnline(tipo, tipoDisparo){
+    switch (tipo) {
+        // Para el booster de velocidad: aumentamos la velocidad del personaje x1.15 hasta el final de la ronda
+      case BoosterType.Speed:
+        this.velocidadDeRotacion *= 1.15; // Aumentamos la velocidad de rotación actual
+
+        this.escena.events.emit('booster_obtenido', {
+          tipo: BoosterType.Speed,
+          esjugador1: this.jugador1
+        });
+        break;
+
+        // Para el booster de daño
+      case BoosterType.Damage:
+
+        this.tipoDisparo = tipoDisparo;
+
+        switch(this.tipoDisparo){
+          case 0:
+            this.municion = NaN;
+            break;
+          case 1:
+            this.municion = 20;
+            break;
+          case 2:
+            this.municion = 10;
+            break;
+          case 3:
+            this.municion = 5;
+            break;
+        }
+
+        this.escena.events.emit('booster_obtenido', {
+          tipo: BoosterType.Damage,
+          esjugador1: this.jugador1,
+          arma: this.tipoDisparo,
+        });
+        break;
+
+        // Para el booster de escudo: proporciona un escudo
+      case BoosterType.Shield:
+        this.shield = this.shieldHealth;
+
+        this.escena.events.emit('booster_obtenido', {
+          tipo: BoosterType.Shield,
+          esjugador1: this.jugador1
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 
   MensajeMovimiento(){

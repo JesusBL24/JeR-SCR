@@ -85,7 +85,6 @@ class Proyectil{
         if (objetoImpacto && objetoImpacto instanceof Nave || objetoImpacto && objetoImpacto instanceof NaveOnline) {
             if(objetoImpacto.shield > 0){
                 objetoImpacto.shield -= this.daño;
-
                 if(objetoImpacto.shield < 0){
                     objetoImpacto.vida += objetoImpacto.shield;
                     objetoImpacto.shield = 0;

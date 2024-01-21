@@ -120,7 +120,7 @@ class InterfazJuego extends Phaser.Scene{
                 //SI ES DE VELOCIDAD
                 case BoosterType.Speed:
                     if(data.esjugador1){
-                        console.log("entra aqui")
+                        //console.log("entra aqui")
                         j1b1.destroy();
                         j1b1 = this.add.sprite(booster1.x, booster1.y, "boosters", 2).setScale(scale);
                     } else{
@@ -199,6 +199,7 @@ class InterfazJuego extends Phaser.Scene{
 
         // ESCENA DEL ONLINE
         this.scene.get('EscenaPrincipalOnline').events.on('booster_perdido', (data) => {
+            console.log(data.tipo);
             switch(data.tipo){
                 //SI ES DE DAÑO
                 case BoosterType.Damage:

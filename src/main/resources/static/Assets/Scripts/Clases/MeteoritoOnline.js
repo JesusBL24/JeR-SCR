@@ -42,13 +42,13 @@ class MeteoritoOnline{
     //FUNCIÓN QUE DA AL JUGADOR UN BOOSTER
     SpawnBooster(jugador1, escena){
         //console.log("Booster pa ti");
-        console.log(jugador1);
+        //console.log(jugador1);
         var booster = new Booster(this.GetRandomBoosterType(), {x:-1000, y:-1000});
 
-        if(jugador1){
+        if(jugador1 && escena.nave1.jugadorLocal){
             escena.nave1.CogerBooster(booster);
         }
-        else{
+        else if (!jugador1 && escena.nave2.jugadorLocal){
             escena.nave2.CogerBooster(booster);
         }
     }

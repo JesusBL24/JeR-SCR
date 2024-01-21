@@ -39,6 +39,7 @@ function abrirConexionWS() {
         if(msg.data.includes("Disparo"))
         {
             var atributos = msg.data.split(";");
+            console.log("MENSAJE DE DISPARO: " + atributos[1]);
             if(posicion == 1) {
                 escenaOnline.nave2.RecibirDisparoOnline(atributos[1] === "true");
             }else{
@@ -47,11 +48,12 @@ function abrirConexionWS() {
 
         }
         if(msg.data.includes("Booster")) {
+            //console.log("Booster: " + msg.data);
             var atributos = msg.data.split(";");   
             if(posicion == 1){
-                escenaOnline.nave2.RecibirBoosterOnline(JSON.parse(atributos[1]));
+                escenaOnline.nave2.RecibirBoosterOnline(atributos[1], Number(atributos[3]));
             }else{
-                escenaOnline.nave1.RecibirBoosterOnline(JSON.parse(atributos[1]));
+                escenaOnline.nave1.RecibirBoosterOnline(atributos[1], Number(atributos[3]));
             }
         }
         if(msg.data.includes("SyncNaves"))

@@ -99,7 +99,7 @@ class Explosion {
                 objetoImpacto.vida = objetoImpacto.vida - this.daño;
             }
             objetoImpacto.Hit();
-            console.log(objetoImpacto.vida);
+            //console.log(objetoImpacto.vida);
             //console.log(objetoImpacto);
             this.nave1Golpeada = true
         }
@@ -118,7 +118,7 @@ class Explosion {
                 objetoImpacto.vida = objetoImpacto.vida - this.daño;
             }
             objetoImpacto.Hit();
-            console.log(objetoImpacto.vida);
+            //console.log(objetoImpacto.vida);
             //console.log("A");
             this.nave2Golpeada = true;
         }
@@ -126,7 +126,7 @@ class Explosion {
         //DAÑO A LOS METEORITOS
         else if(objetoImpacto && (objetoImpacto.datos instanceof Meteorito || objetoImpacto.datos instanceof MeteoritoOnline)
                 && !this.meteoritosGolpeados.includes(objetoImpacto.datos)){
-            console.log(objetoImpacto.datos);
+            //console.log(objetoImpacto.datos);
             objetoImpacto.datos.Hit(this.jugador1, this.escena);
             objetoImpacto.datos.vida -= this.daño;
             //console.log("B");
