@@ -199,7 +199,6 @@ class InterfazJuego extends Phaser.Scene{
 
         // ESCENA DEL ONLINE
         this.scene.get('EscenaPrincipalOnline').events.on('booster_perdido', (data) => {
-            console.log(data.tipo);
             switch(data.tipo){
                 //SI ES DE DAÑO
                 case BoosterType.Damage:
@@ -212,11 +211,23 @@ class InterfazJuego extends Phaser.Scene{
 
                 //SI ES DE ESCUDO
                 case BoosterType.Shield:
-                    if(data.esjugador1){
-                        j1b3.destroy();
-                    } else{
-                        j2b3.destroy();
+                    //console.log("Posicion: " + posicion + "Es Jugador 1: " + data.esjugador1);
+                    if(posicion == 2)
+                    {
+                        if(data.esjugador1){
+                            j2b3.destroy();
+                        } else{
+                            j1b3.destroy();
+                        }
                     }
+                    if(posicion == 1){
+                        if(data.esjugador1){
+                            j2b3.destroy();
+                        } else{
+                            j1b3.destroy();
+                        }
+                    }
+
                     break;
             }
         });

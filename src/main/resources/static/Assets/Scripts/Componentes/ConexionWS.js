@@ -39,7 +39,7 @@ function abrirConexionWS() {
         if(msg.data.includes("Disparo"))
         {
             var atributos = msg.data.split(";");
-            console.log("MENSAJE DE DISPARO: " + atributos[1]);
+            //console.log("MENSAJE DE DISPARO: " + atributos[1]);
             if(posicion == 1) {
                 escenaOnline.nave2.RecibirDisparoOnline(atributos[1] === "true");
             }else{
