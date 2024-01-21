@@ -4,7 +4,7 @@ var fps = 60;
 var pasoFijo = 1/fps * 1000;
 var lastTime = 0;
 var lastSynced = 0;
-var syncRate = 5;
+var syncRate = 3;
 
 class EscenaPrincipalOnline extends Phaser.Scene {
   constructor() {
@@ -280,6 +280,7 @@ class EscenaPrincipalOnline extends Phaser.Scene {
 
       //SI UNO DE LOS JUGADORES MUERE, LANZAMOS EL EVENTO "finDePartida"
       if (this.nave1.vida <= 0 || this.nave2.vida <= 0) {
+        this.syncNaves();
         if(this.nave1.vida <= 0){
           if(posicion == 1)
           {
@@ -344,7 +345,7 @@ class EscenaPrincipalOnline extends Phaser.Scene {
   {
     if(posicion == 1)
     {
-      var objetos = [[this.nave1.cuerpo.x, this.nave1.cuerpo.y, this.nave1.cuerpo.rotation, this.nave1.cuerpo.body.velocity],[this.nave2.cuerpo.x, this.nave2.cuerpo.y, this.nave2.cuerpo.rotation, this.nave2.cuerpo.body.velocity]];
+      var objetos = [[this.nave1.cuerpo.x, this.nave1.cuerpo.y, this.nave1.cuerpo.rotation, this.nave1.cuerpo.body.velocity, this.nave1.vida],[this.nave2.cuerpo.x, this.nave2.cuerpo.y, this.nave2.cuerpo.rotation, this.nave2.cuerpo.body.velocity, this.nave2.vida]];
       mandarMensaje("SyncNaves;" + JSON.stringify(objetos) + ";" + syncNavesEnviado);
       syncNavesEnviado++;
     }

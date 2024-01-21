@@ -108,11 +108,14 @@ function abrirConexionWS() {
                     escenaOnline.nave1.cuerpo.x = objetos[0][0];
                     escenaOnline.nave1.cuerpo.y = objetos[0][1];
                     escenaOnline.nave1.cuerpo.rotation = objetos[0][2];
-                    escenaOnline.nave1.cuerpo.body.setVelocity(objetos[1][3].x, objetos[1][3].y);
+                    escenaOnline.nave1.cuerpo.body.setVelocity(objetos[0][3].x, objetos[0][3].y);
+                    escenaOnline.nave1.vida = objetos[0][4];
                     escenaOnline.nave2.cuerpo.x = objetos[1][0];
                     escenaOnline.nave2.cuerpo.y = objetos[1][1];
                     escenaOnline.nave2.cuerpo.rotation = objetos[1][2];
                     escenaOnline.nave2.cuerpo.body.setVelocity(objetos[1][3].x, objetos[1][3].y);
+                    escenaOnline.nave2.vida = objetos[1][4];
+                    console.log(objetos);
 
                     syncNavesRecibido = Number(atributos[atributos.length-1]);
                 }
